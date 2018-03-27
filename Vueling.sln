@@ -3,19 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vueling.Presentation", "Vueling.Presentation", "{869B4A70-5455-48DA-A60D-93E01CBCD703}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Presentation.WinSite", "Vueling.Presentation.WinSite\Vueling.Presentation.WinSite.csproj", "{737AFC23-E115-4F03-AE83-401A5A1EFAE7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vueling.Business", "Vueling.Business", "{9464B37A-1EDE-428E-BD63-5DA84D339817}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Business.Logic", "Vueling.Business.Logic\Vueling.Business.Logic.csproj", "{8CEB6244-AC1E-4EBD-BC0C-A75D51BCAE4C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vueling.DataAccess", "Vueling.DataAccess", "{9CAD411E-A861-48C4-8B3E-03F06B95A899}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAccess.DAO", "Vueling.DataAccess.DAO\Vueling.DataAccess.DAO.csproj", "{0DE51EF2-A117-456E-8EBC-92B530F2D3DC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vueling.Common", "Vueling.Common", "{F9542798-E8A8-444F-B429-55AE83217808}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Common.Logic", "Vueling.Common.Logic\Vueling.Common.Logic.csproj", "{7033AABC-C8F8-4456-9DFA-AEF7AA8A6726}"
 EndProject
@@ -44,12 +36,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{737AFC23-E115-4F03-AE83-401A5A1EFAE7} = {869B4A70-5455-48DA-A60D-93E01CBCD703}
-		{8CEB6244-AC1E-4EBD-BC0C-A75D51BCAE4C} = {9464B37A-1EDE-428E-BD63-5DA84D339817}
-		{0DE51EF2-A117-456E-8EBC-92B530F2D3DC} = {9CAD411E-A861-48C4-8B3E-03F06B95A899}
-		{7033AABC-C8F8-4456-9DFA-AEF7AA8A6726} = {F9542798-E8A8-444F-B429-55AE83217808}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2490D861-D705-4C54-8A70-5D73918C1404}
