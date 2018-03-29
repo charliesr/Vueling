@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vueling.Common.Logic
 {
-    public class Class1
+    public static class Enums
     {
     }
 }

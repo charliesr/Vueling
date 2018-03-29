@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vueling.DataAccess.DAO
+namespace Vueling.Common.Logic.Model
 {
-    public class Class1
+    public class VuelingModelObject
     {
+        public Guid Guid { get; set; }
     }
 }

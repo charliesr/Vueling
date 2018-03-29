@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vueling.Business.Logic
+namespace Vueling.DataAccess.DAO
 {
-    public class Class1
+    public class TxtFormat
     {
     }
 }
