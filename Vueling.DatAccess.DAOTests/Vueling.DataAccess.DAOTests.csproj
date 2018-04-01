@@ -45,16 +45,22 @@
       <HintPath>..\packages\MSTest.TestFramework.1.2.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="StudentDaoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Vueling.Common.Logic\Vueling.Common.Logic.csproj">
+      <Project>{7033AABC-C8F8-4456-9DFA-AEF7AA8A6726}</Project>
+      <Name>Vueling.Common.Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Vueling.DataAccess.DAO\Vueling.DataAccess.DAO.csproj">
       <Project>{0DE51EF2-A117-456E-8EBC-92B530F2D3DC}</Project>
       <Name>Vueling.DataAccess.DAO</Name>

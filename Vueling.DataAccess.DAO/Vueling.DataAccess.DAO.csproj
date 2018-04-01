@@ -30,7 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,12 +46,11 @@
   <ItemGroup>
     <Compile Include="FormatFactory.cs" />
     <Compile Include="IFormat.cs" />
-    <Compile Include="IStudentDAO.cs" />
-    <Compile Include="StudentDAO.cs" />
+    <Compile Include="IStudentDao.cs" />
+    <Compile Include="StudentDao.cs" />
     <Compile Include="XmlFormat.cs" />
     <Compile Include="TxtFormat.cs" />
     <Compile Include="JsonFormat.cs" />
-    <Compile Include="StudentDataAccessObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +58,9 @@
       <Project>{7033aabc-c8f8-4456-9dfa-aef7aa8a6726}</Project>
       <Name>Vueling.Common.Logic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

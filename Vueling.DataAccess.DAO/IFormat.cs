@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Vueling.DataAccess.DAO
 {
-    interface IFormat
+    public interface IFormat<T> where T : class
     {
+        string Filename { get; set; }
+        T Insert(T entity);
+        T Select(Guid guid);
     }
 }

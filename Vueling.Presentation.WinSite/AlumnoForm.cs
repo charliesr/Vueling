@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vueling.Business.Logic;
 using Vueling.Common.Logic.Model;
+using Vueling.Common.Logic;
 
 namespace Vueling.Presentation.WinSite
 {
@@ -24,29 +25,35 @@ namespace Vueling.Presentation.WinSite
             alumnoBL = new StudentBL();
         }
 
-        private void btnTxt_Click(object sender, EventArgs e)
+        private void BtnTxt_Click(object sender, EventArgs e)
         {
-            // MessageBox.Show(((Button)sender).Text);
-
+            LoadAlumnoData();
+            alumnoBL.ChangeFormat(Enums.DataTypeAccess.txt);
+            alumnoBL.Add(alumno);
         }
 
-        private void btnJson_Click(object sender, EventArgs e)
+        private void BtnJson_Click(object sender, EventArgs e)
         {
-
+            LoadAlumnoData();
+            alumnoBL.ChangeFormat(Enums.DataTypeAccess.json);
+            alumnoBL.Add(alumno);
         }
 
-        private void btnXml_Click(object sender, EventArgs e)
+        private void BtnXml_Click(object sender, EventArgs e)
         {
-
+            LoadAlumnoData();
+            alumnoBL.ChangeFormat(Enums.DataTypeAccess.xml);
+            alumnoBL.Add(alumno);
         }
 
         private void LoadAlumnoData()
         {
+            alumno.SetGuid();
             alumno.ID = Convert.ToInt32(txtId.Text);
             alumno.Nombre = txtNombre.Text;
-            alumno.ID = Convert.ToInt32(txtId.Text);
-            alumno.ID = Convert.ToInt32(txtId.Text);
-
+            alumno.Apellidos = txtApellidos.Text;
+            alumno.DNI = txtDni.Text;
+            alumno.FechaDeNacimiento = dtpFechaNacimiento.Value;
         }
 
     }

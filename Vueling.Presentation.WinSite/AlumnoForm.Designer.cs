@@ -35,12 +35,12 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellidos = new System.Windows.Forms.TextBox();
             this.txtDni = new System.Windows.Forms.TextBox();
-            this.txtFechaNacimiento = new System.Windows.Forms.TextBox();
             this.lblId = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblApellidos = new System.Windows.Forms.Label();
             this.lblDni = new System.Windows.Forms.Label();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
+            this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // btnTxt
@@ -51,7 +51,7 @@
             this.btnTxt.TabIndex = 0;
             this.btnTxt.Text = "Txt";
             this.btnTxt.UseVisualStyleBackColor = true;
-            this.btnTxt.Click += new System.EventHandler(this.btnTxt_Click);
+            this.btnTxt.Click += new System.EventHandler(this.BtnTxt_Click);
             // 
             // btnJson
             // 
@@ -61,7 +61,7 @@
             this.btnJson.TabIndex = 1;
             this.btnJson.Text = "Json";
             this.btnJson.UseVisualStyleBackColor = true;
-            this.btnJson.Click += new System.EventHandler(this.btnJson_Click);
+            this.btnJson.Click += new System.EventHandler(this.BtnJson_Click);
             // 
             // btnXml
             // 
@@ -71,47 +71,40 @@
             this.btnXml.TabIndex = 2;
             this.btnXml.Text = "Xml";
             this.btnXml.UseVisualStyleBackColor = true;
-            this.btnXml.Click += new System.EventHandler(this.btnXml_Click);
+            this.btnXml.Click += new System.EventHandler(this.BtnXml_Click);
             // 
             // txtId
             // 
-            this.txtId.Location = new System.Drawing.Point(217, 51);
+            this.txtId.Location = new System.Drawing.Point(291, 47);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(138, 20);
             this.txtId.TabIndex = 3;
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(217, 101);
+            this.txtNombre.Location = new System.Drawing.Point(291, 97);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(138, 20);
             this.txtNombre.TabIndex = 4;
             // 
             // txtApellidos
             // 
-            this.txtApellidos.Location = new System.Drawing.Point(217, 161);
+            this.txtApellidos.Location = new System.Drawing.Point(291, 157);
             this.txtApellidos.Name = "txtApellidos";
             this.txtApellidos.Size = new System.Drawing.Size(138, 20);
             this.txtApellidos.TabIndex = 5;
             // 
             // txtDni
             // 
-            this.txtDni.Location = new System.Drawing.Point(217, 217);
+            this.txtDni.Location = new System.Drawing.Point(291, 213);
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(138, 20);
             this.txtDni.TabIndex = 6;
             // 
-            // txtFechaNacimiento
-            // 
-            this.txtFechaNacimiento.Location = new System.Drawing.Point(217, 281);
-            this.txtFechaNacimiento.Name = "txtFechaNacimiento";
-            this.txtFechaNacimiento.Size = new System.Drawing.Size(138, 20);
-            this.txtFechaNacimiento.TabIndex = 7;
-            // 
             // lblId
             // 
             this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(120, 58);
+            this.lblId.Location = new System.Drawing.Point(192, 54);
             this.lblId.Name = "lblId";
             this.lblId.Size = new System.Drawing.Size(16, 13);
             this.lblId.TabIndex = 8;
@@ -120,7 +113,7 @@
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(120, 108);
+            this.lblNombre.Location = new System.Drawing.Point(192, 104);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(44, 13);
             this.lblNombre.TabIndex = 9;
@@ -129,7 +122,7 @@
             // lblApellidos
             // 
             this.lblApellidos.AutoSize = true;
-            this.lblApellidos.Location = new System.Drawing.Point(123, 168);
+            this.lblApellidos.Location = new System.Drawing.Point(192, 164);
             this.lblApellidos.Name = "lblApellidos";
             this.lblApellidos.Size = new System.Drawing.Size(49, 13);
             this.lblApellidos.TabIndex = 10;
@@ -138,7 +131,7 @@
             // lblDni
             // 
             this.lblDni.AutoSize = true;
-            this.lblDni.Location = new System.Drawing.Point(123, 224);
+            this.lblDni.Location = new System.Drawing.Point(197, 220);
             this.lblDni.Name = "lblDni";
             this.lblDni.Size = new System.Drawing.Size(23, 13);
             this.lblDni.TabIndex = 11;
@@ -147,23 +140,31 @@
             // lblFechaNacimiento
             // 
             this.lblFechaNacimiento.AutoSize = true;
-            this.lblFechaNacimiento.Location = new System.Drawing.Point(123, 284);
+            this.lblFechaNacimiento.Location = new System.Drawing.Point(192, 270);
             this.lblFechaNacimiento.Name = "lblFechaNacimiento";
             this.lblFechaNacimiento.Size = new System.Drawing.Size(93, 13);
             this.lblFechaNacimiento.TabIndex = 12;
             this.lblFechaNacimiento.Text = "Fecha Nacimiento";
+            // 
+            // dtpFechaNacimiento
+            // 
+            this.dtpFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaNacimiento.Location = new System.Drawing.Point(291, 264);
+            this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
+            this.dtpFechaNacimiento.Size = new System.Drawing.Size(138, 20);
+            this.dtpFechaNacimiento.TabIndex = 13;
             // 
             // AlumnoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 450);
+            this.Controls.Add(this.dtpFechaNacimiento);
             this.Controls.Add(this.lblFechaNacimiento);
             this.Controls.Add(this.lblDni);
             this.Controls.Add(this.lblApellidos);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblId);
-            this.Controls.Add(this.txtFechaNacimiento);
             this.Controls.Add(this.txtDni);
             this.Controls.Add(this.txtApellidos);
             this.Controls.Add(this.txtNombre);
@@ -190,8 +191,8 @@
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblApellidos;
         private System.Windows.Forms.TextBox txtDni;
-        private System.Windows.Forms.TextBox txtFechaNacimiento;
         private System.Windows.Forms.Label lblDni;
         private System.Windows.Forms.Label lblFechaNacimiento;
+        private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
     }
 }
