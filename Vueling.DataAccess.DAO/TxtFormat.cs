@@ -6,10 +6,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
 {
-    public class TxtFormat<T> : IFormat<T> where T : class
+    public class TxtFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
         public string Filename { get; set; }
 
@@ -37,7 +38,7 @@ namespace Vueling.DataAccess.DAO
 
         public T Select(Guid guid)
         {
-            if (!File.Exists(Filename)) return null;
+            if (!File.Exists(Filename)) return default(T);
             var entityString = string.Empty;
             using (TextReader reader = new StreamReader(Filename))
             {
@@ -54,7 +55,7 @@ namespace Vueling.DataAccess.DAO
                     }
                 }
             }
-            if (entityString == string.Empty) return null;
+            if (entityString == string.Empty) return default(T);
             var propValues = entityString.Split(',');
             var entity = Activator.CreateInstance(typeof(T), propValues);
             return (T)entity;

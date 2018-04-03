@@ -11,7 +11,7 @@ using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
 {
-    public class JsonFormat<T> : IFormat<T> where T : class
+    public class JsonFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
         public string Filename { get; set; }
 
@@ -30,7 +30,7 @@ namespace Vueling.DataAccess.DAO
 
         public T Select(Guid guid)
         {
-            if (!File.Exists(Filename)) return null;
+            if (!File.Exists(Filename)) return default(T);
             var group = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(Filename));
             return group.FirstOrDefault(i => (Guid)typeof(T).GetProperty("Guid").GetValue(i) == guid);
         }

@@ -1,8 +1,9 @@
 ﻿using Vueling.Common.Logic;
+using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
 {
-    public static class FormatFactory<T> where T : class
+    public static class FormatFactory<T> where T : IVuelingModelObject
     {
         public static IFormat<T> GetFormat(Enums.DataTypeAccess dataAccesType)
         {

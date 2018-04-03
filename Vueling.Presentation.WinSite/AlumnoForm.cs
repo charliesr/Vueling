@@ -10,11 +10,13 @@ using System.Windows.Forms;
 using Vueling.Business.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic;
+using System.Reflection;
 
 namespace Vueling.Presentation.WinSite
 {
     public partial class AlumnoForm : Form
     {
+        private IVuelingLogger log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private Student alumno;
         private IStudentBL alumnoBL;
         public AlumnoForm()
@@ -23,10 +25,12 @@ namespace Vueling.Presentation.WinSite
             InitializeComponent();
             alumno = new Student();
             alumnoBL = new StudentBL();
+
         }
 
         private void BtnTxt_Click(object sender, EventArgs e)
         {
+            log.Debug("Clicado el botón de guardar en TXT");
             LoadAlumnoData();
             alumnoBL.ChangeFormat(Enums.DataTypeAccess.txt);
             alumnoBL.Add(alumno);
@@ -34,6 +38,7 @@ namespace Vueling.Presentation.WinSite
 
         private void BtnJson_Click(object sender, EventArgs e)
         {
+            log.Debug("Clicado el botón de guardar en JSon");
             LoadAlumnoData();
             alumnoBL.ChangeFormat(Enums.DataTypeAccess.json);
             alumnoBL.Add(alumno);
@@ -41,6 +46,7 @@ namespace Vueling.Presentation.WinSite
 
         private void BtnXml_Click(object sender, EventArgs e)
         {
+            log.Debug("Clicado el botón de guardar en Xml");
             LoadAlumnoData();
             alumnoBL.ChangeFormat(Enums.DataTypeAccess.xml);
             alumnoBL.Add(alumno);
@@ -48,6 +54,7 @@ namespace Vueling.Presentation.WinSite
 
         private void LoadAlumnoData()
         {
+            log.Debug("Cargamos datos del alumno en el form");
             alumno.SetGuid();
             alumno.ID = Convert.ToInt32(txtId.Text);
             alumno.Nombre = txtNombre.Text;

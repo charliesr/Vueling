@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
 {
-    public class XmlFormat<T> : IFormat<T> where T : class
+    public class XmlFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
         public string Filename { get; set; }
 
@@ -50,7 +51,7 @@ namespace Vueling.DataAccess.DAO
                 }
                 return group.FirstOrDefault(i => (Guid)typeof(T).GetProperty("Guid").GetValue(i) == guid);
             }
-            return null;
+            return default(T);
         }
     }
 }

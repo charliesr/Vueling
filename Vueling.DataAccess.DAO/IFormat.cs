@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
 {
-    public interface IFormat<T> where T : class
+    public interface IFormat<T> where T : IVuelingModelObject
     {
         string Filename { get; set; }
         T Insert(T entity);
