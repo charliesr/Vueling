@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
@@ -10,12 +11,14 @@ namespace Vueling.DataAccess.DAO
 {
     public class JsonStudents
     {
+        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static JsonStudents _instance;
         private readonly List<Student> _students;
         private static object syncLock = new object();
 
         protected JsonStudents()
         {
+            _log.Debug("Ojo! nueva instancia del singleton JSON!!");
             var _format = FormatFactory<Student>.GetFormat(DataTypeAccess.json);
             _students = _format.SelectAll();
         }
@@ -37,6 +40,7 @@ namespace Vueling.DataAccess.DAO
 
         public List<Student> GetAll()
         {
+            _log.Debug("Singleton de json devuelve alumnos INTERNOS");
             return _students;
         }
     }

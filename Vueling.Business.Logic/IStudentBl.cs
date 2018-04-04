@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic;
+using System.Linq.Expressions;
 
 namespace Vueling.Business.Logic
 {
@@ -14,6 +15,5 @@ namespace Vueling.Business.Logic
         List<Student> GetAll(DataTypeAccess dataTypeAccess);
         void ChangeFormat(DataTypeAccess dataTypeAccess);
         int CalcularEdad(DateTime registro, DateTime nacimiento);
-
     }
 }

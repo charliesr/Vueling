@@ -47,29 +47,33 @@
             this.txtDni = new System.Windows.Forms.TextBox();
             this.dtpRegistro = new System.Windows.Forms.DateTimePicker();
             this.dtpNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.nudEdad = new System.Windows.Forms.NumericUpDown();
+            this.lbEdad = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEdad)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvResults
             // 
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResults.Location = new System.Drawing.Point(12, 141);
+            this.dgvResults.Location = new System.Drawing.Point(7, 191);
             this.dgvResults.Name = "dgvResults";
             this.dgvResults.Size = new System.Drawing.Size(776, 165);
             this.dgvResults.TabIndex = 0;
             // 
             // btnTxt
             // 
-            this.btnTxt.Location = new System.Drawing.Point(130, 342);
+            this.btnTxt.Location = new System.Drawing.Point(125, 392);
             this.btnTxt.Name = "btnTxt";
             this.btnTxt.Size = new System.Drawing.Size(75, 23);
             this.btnTxt.TabIndex = 1;
             this.btnTxt.Text = "Datos TXT";
             this.btnTxt.UseVisualStyleBackColor = true;
+            this.btnTxt.Click += new System.EventHandler(this.btnTxt_Click);
             // 
             // btnJson
             // 
-            this.btnJson.Location = new System.Drawing.Point(336, 342);
+            this.btnJson.Location = new System.Drawing.Point(331, 392);
             this.btnJson.Name = "btnJson";
             this.btnJson.Size = new System.Drawing.Size(75, 23);
             this.btnJson.TabIndex = 2;
@@ -79,16 +83,17 @@
             // 
             // btnXml
             // 
-            this.btnXml.Location = new System.Drawing.Point(561, 342);
+            this.btnXml.Location = new System.Drawing.Point(556, 392);
             this.btnXml.Name = "btnXml";
             this.btnXml.Size = new System.Drawing.Size(75, 23);
             this.btnXml.TabIndex = 3;
             this.btnXml.Text = "Datos XML";
             this.btnXml.UseVisualStyleBackColor = true;
+            this.btnXml.Click += new System.EventHandler(this.btnXml_Click);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(361, 112);
+            this.btnSearch.Location = new System.Drawing.Point(356, 162);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 4;
@@ -210,11 +215,29 @@
             this.dtpNacimiento.Size = new System.Drawing.Size(96, 20);
             this.dtpNacimiento.TabIndex = 18;
             // 
+            // nudEdad
+            // 
+            this.nudEdad.Location = new System.Drawing.Point(366, 112);
+            this.nudEdad.Name = "nudEdad";
+            this.nudEdad.Size = new System.Drawing.Size(49, 20);
+            this.nudEdad.TabIndex = 19;
+            // 
+            // lbEdad
+            // 
+            this.lbEdad.AutoSize = true;
+            this.lbEdad.Location = new System.Drawing.Point(328, 112);
+            this.lbEdad.Name = "lbEdad";
+            this.lbEdad.Size = new System.Drawing.Size(32, 13);
+            this.lbEdad.TabIndex = 20;
+            this.lbEdad.Text = "Edad";
+            // 
             // AlumnoShowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbEdad);
+            this.Controls.Add(this.nudEdad);
             this.Controls.Add(this.dtpNacimiento);
             this.Controls.Add(this.dtpRegistro);
             this.Controls.Add(this.txtDni);
@@ -237,6 +260,7 @@
             this.Name = "AlumnoShowForm";
             this.Text = "AlumnoShowForm";
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEdad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -263,5 +287,7 @@
         private System.Windows.Forms.TextBox txtDni;
         private System.Windows.Forms.DateTimePicker dtpRegistro;
         private System.Windows.Forms.DateTimePicker dtpNacimiento;
+        private System.Windows.Forms.NumericUpDown nudEdad;
+        private System.Windows.Forms.Label lbEdad;
     }
 }
