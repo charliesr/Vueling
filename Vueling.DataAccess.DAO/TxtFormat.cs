@@ -60,5 +60,22 @@ namespace Vueling.DataAccess.DAO
             var entity = Activator.CreateInstance(typeof(T), propValues);
             return (T)entity;
         }
+
+        public List<T> SelectAll()
+        {
+            var groupOfEntity = new List<T>();
+            using (TextReader reader = new StreamReader(Filename))
+            {
+                while (reader.Peek() > -1)
+                {
+                    var line = reader.ReadLine();
+                    var propValues = line.Split(',');
+                    var entity = Activator.CreateInstance(typeof(T), propValues);
+                    groupOfEntity.Add((T)entity);
+
+                }
+            }
+            return groupOfEntity;
+        }
     }
 }

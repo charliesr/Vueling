@@ -41,7 +41,7 @@
             this.lblDni = new System.Windows.Forms.Label();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnOpenShowStudent = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTxt
@@ -155,21 +155,22 @@
             this.dtpFechaNacimiento.Size = new System.Drawing.Size(138, 20);
             this.dtpFechaNacimiento.TabIndex = 13;
             // 
-            // button1
+            // btnOpenShowStudent
             // 
-            this.button1.Location = new System.Drawing.Point(185, 351);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(274, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Abrir Search";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnOpenShowStudent.Location = new System.Drawing.Point(185, 351);
+            this.btnOpenShowStudent.Name = "btnOpenShowStudent";
+            this.btnOpenShowStudent.Size = new System.Drawing.Size(274, 23);
+            this.btnOpenShowStudent.TabIndex = 14;
+            this.btnOpenShowStudent.Text = "Abrir Search";
+            this.btnOpenShowStudent.UseVisualStyleBackColor = true;
+            this.btnOpenShowStudent.Click += new System.EventHandler(this.btnOpenShowStudent_Click);
             // 
             // AlumnoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnOpenShowStudent);
             this.Controls.Add(this.dtpFechaNacimiento);
             this.Controls.Add(this.lblFechaNacimiento);
             this.Controls.Add(this.lblDni);
@@ -205,6 +206,6 @@
         private System.Windows.Forms.Label lblDni;
         private System.Windows.Forms.Label lblFechaNacimiento;
         private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnOpenShowStudent;
     }
 }

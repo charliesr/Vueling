@@ -63,5 +63,10 @@ namespace Vueling.Presentation.WinSite
             alumno.FechaDeNacimiento = dtpFechaNacimiento.Value;
         }
 
+        private void btnOpenShowStudent_Click(object sender, EventArgs e)
+        {
+            var formShowStudent = new AlumnoShowForm();
+            formShowStudent.ShowDialog();
+        }
     }
 }

@@ -47,6 +47,8 @@
     <Compile Include="FormatFactory.cs" />
     <Compile Include="IFormat.cs" />
     <Compile Include="IStudentDao.cs" />
+    <Compile Include="XmlStudents.cs" />
+    <Compile Include="JsonStudents.cs" />
     <Compile Include="StudentDao.cs" />
     <Compile Include="XmlFormat.cs" />
     <Compile Include="TxtFormat.cs" />

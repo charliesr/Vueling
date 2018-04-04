@@ -34,5 +34,10 @@ namespace Vueling.DataAccess.DAO
             var group = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(Filename));
             return group.FirstOrDefault(i => (Guid)typeof(T).GetProperty("Guid").GetValue(i) == guid);
         }
+
+        public List<T> SelectAll()
+        {
+            return JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(Filename));
+        }
     }
 }

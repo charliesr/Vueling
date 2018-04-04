@@ -2,6 +2,7 @@
 using Vueling.Common.Logic.Model;
 using System.Configuration;
 using System;
+using System.Collections.Generic;
 
 namespace Vueling.DataAccess.DAO
 {
@@ -23,6 +24,21 @@ namespace Vueling.DataAccess.DAO
         public void ChangeFormat(DataTypeAccess dataTypeAccess)
         {
             _format = FormatFactory<Student>.GetFormat(dataTypeAccess);
+        }
+
+        public List<Student> GetAll(DataTypeAccess dataTypeAccess)
+        {
+            switch (dataTypeAccess)
+            {
+                case DataTypeAccess.json:
+                    var studentsSingleton = JsonStudents.GetJsonStudents();
+                    return studentsSingleton.GetAll();
+                case DataTypeAccess.xml:
+                    var studentsSingletonXml = XmlStudents.GetXmlStudents();
+                    return studentsSingletonXml.GetAll();
+                default:
+                    return _format.SelectAll();
+            }
         }
     }
 }

@@ -38,5 +38,11 @@ namespace Vueling.Business.Logic
             return Convert.ToInt32((registro - nacimiento).TotalDays / 365);
         }
 
+        public List<Student> GetAll(DataTypeAccess dataTypeAccess)
+        {
+
+            _log.Debug("Método Get All alumnos");
+            return _studentDao.GetAll(dataTypeAccess);
+        }
     }
 }

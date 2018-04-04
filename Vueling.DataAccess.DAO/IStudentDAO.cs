@@ -1,4 +1,5 @@
-﻿using Vueling.Common.Logic;
+﻿using System.Collections.Generic;
+using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
@@ -7,6 +8,6 @@ namespace Vueling.DataAccess.DAO
     {
         Student Add(Student alumno);
         void ChangeFormat(DataTypeAccess dataTypeAccess);
-
+        List<Student> GetAll(DataTypeAccess dataTypeAccess);
     }
 }

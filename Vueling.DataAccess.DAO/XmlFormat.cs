@@ -53,5 +53,18 @@ namespace Vueling.DataAccess.DAO
             }
             return default(T);
         }
+
+        public List<T> SelectAll()
+        {
+            if (File.Exists(Filename))
+            {
+                using (Stream reader = File.OpenRead(Filename))
+                {
+                    var xmlSerializer = new XmlSerializer(typeof(List<T>));
+                    return (List<T>)xmlSerializer.Deserialize(reader);
+                }
+            }
+            return new List<T>();
+        }
     }
 }

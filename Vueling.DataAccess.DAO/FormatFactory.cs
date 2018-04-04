@@ -1,4 +1,4 @@
-﻿using Vueling.Common.Logic;
+﻿    using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
