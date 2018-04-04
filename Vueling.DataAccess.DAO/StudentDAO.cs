@@ -11,7 +11,7 @@ namespace Vueling.DataAccess.DAO
 
         public StudentDao()
         {
-            _format = FormatFactory<Student>.GetFormat((Enums.DataTypeAccess)Enum.Parse(typeof(Enums.DataTypeAccess),ConfigurationManager.AppSettings["DefaultDataAccesType"]));
+            _format = FormatFactory<Student>.GetFormat((DataTypeAccess)Enum.Parse(typeof(DataTypeAccess),ConfigurationManager.AppSettings["DefaultDataAccesType"]));
         }
 
         public Student Add(Student alumno)
@@ -20,7 +20,7 @@ namespace Vueling.DataAccess.DAO
             return _format.Select(alumno.Guid);
         }
 
-        public void ChangeFormat(Enums.DataTypeAccess dataTypeAccess)
+        public void ChangeFormat(DataTypeAccess dataTypeAccess)
         {
             _format = FormatFactory<Student>.GetFormat(dataTypeAccess);
         }

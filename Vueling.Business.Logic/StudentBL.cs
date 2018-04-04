@@ -22,20 +22,20 @@ namespace Vueling.Business.Logic
         {
             _log.Debug("Llamado método add del BL");
             alumno.FechaHoraRegistro = DateTime.Now;
-            alumno.Edad = CalcularEdad(alumno.FechaHoraRegistro.Year,alumno.FechaDeNacimiento.Year);
+            alumno.Edad = CalcularEdad(alumno.FechaHoraRegistro,alumno.FechaDeNacimiento);
             return _studentDao.Add(alumno);
         }
 
-        public void ChangeFormat(Enums.DataTypeAccess dataTypeAccess)
+        public void ChangeFormat(DataTypeAccess dataTypeAccess)
         {
             _log.Debug("Cambiamos el formato de la factory (formato del archivo a) " + dataTypeAccess.ToString());
             _studentDao.ChangeFormat(dataTypeAccess);
         }
 
-        public int CalcularEdad(int registro, int nacimiento)
+        public int CalcularEdad(DateTime registro, DateTime nacimiento)
         {
             _log.Debug(string.Format("Calculamos la edad pardiendo de {0} (Registro) {1} (Nacimiento)", registro, nacimiento));
-            return registro - nacimiento;
+            return Convert.ToInt32((registro - nacimiento).TotalDays / 365);
         }
 
     }

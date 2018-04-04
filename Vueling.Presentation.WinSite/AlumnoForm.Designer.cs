@@ -41,11 +41,12 @@
             this.lblDni = new System.Windows.Forms.Label();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTxt
             // 
-            this.btnTxt.Location = new System.Drawing.Point(102, 367);
+            this.btnTxt.Location = new System.Drawing.Point(113, 309);
             this.btnTxt.Name = "btnTxt";
             this.btnTxt.Size = new System.Drawing.Size(98, 25);
             this.btnTxt.TabIndex = 0;
@@ -55,7 +56,7 @@
             // 
             // btnJson
             // 
-            this.btnJson.Location = new System.Drawing.Point(255, 367);
+            this.btnJson.Location = new System.Drawing.Point(266, 309);
             this.btnJson.Name = "btnJson";
             this.btnJson.Size = new System.Drawing.Size(100, 25);
             this.btnJson.TabIndex = 1;
@@ -65,7 +66,7 @@
             // 
             // btnXml
             // 
-            this.btnXml.Location = new System.Drawing.Point(412, 367);
+            this.btnXml.Location = new System.Drawing.Point(423, 309);
             this.btnXml.Name = "btnXml";
             this.btnXml.Size = new System.Drawing.Size(98, 25);
             this.btnXml.TabIndex = 2;
@@ -154,11 +155,21 @@
             this.dtpFechaNacimiento.Size = new System.Drawing.Size(138, 20);
             this.dtpFechaNacimiento.TabIndex = 13;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(185, 351);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(274, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Abrir Search";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // AlumnoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dtpFechaNacimiento);
             this.Controls.Add(this.lblFechaNacimiento);
             this.Controls.Add(this.lblDni);
@@ -194,5 +205,6 @@
         private System.Windows.Forms.Label lblDni;
         private System.Windows.Forms.Label lblFechaNacimiento;
         private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
+        private System.Windows.Forms.Button button1;
     }
 }

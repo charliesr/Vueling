@@ -33,8 +33,8 @@ namespace Vueling.DatAccess.DAOTests
 
         public static IEnumerable<object[]> StudentData()
         {
-            yield return new object[] { new Student(Guid.NewGuid(), 1, "Carlos", "Sanchez Romero", "46469815V", new DateTime(1988, 2, 28).ToLocalTime(), DateTime.Now, 30) };
-            yield return new object[] { new Student(Guid.NewGuid(), 2, "Elisabet", "Bayot Bertran", "46960066T", new DateTime(1987, 07, 25).ToLocalTime(), DateTime.Now, 30) };
+            yield return new object[] { new Student(Guid.NewGuid(), 1, "Carlos", "Sanchez Romero", "dadadasdasd", new DateTime(1988, 2, 28).ToLocalTime(), DateTime.Now, 30) };
+            yield return new object[] { new Student(Guid.NewGuid(), 2, "Elisabet", "Bayot Bertran", "adadasd", new DateTime(1987, 07, 25).ToLocalTime(), DateTime.Now, 30) };
         }
 
 
@@ -43,7 +43,7 @@ namespace Vueling.DatAccess.DAOTests
         [DynamicData(nameof(StudentData), DynamicDataSourceType.Method)]
         public void TxtSaveTest(Student alumno)
         {
-            StudentRepository.ChangeFormat(Enums.DataTypeAccess.txt);
+            StudentRepository.ChangeFormat(DataTypeAccess.txt);
             var result = StudentRepository.Add(alumno);
             Assert.IsTrue(alumno.Equals(result));
         }
@@ -52,7 +52,7 @@ namespace Vueling.DatAccess.DAOTests
         [DynamicData(nameof(StudentData), DynamicDataSourceType.Method)]
         public void JsonSaveTest(Student alumno)
         {
-            StudentRepository.ChangeFormat(Enums.DataTypeAccess.json);
+            StudentRepository.ChangeFormat(DataTypeAccess.json);
             var result = StudentRepository.Add(alumno);
             Assert.IsTrue(alumno.Equals(result));
         }
@@ -61,7 +61,7 @@ namespace Vueling.DatAccess.DAOTests
         [DynamicData(nameof(StudentData), DynamicDataSourceType.Method)]
         public void XmlSaveTest(Student alumno)
         {
-            StudentRepository.ChangeFormat(Enums.DataTypeAccess.xml);
+            StudentRepository.ChangeFormat(DataTypeAccess.xml);
             var result = StudentRepository.Add(alumno);
             Assert.IsTrue(alumno.Equals(result));
         }

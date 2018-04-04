@@ -32,7 +32,7 @@ namespace Vueling.Presentation.WinSite
         {
             log.Debug("Clicado el botón de guardar en TXT");
             LoadAlumnoData();
-            alumnoBL.ChangeFormat(Enums.DataTypeAccess.txt);
+            alumnoBL.ChangeFormat(DataTypeAccess.txt);
             alumnoBL.Add(alumno);
         }
 
@@ -40,7 +40,7 @@ namespace Vueling.Presentation.WinSite
         {
             log.Debug("Clicado el botón de guardar en JSon");
             LoadAlumnoData();
-            alumnoBL.ChangeFormat(Enums.DataTypeAccess.json);
+            alumnoBL.ChangeFormat(DataTypeAccess.json);
             alumnoBL.Add(alumno);
         }
 
@@ -48,7 +48,7 @@ namespace Vueling.Presentation.WinSite
         {
             log.Debug("Clicado el botón de guardar en Xml");
             LoadAlumnoData();
-            alumnoBL.ChangeFormat(Enums.DataTypeAccess.xml);
+            alumnoBL.ChangeFormat(DataTypeAccess.xml);
             alumnoBL.Add(alumno);
         }
 

@@ -5,15 +5,15 @@ namespace Vueling.DataAccess.DAO
 {
     public static class FormatFactory<T> where T : IVuelingModelObject
     {
-        public static IFormat<T> GetFormat(Enums.DataTypeAccess dataAccesType)
+        public static IFormat<T> GetFormat(DataTypeAccess dataAccesType)
         {
             switch (dataAccesType)
             {   
-                case Enums.DataTypeAccess.txt:
+                case DataTypeAccess.txt:
                     return new TxtFormat<T>();
-                case Enums.DataTypeAccess.json:
+                case DataTypeAccess.json:
                     return new JsonFormat<T>();
-                case Enums.DataTypeAccess.xml:
+                case DataTypeAccess.xml:
                     return new XmlFormat<T>();
                 default:
                     return null;

@@ -6,7 +6,7 @@ namespace Vueling.DataAccess.DAO
     public interface IStudentDao
     {
         Student Add(Student alumno);
-        void ChangeFormat(Enums.DataTypeAccess dataTypeAccess);
+        void ChangeFormat(DataTypeAccess dataTypeAccess);
 
     }
 }
