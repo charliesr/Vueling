@@ -22,21 +22,19 @@ namespace Vueling.DataAccess.DAO
         public T Insert(T entity)
         {
             var xmlSerializer = new XmlSerializer(typeof(List<T>));
-            var group = new List<T>();
-            if (File.Exists(Filename))
+            try
             {
-                using (Stream reader = File.OpenRead(Filename))
+                var group = SelectAll();
+                using (Stream writer = File.Open(Filename, FileMode.OpenOrCreate, FileAccess.Write))
                 {
-                    group = (List<T>)xmlSerializer.Deserialize(reader);
+                    xmlSerializer.Serialize(writer, group);
                 }
+                return Select((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
             }
-            group.Add(entity);
-            using (Stream writer = File.Open(Filename, FileMode.OpenOrCreate, FileAccess.Write))
+            catch (IOException)
             {
-                xmlSerializer.Serialize(writer, group);
+                throw;
             }
-
-            return Select((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
         }
 
         public T Select(Guid guid)

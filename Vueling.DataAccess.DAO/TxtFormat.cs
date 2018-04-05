@@ -38,44 +38,68 @@ namespace Vueling.DataAccess.DAO
 
         public T Select(Guid guid)
         {
-            if (!File.Exists(Filename)) return default(T);
-            var entityString = string.Empty;
-            using (TextReader reader = new StreamReader(Filename))
+            try
             {
-                StringBuilder word = new StringBuilder();
-                while (reader.Peek() > -1)
+                var entityString = string.Empty;
+                using (TextReader reader = new StreamReader(Filename))
                 {
-                    word.Append((char)reader.Read());
-                    if ((char)reader.Peek() != ',') continue;
-                    if(guid.ToString() == word.ToString())
+                    StringBuilder word = new StringBuilder();
+                    while (reader.Peek() > -1)
                     {
-                        entityString = guid.ToString() + reader.ReadLine();
-                    } else {
-                        reader.ReadLine();
+                        word.Append((char)reader.Read());
+                        if ((char)reader.Peek() != ',') continue;
+                        if (guid.ToString() == word.ToString())
+                        {
+                            entityString = guid.ToString() + reader.ReadLine();
+                        }
+                        else
+                        {
+                            reader.ReadLine();
+                        }
                     }
                 }
+                if (entityString == string.Empty) return default(T);
+                var propValues = entityString.Split(',');
+                var entity = Activator.CreateInstance(typeof(T), propValues);
+                return (T)entity;
+
             }
-            if (entityString == string.Empty) return default(T);
-            var propValues = entityString.Split(',');
-            var entity = Activator.CreateInstance(typeof(T), propValues);
-            return (T)entity;
+            catch (IOException)
+            {
+                throw;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
 
         public List<T> SelectAll()
         {
-            var groupOfEntity = new List<T>();
-            using (TextReader reader = new StreamReader(Filename))
+            try
             {
-                while (reader.Peek() > -1)
+                var groupOfEntity = new List<T>();
+                using (TextReader reader = new StreamReader(Filename))
                 {
-                    var line = reader.ReadLine();
-                    var propValues = line.Split(',');
-                    var entity = Activator.CreateInstance(typeof(T), propValues);
-                    groupOfEntity.Add((T)entity);
+                    while (reader.Peek() > -1)
+                    {
+                        var line = reader.ReadLine();
+                        var propValues = line.Split(',');
+                        var entity = Activator.CreateInstance(typeof(T), propValues);
+                        groupOfEntity.Add((T)entity);
 
+                    }
+                    return groupOfEntity;
                 }
             }
-            return groupOfEntity;
+            catch (IOException)
+            {
+                throw;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
     }
 }
