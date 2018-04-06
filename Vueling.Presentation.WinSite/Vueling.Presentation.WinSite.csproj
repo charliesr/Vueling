@@ -75,6 +75,7 @@
     <Compile Include="AlumnoShowForm.Designer.cs">
       <DependentUpon>AlumnoShowForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MessageBoxUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AlumnoForm.resx">
