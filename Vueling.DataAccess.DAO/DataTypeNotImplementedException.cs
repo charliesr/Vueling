@@ -16,7 +16,7 @@ namespace Vueling.DataAccess.DAO
         }
         public DataTypeNotImplementedException()
         {
-            Message = "Data type access not implemented!!, returning default dataAccesType"";
+            Message = "Data type access not implemented!!, returning default dataAccesType";
         }
     }
 }

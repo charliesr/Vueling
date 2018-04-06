@@ -37,6 +37,7 @@ namespace Vueling.Presentation.WinSite
                 LoadAlumnoData();
                 alumnoBL.ChangeFormat(DataTypeAccess.txt);
                 alumnoBL.Add(alumno);
+                throw new OverflowException();
             }
             catch (OverflowException ex)
             {
@@ -180,6 +181,11 @@ namespace Vueling.Presentation.WinSite
                 alumno.FechaDeNacimiento = dtpFechaNacimiento.Value;
             }
             catch (OverflowException ex)
+            {
+                _log.Error(ex);
+                MessageBoxUtil.ShowException(ex);
+            }
+            catch (FormatException ex)
             {
                 _log.Error(ex);
                 MessageBoxUtil.ShowException(ex);

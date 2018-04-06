@@ -18,26 +18,55 @@ namespace Vueling.Common.Logic
         {
             var hierarchy = (Hierarchy)LogManager.GetRepository();
 
-            var patternLayout = new PatternLayout();
+            // Ingresamos la pattern que seguirá el log
+            var rollingPatternLayout = new PatternLayout()
+            {
+                ConversionPattern = "%date [%thread] %-5level %logger - %message%newline"
+            };
+            var mailingPatternLayout = new PatternLayout()
+            {
+                ConversionPattern = "%level %date - %message%newline"
+            };
+            rollingPatternLayout.ActivateOptions();
+            mailingPatternLayout.ActivateOptions();
 
-            // Ingresamos la patter que seguirá el log
-            patternLayout.ConversionPattern = "%date [%thread] %-5level %logger - %message%newline";
-            patternLayout.ActivateOptions();
 
             //Instancia del appender tipo rolling con sus opciones
-            var roller = new RollingFileAppender();
-            roller.AppendToFile = true;
-            roller.File = @"Logs\EventLog.txt";
-            roller.Layout = patternLayout;
-            roller.MaximumFileSize = "10MB";
-            roller.MaxSizeRollBackups = 10;
-            roller.RollingStyle = RollingFileAppender.RollingMode.Date;
-            roller.StaticLogFileName = true;
+            var roller = new RollingFileAppender
+            {
+                AppendToFile = true,
+                File = @"Logs\EventLog.txt",
+                Layout = rollingPatternLayout,
+                MaximumFileSize = "10MB",
+                MaxSizeRollBackups = 10,
+                RollingStyle = RollingFileAppender.RollingMode.Date,
+                StaticLogFileName = true
+            };
             roller.ActivateOptions();
             hierarchy.Root.AddAppender(roller);
 
+            //Instancia del appender tipo Mail con sus opciones
+            //var mailer = new SmtpAppender()
+            //{
+            //    SmtpHost = "smtp.gmail.com",
+            //    Port = 587,
+            //    Authentication = SmtpAppender.SmtpAuthentication.Basic,
+            //    Username = "charlvuel@gmail.com",
+            //    Password = "",
+            //    BufferSize = 1,
+            //    From = "charlvuel@gmail.com",
+            //    To = "carles.sanchez@atmira.com",
+            //    EnableSsl = true,
+            //    Subject = "Mail de logs de errores graves en Student 3 capas",
+            //    Layout = mailingPatternLayout,
+            //    Threshold = Level.Error
+            //};
+            //mailer.ActivateOptions();
+            //hierarchy.Root.AddAppender(mailer);
+
             hierarchy.Root.Level = Level.Debug;
             hierarchy.Configured = true;
+
         }
         private readonly ILog log;
         public VuelingLogger(Type declaringType )
