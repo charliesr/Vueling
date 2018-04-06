@@ -22,25 +22,53 @@ namespace Vueling.DataAccess.DAO
         public T Insert(T entity)
         {
             var content = string.Empty;
-            var assembly = Assembly.Load("Vueling.Common.Logic");
-            var type = assembly.GetType(typeof(T).FullName);
+            Type type;
+            try
+            {
+                var assembly = Assembly.Load("Vueling.Common.Logic");
+                type = assembly.GetType(typeof(T).FullName);
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (FileNotFoundException)
+            {
+                throw;
+            }
             var methodToString = type.GetMethod("ToString");
             object[] propValues = new object[type.GetProperties().Length];
             for (int i = 0; i < type.GetProperties().Length; i++)
             {
                 propValues[i] = type.GetProperties()[i].GetValue(entity);
             }
-            var classInstance = Activator.CreateInstance(type, propValues);
-            content = (string)methodToString.Invoke(classInstance, null);
-            File.AppendAllText(Filename, content + "\r\n");
-            return Select((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
+            try
+            {
+                var classInstance = Activator.CreateInstance(type, propValues);
+                content = (string)methodToString.Invoke(classInstance, null);
+                File.AppendAllText(Filename, content + "\r\n");
+                return Select((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (NotSupportedException)
+            {
+                throw;
+            }
+            catch (TargetInvocationException)
+            {
+                throw;
+            }
+
         }
 
         public T Select(Guid guid)
         {
+            var entityString = string.Empty;
             try
             {
-                var entityString = string.Empty;
                 using (TextReader reader = new StreamReader(Filename))
                 {
                     StringBuilder word = new StringBuilder();
@@ -58,11 +86,6 @@ namespace Vueling.DataAccess.DAO
                         }
                     }
                 }
-                if (entityString == string.Empty) return default(T);
-                var propValues = entityString.Split(',');
-                var entity = Activator.CreateInstance(typeof(T), propValues);
-                return (T)entity;
-
             }
             catch (IOException)
             {
@@ -72,6 +95,26 @@ namespace Vueling.DataAccess.DAO
             {
                 throw;
             }
+            if (entityString == string.Empty) return default(T);
+            var propValues = entityString.Split(',');
+            object entity;
+            try
+            {
+                entity = Activator.CreateInstance(typeof(T), propValues);
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (NotSupportedException)
+            {
+                throw;
+            }
+            catch (TargetInvocationException)
+            {
+                throw;
+            }
+            return (T)entity;
         }
 
         public List<T> SelectAll()
