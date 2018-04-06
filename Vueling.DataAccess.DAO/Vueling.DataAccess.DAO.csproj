@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTypeNotImplementedException.cs" />
     <Compile Include="FormatFactory.cs" />
     <Compile Include="IFormat.cs" />
     <Compile Include="IStudentDao.cs" />

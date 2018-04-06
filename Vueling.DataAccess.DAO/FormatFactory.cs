@@ -16,7 +16,7 @@ namespace Vueling.DataAccess.DAO
                 case DataTypeAccess.xml:
                     return new XmlFormat<T>();
                 default:
-                    return null;
+                    throw new DataTypeNotImplementedException(dataAccesType);
             }
         }
 

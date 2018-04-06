@@ -230,5 +230,10 @@ namespace Vueling.Common.Logic
         {
             log.WarnFormat(provider, format, args);
         }
+
+        public void Error(Exception ex)
+        {
+            log.Error("Se ha producido una excepción de tipo " + ex.GetType().Name, ex);
+        }
     }
 }

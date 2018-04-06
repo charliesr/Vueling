@@ -9,7 +9,6 @@ namespace Vueling.DataAccess.DAO
 {
     public interface IFormat<T> where T : IVuelingModelObject
     {
-        string Filename { get; set; }
         T Insert(T entity);
         T Select(Guid guid);
         List<T> SelectAll();

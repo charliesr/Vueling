@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileUtils.cs" />
     <Compile Include="IVuelingLogger.cs" />
     <Compile Include="VuelingLogger.cs" />
     <Compile Include="DataTypeAccess.cs" />

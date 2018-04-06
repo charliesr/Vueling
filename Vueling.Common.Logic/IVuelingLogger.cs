@@ -1,4 +1,6 @@
-﻿namespace Vueling.Common.Logic
+﻿using System;
+
+namespace Vueling.Common.Logic
 {
     public interface IVuelingLogger
     {
@@ -7,5 +9,6 @@
         void Warn(object message);
         void Error(object message);
         void Info(object message);
+        void Error(Exception ex);
     }
 }
