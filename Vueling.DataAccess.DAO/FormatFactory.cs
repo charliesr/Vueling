@@ -1,4 +1,5 @@
-﻿    using Vueling.Common.Logic;
+﻿using System.Reflection;
+using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
@@ -8,7 +9,7 @@ namespace Vueling.DataAccess.DAO
         public static IFormat<T> GetFormat(DataTypeAccess dataAccesType)
         {
             switch (dataAccesType)
-            {   
+            {
                 case DataTypeAccess.txt:
                     return new TxtFormat<T>();
                 case DataTypeAccess.json:
@@ -19,6 +20,5 @@ namespace Vueling.DataAccess.DAO
                     throw new DataTypeNotImplementedException(dataAccesType);
             }
         }
-
     }
 }

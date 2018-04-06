@@ -1,68 +1,172 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
+using System.Security;
 using System.Xml.Serialization;
+using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
 {
     public class XmlFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
-        public string Filename { get; set; }
-
-        public XmlFormat()
-        {
-            Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\" + typeof(T).Name + ".xml";
-        }
-
+        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public T Insert(T entity)
         {
-            var xmlSerializer = new XmlSerializer(typeof(List<T>));
             try
             {
+                _log.Debug("Añadiendo un/a nuevo/a " + typeof(T).Name);
+                var xmlSerializer = new XmlSerializer(typeof(List<T>));
                 var group = SelectAll();
-                using (Stream writer = File.Open(Filename, FileMode.OpenOrCreate, FileAccess.Write))
+                using (Stream writer = File.Open(FileUtils.GetFilePath<T>(DataTypeAccess.json), FileMode.OpenOrCreate, FileAccess.Write))
                 {
                     xmlSerializer.Serialize(writer, group);
                 }
                 return Select((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
             }
-            catch (IOException)
+            catch (FileNotFoundException ex)
             {
+                _log.Error(ex);
+                throw;
+            }
+            catch (ArgumentNullException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error(ex);
                 throw;
             }
         }
 
         public T Select(Guid guid)
         {
-            if (File.Exists(Filename))
+            try
             {
-                var xmlSerializer = new XmlSerializer(typeof(List<T>));
-                List<T> group;
-                using (Stream reader = File.OpenRead(Filename))
+                _log.Debug("Select " + typeof(T).Name + "con Guid " + guid.ToString());
+                if (File.Exists(FileUtils.GetFilePath<T>(DataTypeAccess.json)))
                 {
-                    group = (List<T>)xmlSerializer.Deserialize(reader);
+                    var xmlSerializer = new XmlSerializer(typeof(List<T>));
+                    List<T> group;
+                    using (Stream reader = File.OpenRead(FileUtils.GetFilePath<T>(DataTypeAccess.json)))
+                    {
+                        group = (List<T>)xmlSerializer.Deserialize(reader);
+                    }
+                    return group.FirstOrDefault(i => (Guid)typeof(T).GetProperty("Guid").GetValue(i) == guid);
                 }
-                return group.FirstOrDefault(i => (Guid)typeof(T).GetProperty("Guid").GetValue(i) == guid);
+                return default(T);
             }
-            return default(T);
+            catch (FileNotFoundException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (ArgumentNullException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
         }
 
         public List<T> SelectAll()
         {
-            if (File.Exists(Filename))
+            try
             {
-                using (Stream reader = File.OpenRead(Filename))
+                _log.Debug("Obtenemos todos los/las " + typeof(T).Name);
+                if (File.Exists(FileUtils.GetFilePath<T>(DataTypeAccess.json)))
                 {
-                    var xmlSerializer = new XmlSerializer(typeof(List<T>));
-                    return (List<T>)xmlSerializer.Deserialize(reader);
+                    using (Stream reader = File.OpenRead(FileUtils.GetFilePath<T>(DataTypeAccess.json)))
+                    {
+                        var xmlSerializer = new XmlSerializer(typeof(List<T>));
+                        return (List<T>)xmlSerializer.Deserialize(reader);
+                    }
                 }
+                return new List<T>();
             }
-            return new List<T>();
+            catch (FileNotFoundException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (ArgumentNullException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
         }
     }
 }

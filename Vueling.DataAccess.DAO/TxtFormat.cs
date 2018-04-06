@@ -4,61 +4,55 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
 {
     public class TxtFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
-        public string Filename { get; set; }
-
-        public TxtFormat()
-        {
-            Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\" + typeof(T).Name + ".txt";
-        }
-
+        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public T Insert(T entity)
         {
             var content = string.Empty;
             Type type;
             try
             {
+                _log.Debug("Añadiendo un/a nuevo/a " + typeof(T).Name);
                 var assembly = Assembly.Load("Vueling.Common.Logic");
                 type = assembly.GetType(typeof(T).FullName);
-            }
-            catch (ArgumentNullException)
-            {
-                throw;
-            }
-            catch (FileNotFoundException)
-            {
-                throw;
-            }
-            var methodToString = type.GetMethod("ToString");
-            object[] propValues = new object[type.GetProperties().Length];
-            for (int i = 0; i < type.GetProperties().Length; i++)
-            {
-                propValues[i] = type.GetProperties()[i].GetValue(entity);
-            }
-            try
-            {
+                var methodToString = type.GetMethod("ToString");
+                object[] propValues = new object[type.GetProperties().Length];
+                for (int i = 0; i < type.GetProperties().Length; i++)
+                {
+                    propValues[i] = type.GetProperties()[i].GetValue(entity);
+                }
                 var classInstance = Activator.CreateInstance(type, propValues);
                 content = (string)methodToString.Invoke(classInstance, null);
-                File.AppendAllText(Filename, content + "\r\n");
+                File.AppendAllText(FileUtils.GetFilePath<T>(DataTypeAccess.json), content + "\r\n");
                 return Select((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
             }
-            catch (ArgumentException)
+            catch (ArgumentException ex)
             {
+                _log.Error(ex);
                 throw;
             }
-            catch (NotSupportedException)
+            catch (NotSupportedException ex)
             {
+                _log.Error(ex);
                 throw;
             }
-            catch (TargetInvocationException)
+            catch (TargetInvocationException ex)
             {
+                _log.Error(ex);
+                throw;
+            }
+            catch (FileNotFoundException ex)
+            {
+                _log.Error(ex);
                 throw;
             }
 
@@ -66,10 +60,11 @@ namespace Vueling.DataAccess.DAO
 
         public T Select(Guid guid)
         {
-            var entityString = string.Empty;
             try
             {
-                using (TextReader reader = new StreamReader(Filename))
+                _log.Debug("Select " + typeof(T).Name + "con Guid " + guid.ToString());
+                var entityString = string.Empty;
+                using (TextReader reader = new StreamReader(FileUtils.GetFilePath<T>(DataTypeAccess.json)))
                 {
                     StringBuilder word = new StringBuilder();
                     while (reader.Peek() > -1)
@@ -86,43 +81,37 @@ namespace Vueling.DataAccess.DAO
                         }
                     }
                 }
-            }
-            catch (IOException)
-            {
-                throw;
-            }
-            catch (ArgumentException)
-            {
-                throw;
-            }
-            if (entityString == string.Empty) return default(T);
-            var propValues = entityString.Split(',');
-            object entity;
-            try
-            {
+                if (entityString == string.Empty) return default(T);
+                var propValues = entityString.Split(',');
+                object entity;
                 entity = Activator.CreateInstance(typeof(T), propValues);
+                return (T)entity;
             }
-            catch (ArgumentException)
+            catch (ArgumentException ex)
             {
+                _log.Error(ex);
                 throw;
             }
-            catch (NotSupportedException)
+            catch (NotSupportedException ex)
             {
+                _log.Error(ex);
                 throw;
             }
-            catch (TargetInvocationException)
+            catch (TargetInvocationException ex)
             {
+                _log.Error(ex);
                 throw;
             }
-            return (T)entity;
+
         }
 
         public List<T> SelectAll()
         {
             try
             {
+                _log.Debug("Obtenemos todos los/las " + typeof(T).Name);
                 var groupOfEntity = new List<T>();
-                using (TextReader reader = new StreamReader(Filename))
+                using (TextReader reader = new StreamReader(FileUtils.GetFilePath<T>(DataTypeAccess.json)))
                 {
                     while (reader.Peek() > -1)
                     {
@@ -135,12 +124,39 @@ namespace Vueling.DataAccess.DAO
                     return groupOfEntity;
                 }
             }
-            catch (IOException)
+            catch (FileNotFoundException ex)
             {
+                _log.Error(ex);
                 throw;
             }
-            catch (ArgumentException)
+            catch (ArgumentNullException ex)
             {
+                _log.Error(ex);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error(ex);
                 throw;
             }
         }

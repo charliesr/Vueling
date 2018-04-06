@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
@@ -19,12 +21,51 @@ namespace Vueling.Business.Logic
         {
             _studentDao = new StudentDao();
         }
+
         public Student Add(Student alumno)
         {
-            _log.Debug("Llamado método add del BL");
-            alumno.FechaHoraRegistro = DateTime.Now;
-            alumno.Edad = CalcularEdad(alumno.FechaHoraRegistro,alumno.FechaDeNacimiento);
-            return _studentDao.Add(alumno);
+            try
+            {
+                _log.Debug("Llamado método add del BL");
+                alumno.FechaHoraRegistro = DateTime.Now;
+                alumno.Edad = CalcularEdad(alumno.FechaHoraRegistro, alumno.FechaDeNacimiento);
+                return _studentDao.Add(alumno);
+            }
+            catch (ArgumentNullException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (OverflowException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
         }
 
         public void ChangeFormat(DataTypeAccess dataTypeAccess)
@@ -35,14 +76,61 @@ namespace Vueling.Business.Logic
 
         public int CalcularEdad(DateTime registro, DateTime nacimiento)
         {
-            _log.Debug(string.Format("Calculamos la edad pardiendo de {0} (Registro) {1} (Nacimiento)", registro, nacimiento));
-            return Convert.ToInt32((registro - nacimiento).TotalDays / 365);
+            try
+            {
+                _log.Debug(string.Format("Calculamos la edad pardiendo de {0} (Registro) {1} (Nacimiento)", registro, nacimiento));
+                return Convert.ToInt32((registro - nacimiento).TotalDays / 365);
+            }
+            catch (OverflowException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
         }
 
         public List<Student> GetAll(DataTypeAccess dataTypeAccess)
         {
-            _log.Debug("Método Get All alumnos");
-            return _studentDao.GetAll(dataTypeAccess);
+            try
+            {
+                _log.Debug("Método Get All alumnos");
+                return _studentDao.GetAll(dataTypeAccess);
+            }
+            catch (FileNotFoundException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (ArgumentNullException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+
         }
     }
 }
