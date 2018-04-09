@@ -1,29 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
 {
-    public class JsonStudents
+    public class XmlStudents
     {
         private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static JsonStudents _instance;
+        private static XmlStudents _instance;
         private readonly List<Student> _students;
         private static object syncLock = new object();
 
-        protected JsonStudents()
+        protected XmlStudents()
         {
-            _log.Debug("Ojo! nueva instancia del singleton JSON!!");
-            var _format = FormatFactory<Student>.GetFormat(DataTypeAccess.json);
+            _log.Debug("Ojo! nueva instancia del singleton XML!!");
+            var _format = FormatFactory<Student>.GetFormat(DataTypeAccess.xml);
             _students = _format.SelectAll();
         }
 
-        public static JsonStudents GetJsonStudents()
+        public static XmlStudents GetInstance()
         {
             if (_instance == null)
             {
@@ -31,7 +27,7 @@ namespace Vueling.DataAccess.DAO
                 {
                     if (_instance == null)
                     {
-                        _instance = new JsonStudents();
+                        _instance = new XmlStudents();
                     }
                 }
             }
@@ -40,7 +36,7 @@ namespace Vueling.DataAccess.DAO
 
         public List<Student> GetAll()
         {
-            _log.Debug("Singleton de json devuelve alumnos INTERNOS");
+            _log.Debug("Singleton de xml devuelve alumnos INTERNOS");
             return _students;
         }
     }

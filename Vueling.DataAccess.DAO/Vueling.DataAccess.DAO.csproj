@@ -44,16 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTypeNotImplementedException.cs" />
-    <Compile Include="FormatFactory.cs" />
-    <Compile Include="IFormat.cs" />
-    <Compile Include="IStudentDao.cs" />
-    <Compile Include="XmlStudents.cs" />
-    <Compile Include="JsonStudents.cs" />
-    <Compile Include="StudentDao.cs" />
-    <Compile Include="XmlFormat.cs" />
-    <Compile Include="TxtFormat.cs" />
-    <Compile Include="JsonFormat.cs" />
+    <Compile Include="CrudDAO.cs" />
+    <Compile Include="Formats\FormatFactory.cs" />
+    <Compile Include="Formats\IFormat.cs" />
+    <Compile Include="IInsertDAO.cs" />
+    <Compile Include="ISelectDAO.cs" />
+    <Compile Include="Singletons\XmlStudents.cs" />
+    <Compile Include="Singletons\JsonStudents.cs" />
+    <Compile Include="Formats\XmlFormat.cs" />
+    <Compile Include="Formats\TxtFormat.cs" />
+    <Compile Include="Formats\JsonFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

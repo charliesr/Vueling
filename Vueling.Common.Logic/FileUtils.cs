@@ -11,7 +11,7 @@ namespace Vueling.Common.Logic
     {
         public static string GetFilePath<T>(DataTypeAccess typeFile)
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), typeof(T).Name, ".", typeFile.ToString());
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), typeof(T).Name + "." + typeFile.ToString());
         }
     }
 }

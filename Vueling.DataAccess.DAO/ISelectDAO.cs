@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using Vueling.Common.Logic;
-using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
 {
-    public interface IStudentDao
+    public interface ISelectDAO<T>
     {
-        Student Add(Student alumno);
+        List<T> GetAll(DataTypeAccess dataTypeAccess);
         void ChangeFormat(DataTypeAccess dataTypeAccess);
-        List<Student> GetAll(DataTypeAccess dataTypeAccess);
     }
 }

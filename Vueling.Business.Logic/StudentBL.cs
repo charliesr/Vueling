@@ -16,11 +16,7 @@ namespace Vueling.Business.Logic
     public class StudentBL : IStudentBL
     {
         private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IStudentDao _studentDao;
-        public StudentBL()
-        {
-            _studentDao = new StudentDao();
-        }
+        private readonly CrudBL<Student> _crudBL = new CrudBL<Student>();
 
         public Student Add(Student alumno)
         {
@@ -29,7 +25,7 @@ namespace Vueling.Business.Logic
                 _log.Debug("Llamado método add del BL");
                 alumno.FechaHoraRegistro = DateTime.Now;
                 alumno.Edad = CalcularEdad(alumno.FechaHoraRegistro, alumno.FechaDeNacimiento);
-                return _studentDao.Add(alumno);
+                return _crudBL.Add(alumno);
             }
             catch (ArgumentNullException ex)
             {
@@ -71,7 +67,7 @@ namespace Vueling.Business.Logic
         public void ChangeFormat(DataTypeAccess dataTypeAccess)
         {
             _log.Debug("Cambiamos el formato de la factory (formato del archivo a) " + dataTypeAccess.ToString());
-            _studentDao.ChangeFormat(dataTypeAccess);
+            _crudBL.ChangeFormat(dataTypeAccess);
         }
 
         public int CalcularEdad(DateTime registro, DateTime nacimiento)
@@ -93,7 +89,7 @@ namespace Vueling.Business.Logic
             try
             {
                 _log.Debug("Método Get All alumnos");
-                return _studentDao.GetAll(dataTypeAccess);
+                return _crudBL.GetAll(dataTypeAccess);
             }
             catch (FileNotFoundException ex)
             {
