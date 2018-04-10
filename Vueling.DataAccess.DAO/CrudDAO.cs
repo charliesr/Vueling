@@ -74,20 +74,16 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Obtenemos todos " + typeof(T).ToString());
+                var typeString = string.Concat(dataTypeAccess.ToString().Substring(0, 1).ToUpper(), dataTypeAccess.ToString().Substring(1));
                 switch (dataTypeAccess)
                 {
-                    case DataTypeAccess.json:
-                        var foundJsonSingleton = Assembly.Load("Vueling.DataAccess.DAO.Singletons").GetTypes().FirstOrDefault(t => t.Name.Contains(typeof(T).Name) && t.Name.Contains("Json"));
-                        if (foundJsonSingleton == null) return _format.SelectAll();
-                        var jsonSingletonInstance = foundJsonSingleton.GetMethod("GetInstance", BindingFlags.Static).Invoke(null, null);
-                        return (List<T>)jsonSingletonInstance.GetType().GetMethod("GetAll").Invoke(null, null);
-                    case DataTypeAccess.xml:
-                        var foundXmlSingleton = Assembly.Load("Vueling.DataAccess.DAO.Singletons").GetTypes().FirstOrDefault(t => t.Name.Contains(typeof(T).Name) && t.Name.Contains("Xml"));
-                        if (foundXmlSingleton == null) return _format.SelectAll();
-                        var xmlSingletonInstance = foundXmlSingleton.GetMethod("GetInstance", BindingFlags.Static).Invoke(null, null);
-                        return (List<T>)xmlSingletonInstance.GetType().GetMethod("GetAll").Invoke(null, null);
-                    default:
+                    case DataTypeAccess.txt:
                         return _format.SelectAll();
+                    default:
+                        var foundSingleton = Assembly.Load("Vueling.DataAccess.DAO.Singletons").GetTypes().FirstOrDefault(t => t.Name.Contains(typeof(T).Name) && t.Name.Contains(typeString));
+                        if (foundSingleton == null) return _format.SelectAll();
+                        var jsonSingletonInstance = foundSingleton.GetMethod("GetInstance", BindingFlags.Static).Invoke(null, null);
+                        return (List<T>)jsonSingletonInstance.GetType().GetMethod("GetAll").Invoke(null, null);
                 }
             }
             catch (FileNotFoundException ex)
