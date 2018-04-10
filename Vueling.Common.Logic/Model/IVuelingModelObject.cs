@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vueling.Common.Logic.Model
 {
-    public interface IVuelingModelObject
+    public interface IVuelingModelObject : ICloneable
     {
         Guid Guid { get; set; }
     }

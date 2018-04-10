@@ -89,5 +89,9 @@ namespace Vueling.Common.Logic.Model
             return hashCode;
         }
 
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }
