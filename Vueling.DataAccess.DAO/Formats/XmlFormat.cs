@@ -20,7 +20,7 @@ namespace Vueling.DataAccess.DAO
                 _log.Debug("Añadiendo un/a nuevo/a " + typeof(T).Name);
                 var xmlSerializer = new XmlSerializer(typeof(List<T>));
                 var group = SelectAll();
-                using (Stream writer = File.Open(FileUtils.GetFilePath<T>(DataTypeAccess.json), FileMode.OpenOrCreate, FileAccess.Write))
+                using (Stream writer = File.Open(RepositoryUtils.GetFilePath<T>(DataTypeAccess.json), FileMode.OpenOrCreate, FileAccess.Write))
                 {
                     xmlSerializer.Serialize(writer, group);
                 }
@@ -68,11 +68,11 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Select " + typeof(T).Name + "con Guid " + guid.ToString());
-                if (File.Exists(FileUtils.GetFilePath<T>(DataTypeAccess.json)))
+                if (File.Exists(RepositoryUtils.GetFilePath<T>(DataTypeAccess.json)))
                 {
                     var xmlSerializer = new XmlSerializer(typeof(List<T>));
                     List<T> group;
-                    using (Stream reader = File.OpenRead(FileUtils.GetFilePath<T>(DataTypeAccess.json)))
+                    using (Stream reader = File.OpenRead(RepositoryUtils.GetFilePath<T>(DataTypeAccess.json)))
                     {
                         group = (List<T>)xmlSerializer.Deserialize(reader);
                     }
@@ -122,9 +122,9 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Obtenemos todos los/las " + typeof(T).Name);
-                if (File.Exists(FileUtils.GetFilePath<T>(DataTypeAccess.json)))
+                if (File.Exists(RepositoryUtils.GetFilePath<T>(DataTypeAccess.json)))
                 {
-                    using (Stream reader = File.OpenRead(FileUtils.GetFilePath<T>(DataTypeAccess.json)))
+                    using (Stream reader = File.OpenRead(RepositoryUtils.GetFilePath<T>(DataTypeAccess.json)))
                     {
                         var xmlSerializer = new XmlSerializer(typeof(List<T>));
                         return (List<T>)xmlSerializer.Deserialize(reader);

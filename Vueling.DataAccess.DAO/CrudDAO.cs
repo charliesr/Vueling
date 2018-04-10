@@ -21,7 +21,6 @@ namespace Vueling.DataAccess.DAO
         public CrudDAO(DataTypeAccess tipo)
         {
             ChangeFormat(tipo);
-
         }
 
         public void ChangeFormat(DataTypeAccess dataTypeAccess)

@@ -34,6 +34,7 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTypeNotImplementedException.cs" />
-    <Compile Include="FileUtils.cs" />
+    <Compile Include="RepositoryUtils.cs" />
     <Compile Include="IVuelingLogger.cs" />
     <Compile Include="VuelingLogger.cs" />
     <Compile Include="DataTypeAccess.cs" />
