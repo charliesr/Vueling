@@ -1,4 +1,6 @@
-﻿namespace Vueling.Presentation.WinSite
+﻿using Vueling.Common.Logic;
+
+namespace Vueling.Presentation.WinSite
 {
     partial class AlumnoForm
     {
@@ -28,9 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnTxt = new System.Windows.Forms.Button();
-            this.btnJson = new System.Windows.Forms.Button();
-            this.btnXml = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlumnoForm));
             this.txtId = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellidos = new System.Windows.Forms.TextBox();
@@ -47,176 +47,168 @@
             this.tmuES = new System.Windows.Forms.ToolStripMenuItem();
             this.tmuEN = new System.Windows.Forms.ToolStripMenuItem();
             this.tmuCA = new System.Windows.Forms.ToolStripMenuItem();
+            this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configuraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmiTXT = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmiJSON = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmiXML = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmiSQL = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.lbActualFormat = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnTxt
-            // 
-            this.btnTxt.Location = new System.Drawing.Point(113, 309);
-            this.btnTxt.Name = "btnTxt";
-            this.btnTxt.Size = new System.Drawing.Size(98, 25);
-            this.btnTxt.TabIndex = 0;
-            this.btnTxt.Text = "Txt";
-            this.btnTxt.UseVisualStyleBackColor = true;
-            this.btnTxt.Click += new System.EventHandler(this.BtnTxt_Click);
-            // 
-            // btnJson
-            // 
-            this.btnJson.Location = new System.Drawing.Point(266, 309);
-            this.btnJson.Name = "btnJson";
-            this.btnJson.Size = new System.Drawing.Size(100, 25);
-            this.btnJson.TabIndex = 1;
-            this.btnJson.Text = "Json";
-            this.btnJson.UseVisualStyleBackColor = true;
-            this.btnJson.Click += new System.EventHandler(this.BtnJson_Click);
-            // 
-            // btnXml
-            // 
-            this.btnXml.Location = new System.Drawing.Point(423, 309);
-            this.btnXml.Name = "btnXml";
-            this.btnXml.Size = new System.Drawing.Size(98, 25);
-            this.btnXml.TabIndex = 2;
-            this.btnXml.Text = "Xml";
-            this.btnXml.UseVisualStyleBackColor = true;
-            this.btnXml.Click += new System.EventHandler(this.BtnXml_Click);
-            // 
             // txtId
             // 
-            this.txtId.Location = new System.Drawing.Point(291, 47);
+            resources.ApplyResources(this.txtId, "txtId");
             this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(138, 20);
-            this.txtId.TabIndex = 3;
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(291, 97);
+            resources.ApplyResources(this.txtNombre, "txtNombre");
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(138, 20);
-            this.txtNombre.TabIndex = 4;
             // 
             // txtApellidos
             // 
-            this.txtApellidos.Location = new System.Drawing.Point(291, 157);
+            resources.ApplyResources(this.txtApellidos, "txtApellidos");
             this.txtApellidos.Name = "txtApellidos";
-            this.txtApellidos.Size = new System.Drawing.Size(138, 20);
-            this.txtApellidos.TabIndex = 5;
             // 
             // txtDni
             // 
-            this.txtDni.Location = new System.Drawing.Point(291, 213);
+            resources.ApplyResources(this.txtDni, "txtDni");
             this.txtDni.Name = "txtDni";
-            this.txtDni.Size = new System.Drawing.Size(138, 20);
-            this.txtDni.TabIndex = 6;
             // 
             // lblId
             // 
-            this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(192, 54);
+            resources.ApplyResources(this.lblId, "lblId");
             this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(16, 13);
-            this.lblId.TabIndex = 8;
-            this.lblId.Text = "Id";
             // 
             // lblNombre
             // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(192, 104);
+            resources.ApplyResources(this.lblNombre, "lblNombre");
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(44, 13);
-            this.lblNombre.TabIndex = 9;
-            this.lblNombre.Text = "Nombre";
             // 
             // lblApellidos
             // 
-            this.lblApellidos.AutoSize = true;
-            this.lblApellidos.Location = new System.Drawing.Point(192, 164);
+            resources.ApplyResources(this.lblApellidos, "lblApellidos");
             this.lblApellidos.Name = "lblApellidos";
-            this.lblApellidos.Size = new System.Drawing.Size(49, 13);
-            this.lblApellidos.TabIndex = 10;
-            this.lblApellidos.Text = "Apellidos";
             // 
             // lblDni
             // 
-            this.lblDni.AutoSize = true;
-            this.lblDni.Location = new System.Drawing.Point(197, 220);
+            resources.ApplyResources(this.lblDni, "lblDni");
             this.lblDni.Name = "lblDni";
-            this.lblDni.Size = new System.Drawing.Size(23, 13);
-            this.lblDni.TabIndex = 11;
-            this.lblDni.Text = "Dni";
             // 
             // lblFechaNacimiento
             // 
-            this.lblFechaNacimiento.AutoSize = true;
-            this.lblFechaNacimiento.Location = new System.Drawing.Point(192, 270);
+            resources.ApplyResources(this.lblFechaNacimiento, "lblFechaNacimiento");
             this.lblFechaNacimiento.Name = "lblFechaNacimiento";
-            this.lblFechaNacimiento.Size = new System.Drawing.Size(93, 13);
-            this.lblFechaNacimiento.TabIndex = 12;
-            this.lblFechaNacimiento.Text = "Fecha Nacimiento";
             // 
             // dtpFechaNacimiento
             // 
+            resources.ApplyResources(this.dtpFechaNacimiento, "dtpFechaNacimiento");
             this.dtpFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaNacimiento.Location = new System.Drawing.Point(291, 264);
             this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
-            this.dtpFechaNacimiento.Size = new System.Drawing.Size(138, 20);
-            this.dtpFechaNacimiento.TabIndex = 13;
             // 
             // btnOpenShowStudent
             // 
-            this.btnOpenShowStudent.Location = new System.Drawing.Point(185, 351);
+            resources.ApplyResources(this.btnOpenShowStudent, "btnOpenShowStudent");
             this.btnOpenShowStudent.Name = "btnOpenShowStudent";
-            this.btnOpenShowStudent.Size = new System.Drawing.Size(274, 23);
-            this.btnOpenShowStudent.TabIndex = 14;
-            this.btnOpenShowStudent.Text = "Abrir Search";
             this.btnOpenShowStudent.UseVisualStyleBackColor = true;
             this.btnOpenShowStudent.Click += new System.EventHandler(this.btnOpenShowStudent_Click);
             // 
             // menuStrip1
             // 
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.idiomaToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.idiomaToolStripMenuItem,
+            this.configurationToolStripMenuItem,
+            this.configuraciónToolStripMenuItem});
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(612, 24);
-            this.menuStrip1.TabIndex = 15;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // idiomaToolStripMenuItem
             // 
+            resources.ApplyResources(this.idiomaToolStripMenuItem, "idiomaToolStripMenuItem");
             this.idiomaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tmuES,
             this.tmuEN,
             this.tmuCA});
             this.idiomaToolStripMenuItem.Name = "idiomaToolStripMenuItem";
-            this.idiomaToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.idiomaToolStripMenuItem.Text = "Idioma";
             // 
             // tmuES
             // 
+            resources.ApplyResources(this.tmuES, "tmuES");
             this.tmuES.Name = "tmuES";
-            this.tmuES.Size = new System.Drawing.Size(180, 22);
-            this.tmuES.Text = "ES-ES";
             this.tmuES.Click += new System.EventHandler(this.CambiaIdioma_Click);
             // 
             // tmuEN
             // 
+            resources.ApplyResources(this.tmuEN, "tmuEN");
             this.tmuEN.Name = "tmuEN";
-            this.tmuEN.Size = new System.Drawing.Size(180, 22);
-            this.tmuEN.Text = "EN-GB";
             this.tmuEN.Click += new System.EventHandler(this.CambiaIdioma_Click);
             // 
             // tmuCA
             // 
+            resources.ApplyResources(this.tmuCA, "tmuCA");
             this.tmuCA.Name = "tmuCA";
-            this.tmuCA.Size = new System.Drawing.Size(180, 22);
-            this.tmuCA.Text = "CA-ES";
             this.tmuCA.Click += new System.EventHandler(this.CambiaIdioma_Click);
+            // 
+            // configurationToolStripMenuItem
+            // 
+            resources.ApplyResources(this.configurationToolStripMenuItem, "configurationToolStripMenuItem");
+            this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
+            // 
+            // configuraciónToolStripMenuItem
+            // 
+            resources.ApplyResources(this.configuraciónToolStripMenuItem, "configuraciónToolStripMenuItem");
+            this.configuraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tmiTXT,
+            this.tmiJSON,
+            this.tmiXML,
+            this.tmiSQL});
+            this.configuraciónToolStripMenuItem.Name = "configuraciónToolStripMenuItem";
+            // 
+            // tmiTXT
+            // 
+            resources.ApplyResources(this.tmiTXT, "tmiTXT");
+            this.tmiTXT.Name = "tmiTXT";
+            this.tmiTXT.Click += new System.EventHandler(this.ChangeFormatConfig);
+            // 
+            // tmiJSON
+            // 
+            resources.ApplyResources(this.tmiJSON, "tmiJSON");
+            this.tmiJSON.Name = "tmiJSON";
+            this.tmiJSON.Click += new System.EventHandler(this.ChangeFormatConfig);
+            // 
+            // tmiXML
+            // 
+            resources.ApplyResources(this.tmiXML, "tmiXML");
+            this.tmiXML.Name = "tmiXML";
+            this.tmiXML.Click += new System.EventHandler(this.ChangeFormatConfig);
+            // 
+            // tmiSQL
+            // 
+            resources.ApplyResources(this.tmiSQL, "tmiSQL");
+            this.tmiSQL.Name = "tmiSQL";
+            // 
+            // btnSave
+            // 
+            resources.ApplyResources(this.btnSave, "btnSave");
+            this.btnSave.Name = "btnSave";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.SaveEntity);
+            // 
+            // lbActualFormat
+            // 
+            resources.ApplyResources(this.lbActualFormat, "lbActualFormat");
+            this.lbActualFormat.ForeColor = System.Drawing.Color.Green;
+            this.lbActualFormat.Name = "lbActualFormat";
             // 
             // AlumnoForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 450);
+            this.Controls.Add(this.lbActualFormat);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnOpenShowStudent);
             this.Controls.Add(this.dtpFechaNacimiento);
             this.Controls.Add(this.lblFechaNacimiento);
@@ -228,13 +220,9 @@
             this.Controls.Add(this.txtApellidos);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtId);
-            this.Controls.Add(this.btnXml);
-            this.Controls.Add(this.btnJson);
-            this.Controls.Add(this.btnTxt);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "AlumnoForm";
-            this.Text = "AlumnoForm";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -243,13 +231,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnTxt;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtApellidos;
-        private System.Windows.Forms.Button btnJson;
-        private System.Windows.Forms.Button btnXml;
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblApellidos;
@@ -263,5 +247,13 @@
         private System.Windows.Forms.ToolStripMenuItem tmuES;
         private System.Windows.Forms.ToolStripMenuItem tmuEN;
         private System.Windows.Forms.ToolStripMenuItem tmuCA;
+        private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configuraciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tmiTXT;
+        private System.Windows.Forms.ToolStripMenuItem tmiJSON;
+        private System.Windows.Forms.ToolStripMenuItem tmiXML;
+        private System.Windows.Forms.ToolStripMenuItem tmiSQL;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label lbActualFormat;
     }
 }

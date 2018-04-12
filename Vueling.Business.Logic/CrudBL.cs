@@ -13,8 +13,8 @@ namespace Vueling.Business.Logic
     public class CrudBL<T> : ICrudReadBL<T>, ICrudSaveBL<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IInsertDAO<T> _insertDAO = new CrudDAO<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationManager.AppSettings["DefaultDataAccesType"]));
-        private readonly ISelectDAO<T> _selectDAO = new CrudDAO<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationManager.AppSettings["DefaultDataAccesType"]));
+        private readonly IInsertDAO<T> _insertDAO = new CrudDAO<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
+        private readonly ISelectDAO<T> _selectDAO = new CrudDAO<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
 
         public T Add(T entity)
         {

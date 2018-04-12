@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationUtils.cs" />
     <Compile Include="DataTypeNotImplementedException.cs" />
     <Compile Include="RepositoryUtils.cs" />
     <Compile Include="IVuelingLogger.cs" />

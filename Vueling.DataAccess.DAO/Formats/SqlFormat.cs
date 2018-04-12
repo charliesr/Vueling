@@ -37,7 +37,7 @@ namespace Vueling.DataAccess.DAO.Formats
                         var reader = _command.ExecuteReader();
                         while (reader.Read())
                         {
-                           reader.
+                            throw new NotImplementedException();
                         }
                     }
                 }
@@ -48,6 +48,7 @@ namespace Vueling.DataAccess.DAO.Formats
                 _log.Error(ex);
                 throw;
             }
+            return null;
         }
     }
 }

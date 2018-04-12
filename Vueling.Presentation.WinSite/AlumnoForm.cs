@@ -8,7 +8,9 @@ using System.IO;
 using System.Security;
 using System.Threading;
 using System.Globalization;
-using Vueling.Common.Logic.Resources;
+using System.Collections.Generic;
+using System.Linq;
+using System.ComponentModel;
 
 namespace Vueling.Presentation.WinSite
 {
@@ -17,152 +19,25 @@ namespace Vueling.Presentation.WinSite
         private IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private Student alumno;
         private IStudentBL alumnoBL;
+        
         public AlumnoForm()
         {
             // dibuja todos los controles
             InitializeComponent();
             alumno = new Student();
             alumnoBL = new StudentBL();
+            SetFormat(ConfigurationUtils.LoadFormat());
         }
 
-
-        private void BtnTxt_Click(object sender, EventArgs e)
+        private void SetFormat(string format)
         {
-            try
-            {
-                _log.Debug("Clicado el botón de guardar en TXT");
-                LoadAlumnoData();
-                alumnoBL.ChangeFormat(DataTypeAccess.txt);
-                alumnoBL.Add(alumno);
-                throw new OverflowException();
-            }
-            catch (OverflowException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (ArgumentNullException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (PathTooLongException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (NotSupportedException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (SecurityException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-        }
-
-        private void BtnJson_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _log.Debug("Clicado el botón de guardar en JSon");
-                LoadAlumnoData();
-                alumnoBL.ChangeFormat(DataTypeAccess.json);
-                alumnoBL.Add(alumno);
-            }
-            catch (OverflowException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (ArgumentNullException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (PathTooLongException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (NotSupportedException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (SecurityException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-        }
-
-        private void BtnXml_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _log.Debug("Clicado el botón de guardar en Xml");
-                LoadAlumnoData();
-                alumnoBL.ChangeFormat(DataTypeAccess.xml);
-                alumnoBL.Add(alumno);
-            }
-            catch (OverflowException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (ArgumentNullException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (PathTooLongException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (NotSupportedException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
-            catch (SecurityException ex)
-            {
-                _log.Error(ex);
-                MessageBoxUtil.ShowException(ex);
-            }
+            lbActualFormat.Text = format;
+            this.configuraciónToolStripMenuItem.DropDownItems
+                .Cast<ToolStripMenuItem>().ToList()
+                .ForEach(item => item.Checked = false);
+            this.configuraciónToolStripMenuItem.DropDownItems
+                .Cast<ToolStripMenuItem>()
+                .First(item => item.Text.Contains(format)).Checked = true;
         }
 
         private void LoadAlumnoData()
@@ -205,22 +80,83 @@ namespace Vueling.Presentation.WinSite
 
         private void AplicarTraducciones()
         {
-            lblApellidos.Text = Literals.SurnameLabel;
-            lblNombre.Text = Literals.NameLabel;
-            lblDni.Text = Literals.DniLabel;
-            lblFechaNacimiento.Text = Literals.BirthLabel;
-            lblId.Text = Literals.IdLabel;
-            btnJson.Text = Literals.ButtonJsonLabel;
-            btnOpenShowStudent.Text = Literals.ButtonOpenSearch;
-            btnTxt.Text = Literals.ButtonTxtLabel;
-            btnXml.Text = Literals.ButtonXmlLabel;
+            var resources = new ComponentResourceManager(this.GetType());
+            GetChildren(this).ToList().ForEach(ctrl =>
+            {
+                resources.ApplyResources(ctrl, ctrl.Name);
+            });
+            Text = resources.GetString("$this.text");
+            lbActualFormat.Text = ConfigurationUtils.LoadFormat();
         }
 
+        private IEnumerable<Control> GetChildren(Control control)
+        {
+            var controls = control.Controls.Cast<Control>();
+            return controls.SelectMany(ctrl => GetChildren(ctrl)).Concat(controls);
+        }
 
         private void CambiaIdioma_Click(object sender, EventArgs e)
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(((ToolStripMenuItem)sender).Text);
+            ((ToolStripMenuItem)sender).Checked = true;
+            this.idiomaToolStripMenuItem.DropDownItems
+                .Cast<ToolStripMenuItem>().ToList()
+                .ForEach(item => item.Checked = false);
+            ((ToolStripMenuItem)sender).Checked = true;
             AplicarTraducciones();
+        }
+
+        private void ChangeFormatConfig(object sender, EventArgs e)
+        {
+            var format = ((ToolStripMenuItem)sender).Text;
+            alumnoBL.ChangeFormat(EnumsHelper.StringToDataTypeAccess(format));
+            ConfigurationUtils.SaveFormat(format);
+            SetFormat(format);
+        }
+
+        private void SaveEntity(object sender, EventArgs e)
+        {
+            try
+            {
+                _log.Debug("Clicado el botón de guardar en " + ((ToolStripMenuItem)sender).Text);
+                LoadAlumnoData();
+                alumnoBL.Add(alumno);
+            }
+            catch (OverflowException ex)
+            {
+                _log.Error(ex);
+                MessageBoxUtil.ShowException(ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                _log.Error(ex);
+                MessageBoxUtil.ShowException(ex);
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error(ex);
+                MessageBoxUtil.ShowException(ex);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error(ex);
+                MessageBoxUtil.ShowException(ex);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error(ex);
+                MessageBoxUtil.ShowException(ex);
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error(ex);
+                MessageBoxUtil.ShowException(ex);
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error(ex);
+                MessageBoxUtil.ShowException(ex);
+            }
         }
     }
 }
