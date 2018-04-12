@@ -42,6 +42,12 @@
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.btnOpenShowStudent = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.idiomaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmuES = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmuEN = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmuCA = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnTxt
@@ -165,6 +171,47 @@
             this.btnOpenShowStudent.UseVisualStyleBackColor = true;
             this.btnOpenShowStudent.Click += new System.EventHandler(this.btnOpenShowStudent_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.idiomaToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(612, 24);
+            this.menuStrip1.TabIndex = 15;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // idiomaToolStripMenuItem
+            // 
+            this.idiomaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tmuES,
+            this.tmuEN,
+            this.tmuCA});
+            this.idiomaToolStripMenuItem.Name = "idiomaToolStripMenuItem";
+            this.idiomaToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.idiomaToolStripMenuItem.Text = "Idioma";
+            // 
+            // tmuES
+            // 
+            this.tmuES.Name = "tmuES";
+            this.tmuES.Size = new System.Drawing.Size(180, 22);
+            this.tmuES.Text = "ES-ES";
+            this.tmuES.Click += new System.EventHandler(this.CambiaIdioma_Click);
+            // 
+            // tmuEN
+            // 
+            this.tmuEN.Name = "tmuEN";
+            this.tmuEN.Size = new System.Drawing.Size(180, 22);
+            this.tmuEN.Text = "EN-GB";
+            this.tmuEN.Click += new System.EventHandler(this.CambiaIdioma_Click);
+            // 
+            // tmuCA
+            // 
+            this.tmuCA.Name = "tmuCA";
+            this.tmuCA.Size = new System.Drawing.Size(180, 22);
+            this.tmuCA.Text = "CA-ES";
+            this.tmuCA.Click += new System.EventHandler(this.CambiaIdioma_Click);
+            // 
             // AlumnoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,8 +231,12 @@
             this.Controls.Add(this.btnXml);
             this.Controls.Add(this.btnJson);
             this.Controls.Add(this.btnTxt);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "AlumnoForm";
             this.Text = "AlumnoForm";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,5 +258,10 @@
         private System.Windows.Forms.Label lblFechaNacimiento;
         private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
         private System.Windows.Forms.Button btnOpenShowStudent;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem idiomaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tmuES;
+        private System.Windows.Forms.ToolStripMenuItem tmuEN;
+        private System.Windows.Forms.ToolStripMenuItem tmuCA;
     }
 }

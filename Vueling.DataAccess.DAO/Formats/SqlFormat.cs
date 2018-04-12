@@ -32,16 +32,22 @@ namespace Vueling.DataAccess.DAO.Formats
                 {
                     _connection.Open();
                     var queryString = "Select * from dbo.Student";
-                    var _command = new SqlCommand(queryString, _connection);
-                    var reader = _command.ExecuteReader();
+                    using (var _command = new SqlCommand(queryString, _connection))
+                    {
+                        var reader = _command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                           reader.
+                        }
+                    }
                 }
+
             }
             catch (SqlException ex)
             {
                 _log.Error(ex);
                 throw;
             }
-
         }
     }
 }

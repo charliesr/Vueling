@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vueling.Business.Logic;
 using Vueling.Common.Logic.Model;
@@ -13,6 +6,9 @@ using Vueling.Common.Logic;
 using System.Reflection;
 using System.IO;
 using System.Security;
+using System.Threading;
+using System.Globalization;
+using Vueling.Common.Logic.Resources;
 
 namespace Vueling.Presentation.WinSite
 {
@@ -28,6 +24,7 @@ namespace Vueling.Presentation.WinSite
             alumno = new Student();
             alumnoBL = new StudentBL();
         }
+
 
         private void BtnTxt_Click(object sender, EventArgs e)
         {
@@ -204,6 +201,26 @@ namespace Vueling.Presentation.WinSite
                 _log.Error(ex);
                 MessageBoxUtil.ShowException(ex);
             }
+        }
+
+        private void AplicarTraducciones()
+        {
+            lblApellidos.Text = Literals.SurnameLabel;
+            lblNombre.Text = Literals.NameLabel;
+            lblDni.Text = Literals.DniLabel;
+            lblFechaNacimiento.Text = Literals.BirthLabel;
+            lblId.Text = Literals.IdLabel;
+            btnJson.Text = Literals.ButtonJsonLabel;
+            btnOpenShowStudent.Text = Literals.ButtonOpenSearch;
+            btnTxt.Text = Literals.ButtonTxtLabel;
+            btnXml.Text = Literals.ButtonXmlLabel;
+        }
+
+
+        private void CambiaIdioma_Click(object sender, EventArgs e)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(((ToolStripMenuItem)sender).Text);
+            AplicarTraducciones();
         }
     }
 }

@@ -26,6 +26,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -78,9 +80,9 @@
     <Compile Include="MessageBoxUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AlumnoForm.resx">
+    <Resource Include="AlumnoForm.resx">
       <DependentUpon>AlumnoForm.cs</DependentUpon>
-    </EmbeddedResource>
+    </Resource>
     <EmbeddedResource Include="AlumnoShowForm.resx">
       <DependentUpon>AlumnoShowForm.cs</DependentUpon>
     </EmbeddedResource>

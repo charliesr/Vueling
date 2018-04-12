@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAccess.DAOUnitT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Presentation.WinSite", "Vueling.Presentation.WinSite\Vueling.Presentation.WinSite.csproj", "{737AFC23-E115-4F03-AE83-401A5A1EFAE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Business.LogicBDDTests", "Vueling.Business.LogicBDDTests\Vueling.Business.LogicBDDTests.csproj", "{9D47FEE5-0461-4E00-890A-60D0789CBDCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{737AFC23-E115-4F03-AE83-401A5A1EFAE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{737AFC23-E115-4F03-AE83-401A5A1EFAE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{737AFC23-E115-4F03-AE83-401A5A1EFAE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D47FEE5-0461-4E00-890A-60D0789CBDCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D47FEE5-0461-4E00-890A-60D0789CBDCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D47FEE5-0461-4E00-890A-60D0789CBDCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D47FEE5-0461-4E00-890A-60D0789CBDCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
