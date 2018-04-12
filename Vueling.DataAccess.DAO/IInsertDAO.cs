@@ -7,9 +7,8 @@ using Vueling.Common.Logic;
 
 namespace Vueling.DataAccess.DAO
 {
-    public interface IInsertDAO<T>
+    public interface IInsertDAO<T> : IFormatFactory
     {
         T Add(T entity);
-        void ChangeFormat(DataTypeAccess dataTypeAccess);
     }
 }

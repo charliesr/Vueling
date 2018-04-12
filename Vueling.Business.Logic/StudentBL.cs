@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
-using Vueling.DataAccess.DAO;
 
 namespace Vueling.Business.Logic
 {
     public class StudentBL : IStudentBL
     {
         private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly CrudBL<Student> _crudBL = new CrudBL<Student>();
+        private readonly IReadBL<Student> _readBL = new CrudBL<Student>();
+        private readonly ISaveBL<Student> _saveBL = new CrudBL<Student>();
 
         public Student Add(Student alumno)
         {
@@ -25,7 +21,7 @@ namespace Vueling.Business.Logic
                 _log.Debug("Llamado método add del BL");
                 alumno.FechaHoraRegistro = DateTime.Now;
                 alumno.Edad = CalcularEdad(alumno.FechaHoraRegistro, alumno.FechaDeNacimiento);
-                return _crudBL.Add(alumno);
+                return _saveBL.Add(alumno);
             }
             catch (ArgumentNullException ex)
             {
@@ -64,32 +60,12 @@ namespace Vueling.Business.Logic
             }
         }
 
-        public void ChangeFormat(DataTypeAccess dataTypeAccess)
-        {
-            _log.Debug("Cambiamos el formato de la factory (formato del archivo a) " + dataTypeAccess.ToString());
-            _crudBL.ChangeFormat(dataTypeAccess);
-        }
-
-        public int CalcularEdad(DateTime registro, DateTime nacimiento)
-        {
-            try
-            {
-                _log.Debug(string.Format("Calculamos la edad pardiendo de {0} (Registro) {1} (Nacimiento)", registro, nacimiento));
-                return Convert.ToInt32((registro - nacimiento).TotalDays / 365);
-            }
-            catch (OverflowException ex)
-            {
-                _log.Error(ex);
-                throw;
-            }
-        }
-
         public List<Student> GetAll(DataTypeAccess dataTypeAccess)
         {
             try
             {
                 _log.Debug("Método Get All alumnos");
-                return _crudBL.GetAll(dataTypeAccess);
+                return _readBL.GetAll(dataTypeAccess);
             }
             catch (FileNotFoundException ex)
             {
@@ -127,6 +103,26 @@ namespace Vueling.Business.Logic
                 throw;
             }
 
+        }
+
+        public void ChangeFormat(DataTypeAccess dataTypeAccess)
+        {
+            _log.Debug("Cambiamos el formato de la factory (formato del archivo a) " + dataTypeAccess.ToString());
+            _readBL.ChangeFormat(dataTypeAccess);
+        }
+
+        public int CalcularEdad(DateTime registro, DateTime nacimiento)
+        {
+            try
+            {
+                _log.Debug(string.Format("Calculamos la edad pardiendo de {0} (Registro) {1} (Nacimiento)", registro, nacimiento));
+                return Convert.ToInt32((registro - nacimiento).TotalDays / 365);
+            }
+            catch (OverflowException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
         }
     }
 }

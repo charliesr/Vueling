@@ -10,7 +10,7 @@ using Vueling.DataAccess.DAO;
 
 namespace Vueling.Business.Logic
 {
-    public class CrudBL<T> : ICrudReadBL<T>, ICrudSaveBL<T> where T : IVuelingModelObject
+    public class CrudBL<T> : IReadBL<T>, ISaveBL<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IInsertDAO<T> _insertDAO = new CrudDAO<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
@@ -62,7 +62,7 @@ namespace Vueling.Business.Logic
 
         public List<T> GetAll(DataTypeAccess dataTypeAccess)
         {
-            throw new NotImplementedException();
+            return _selectDAO.GetAll(dataTypeAccess);
         }
 
         public void ChangeFormat(DataTypeAccess dataTypeAccess)

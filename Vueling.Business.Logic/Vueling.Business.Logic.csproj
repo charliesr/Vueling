@@ -42,8 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CrudBL.cs" />
-    <Compile Include="ICrudReadBL.cs" />
-    <Compile Include="ICrudSaveBL.cs" />
+    <Compile Include="IReadBL.cs" />
+    <Compile Include="ISaveBL.cs" />
     <Compile Include="IStudentBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentBL.cs" />

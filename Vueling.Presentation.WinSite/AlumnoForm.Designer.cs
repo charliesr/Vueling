@@ -189,6 +189,7 @@ namespace Vueling.Presentation.WinSite
             // 
             resources.ApplyResources(this.tmiSQL, "tmiSQL");
             this.tmiSQL.Name = "tmiSQL";
+            this.tmiSQL.Click += new System.EventHandler(this.ChangeFormatConfig);
             // 
             // btnSave
             // 

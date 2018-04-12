@@ -48,6 +48,7 @@
     <Compile Include="Formats\FormatFactory.cs" />
     <Compile Include="Formats\IFormat.cs" />
     <Compile Include="Formats\SqlFormat.cs" />
+    <Compile Include="Formats\IFormatFactory.cs" />
     <Compile Include="IInsertDAO.cs" />
     <Compile Include="ISelectDAO.cs" />
     <Compile Include="Singletons\XmlStudents.cs" />
