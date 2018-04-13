@@ -118,7 +118,7 @@ namespace Vueling.Presentation.WinSite
         {
             try
             {
-                _log.Debug("Clicado el botón de guardar en " + ((ToolStripMenuItem)sender).Text);
+                _log.Debug("Clicado el botón de guardar en " + ConfigurationUtils.LoadFormat());
                 LoadAlumnoData();
                 alumnoBL.Add(alumno);
             }

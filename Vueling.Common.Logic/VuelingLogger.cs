@@ -76,7 +76,9 @@ namespace Vueling.Common.Logic
 
         public void Debug(object message)
         {
+#if DEBUG
             log.Debug(message);
+#endif
         }
 
         public void Error(object message)
