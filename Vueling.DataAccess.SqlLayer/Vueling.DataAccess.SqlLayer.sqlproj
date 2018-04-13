@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>VuelingDataAcces.SqlLayer</Name>
+    <Name>Vueling.DataAccess.SqlLayer</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{cf886210-b987-4972-b5c6-586b670206a7}</ProjectGuid>
@@ -12,8 +12,8 @@
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>VuelingDataAcces.SqlLayer</RootNamespace>
-    <AssemblyName>VuelingDataAcces.SqlLayer</AssemblyName>
+    <RootNamespace>Vueling.DataAccess.SqlLayer</RootNamespace>
+    <AssemblyName>Vueling.DataAccess.SqlLayer</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -61,10 +61,12 @@
     <Folder Include="Scripts\Migrations" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\Create_Database_VuelingCrud.sql" />
-    <None Include="Scripts\Migrations\V1__Create_Students.sql" />
+    <None Include="Scripts\Migrations\V2__Create_Students.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\Inserts_Initial_Values.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Migrations\V1__Create_Database_VuelingCrud.sql" />
   </ItemGroup>
 </Project>
