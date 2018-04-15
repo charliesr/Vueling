@@ -6,13 +6,14 @@ using System.Reflection;
 using System.Security;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
+using Vueling.Common.Logic.Utils;
 using Vueling.DataAccess.DAO;
 
 namespace Vueling.Business.Logic
 {
     public class CrudBL<T> : IReadBL<T>, ISaveBL<T> where T : IVuelingModelObject
     {
-        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IInsertDAO<T> _insertDAO = new CrudDAO<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
         private readonly ISelectDAO<T> _selectDAO = new CrudDAO<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
 

@@ -11,12 +11,13 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
+using Vueling.Common.Logic.Utils;
 
 namespace Vueling.Presentation.WinSite
 {
     public partial class AlumnoForm : Form
     {
-        private IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private Student alumno;
         private IStudentBL alumnoBL;
         

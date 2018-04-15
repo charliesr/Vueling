@@ -36,8 +36,7 @@ namespace Vueling.DatAccess.DAOTests
             yield return new object[] { new Student(Guid.NewGuid(), 1, "Carlos", "Sanchez Romero", "dadadasdasd", new DateTime(1988, 2, 28).ToLocalTime(), DateTime.Now, 30) };
             yield return new object[] { new Student(Guid.NewGuid(), 2, "Elisabet", "Bayot Bertran", "adadasd", new DateTime(1987, 07, 25).ToLocalTime(), DateTime.Now, 30) };
         }
-
-
+        
 
         [DataTestMethod]
         [DynamicData(nameof(StudentData), DynamicDataSourceType.Method)]

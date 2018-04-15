@@ -2,12 +2,13 @@
 using System.Reflection;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
+using Vueling.Common.Logic.Utils;
 
 namespace Vueling.DataAccess.DAO
 {
     public class JsonStudents
     {
-        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static JsonStudents _instance;
         private readonly List<Student> _students;
         private static object syncLock = new object();

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Vueling.Common.Logic
+namespace Vueling.Common.Logic.Utils
 {
     public interface IVuelingLogger
     {

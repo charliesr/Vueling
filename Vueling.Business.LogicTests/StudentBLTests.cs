@@ -18,6 +18,8 @@ namespace Vueling.Business.Logic.Tests
             yield return new object[] { new DateTime(2018, 4, 4), new DateTime(1988, 2, 28), 30 };
             yield return new object[] { new DateTime(2010, 4, 4), new DateTime(1988, 2, 28), 22 };
         }
+
+
         [DataTestMethod]
         [DynamicData(nameof(FechasData), DynamicDataSourceType.Method)]
         public void CalcularEdadTest(DateTime registro, DateTime nacimiento, int result)

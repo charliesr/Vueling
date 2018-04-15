@@ -51,15 +51,17 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NMock3\NMockTest.cs" />
     <Compile Include="StudentDAOUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="NMock3\NMock3 Cheat Sheet.pdf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Vueling.Business.Logic\Vueling.Business.Logic.csproj">
+      <Project>{8CEB6244-AC1E-4EBD-BC0C-A75D51BCAE4C}</Project>
+      <Name>Vueling.Business.Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Vueling.Common.Logic\Vueling.Common.Logic.csproj">
       <Project>{7033AABC-C8F8-4456-9DFA-AEF7AA8A6726}</Project>
       <Name>Vueling.Common.Logic</Name>

@@ -11,12 +11,13 @@ using System.Windows.Forms;
 using Vueling.Business.Logic;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
+using Vueling.Common.Logic.Utils;
 
 namespace Vueling.Presentation.WinSite
 {
     public partial class AlumnoShowForm : Form
     {
-        private IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IStudentBL _studentBL = new StudentBL();
         private List<Student> students = new List<Student>();
         public AlumnoShowForm()

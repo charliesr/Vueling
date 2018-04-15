@@ -4,12 +4,15 @@ using log4net.Core;
 using log4net.Layout;
 using log4net.Repository.Hierarchy;
 using System;
+using System.Text;
 
-namespace Vueling.Common.Logic
+namespace Vueling.Common.Logic.Utils
 {
-    public class VuelingLogger : IVuelingLogger
+    public class Log4NetLogger : IVuelingLogger
     {
-        static VuelingLogger()
+        private readonly ILog log;
+
+        static Log4NetLogger()
         {
             Init();
         }
@@ -35,7 +38,7 @@ namespace Vueling.Common.Logic
             var roller = new RollingFileAppender
             {
                 AppendToFile = true,
-                File = @"Logs\EventLog.txt",
+                File = @"Logs\StudentsLog-Log4Net.txt",
                 Layout = rollingPatternLayout,
                 MaximumFileSize = "10MB",
                 MaxSizeRollBackups = 10,
@@ -68,10 +71,11 @@ namespace Vueling.Common.Logic
             hierarchy.Configured = true;
 
         }
-        private readonly ILog log;
-        public VuelingLogger(Type declaringType )
+
+        public Log4NetLogger(Type declaringType )
         {
             log = LogManager.GetLogger(declaringType);
+            this.Debug(new StringBuilder(LogLiterals.enteringClass).Append(declaringType.FullName));
         }
 
         public void Debug(object message)
@@ -103,7 +107,7 @@ namespace Vueling.Common.Logic
 
         public void Error(Exception ex)
         {
-            log.Error("Se ha producido una excepción de tipo " + ex.GetType().Name, ex);
+            log.Error(new StringBuilder(LogLiterals.exceptionThrown).Append(ex.GetType().Name).ToString(), ex);
         }
     }
 }

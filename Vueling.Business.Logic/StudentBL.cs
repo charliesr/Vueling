@@ -5,12 +5,13 @@ using System.Reflection;
 using System.Security;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
+using Vueling.Common.Logic.Utils;
 
 namespace Vueling.Business.Logic
 {
     public class StudentBL : IStudentBL
     {
-        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IReadBL<Student> _readBL = new CrudBL<Student>();
         private readonly ISaveBL<Student> _saveBL = new CrudBL<Student>();
 

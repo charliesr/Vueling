@@ -10,12 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
+using Vueling.Common.Logic.Utils;
 
 namespace Vueling.DataAccess.DAO
 {
     public class CrudDAO<T> : ISelectDAO<T>, IInsertDAO<T> where T : IVuelingModelObject
     {
-        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private IFormat<T> _format;
 
         public CrudDAO(DataTypeAccess tipo)

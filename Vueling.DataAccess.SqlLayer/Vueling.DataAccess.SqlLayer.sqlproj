@@ -61,12 +61,11 @@
     <Folder Include="Scripts\Migrations" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\Migrations\V2__Create_Students.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Scripts\Inserts_Initial_Values.sql" />
+    <None Include="Scripts\Migrations\V1__Create_Students.sql" />
+    <None Include="Scripts\Create_Database_VuelingCrud.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\Migrations\V1__Create_Database_VuelingCrud.sql" />
+    <None Include="flyway.conf" />
   </ItemGroup>
 </Project>

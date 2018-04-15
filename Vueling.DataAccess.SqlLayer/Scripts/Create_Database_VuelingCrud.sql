@@ -1,7 +1,3 @@
-EXEC sp_configure filestream_access_level, 2  
-RECONFIGURE  
-USE master
-GO
 IF NOT EXISTS (
    SELECT name
    FROM sys.databases
