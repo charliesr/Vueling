@@ -62,6 +62,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StudentBLAdd.feature</DependentUpon>
     </Compile>
+    <Compile Include="StudentBLCalcYearsOld.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudentBLCalcYearsOld.feature</DependentUpon>
+    </Compile>
+    <Compile Include="StudentBLCalcYearsOldSteps.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,6 +78,16 @@
       <LastGenOutput>StudentBLAdd.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="StudentBLCalcYearsOld.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>StudentBLCalcYearsOld.feature.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Vueling.Business.Logic\Vueling.Business.Logic.csproj">
+      <Project>{8CEB6244-AC1E-4EBD-BC0C-A75D51BCAE4C}</Project>
+      <Name>Vueling.Business.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
