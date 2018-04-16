@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
+using Vueling.DataAccess.DAO.Singletons;
 
 namespace Vueling.DataAccess.DAO.Formats
 {
@@ -19,7 +20,7 @@ namespace Vueling.DataAccess.DAO.Formats
         {
             try
             {
-                using (SqlConnection _connection = new SqlConnection(RepositoryUtils.GetFilePath<T>(DataTypeAccess.sqlDB)))
+                using (SqlConnection _connection = SqlSingleton.GetInstance().GetConnection())
                 {
                     _connection.Open();
                     var query = new StringBuilder();
@@ -66,7 +67,7 @@ namespace Vueling.DataAccess.DAO.Formats
         {
             try
             {
-                using (SqlConnection _connection = new SqlConnection(RepositoryUtils.GetFilePath<T>(DataTypeAccess.sqlDB)))
+                using (SqlConnection _connection = new SqlConnection(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.sqlDB)))
                 {
                     T entity = default(T);
                     _connection.Open();
@@ -99,7 +100,7 @@ namespace Vueling.DataAccess.DAO.Formats
         {
             try
             {
-                using (SqlConnection _connection = new SqlConnection(RepositoryUtils.GetFilePath<T>(DataTypeAccess.sqlDB)))
+                using (SqlConnection _connection = new SqlConnection(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.sqlDB)))
                 {
                     var results = new List<T>();
                     _connection.Open();

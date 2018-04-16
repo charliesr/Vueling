@@ -77,13 +77,14 @@ namespace Vueling.DataAccess.DAO
                 var typeString = string.Concat(dataTypeAccess.ToString().Substring(0, 1).ToUpper(), dataTypeAccess.ToString().Substring(1));
                 switch (dataTypeAccess)
                 {
+                    case DataTypeAccess.sqlDB:
                     case DataTypeAccess.txt:
                         return _format.SelectAll();
                     default:
                         var foundSingleton = Assembly.Load("Vueling.DataAccess.DAO.Singletons").GetTypes().FirstOrDefault(t => t.Name.Contains(typeof(T).Name) && t.Name.Contains(typeString));
                         if (foundSingleton == null) return _format.SelectAll();
-                        var jsonSingletonInstance = foundSingleton.GetMethod("GetInstance", BindingFlags.Static).Invoke(null, null);
-                        return (List<T>)jsonSingletonInstance.GetType().GetMethod("GetAll").Invoke(null, null);
+                        var singletonInstance = foundSingleton.GetMethod("GetInstance", BindingFlags.Static).Invoke(null, null);
+                        return (List<T>)singletonInstance.GetType().GetMethod("GetAll").Invoke(null, null);
                 }
             }
             catch (FileNotFoundException ex)

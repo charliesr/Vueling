@@ -66,7 +66,6 @@
     </Compile>
     <Compile Include="Utils\ConfigurationUtils.cs" />
     <Compile Include="DataTypeNotImplementedException.cs" />
-    <Compile Include="RepositoryUtils.cs" />
     <Compile Include="Utils\IVuelingLogger.cs" />
     <Compile Include="Resources\Literals.EN-GB.Designer.cs">
       <DependentUpon>Literals.EN-GB.resx</DependentUpon>

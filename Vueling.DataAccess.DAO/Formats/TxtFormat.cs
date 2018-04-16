@@ -33,7 +33,7 @@ namespace Vueling.DataAccess.DAO
                 }
                 var classInstance = Activator.CreateInstance(type, propValues);
                 content = (string)methodToString.Invoke(classInstance, null);
-                File.AppendAllText(RepositoryUtils.GetFilePath<T>(DataTypeAccess.txt), content + "\r\n");
+                File.AppendAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.txt), content + "\r\n");
                 return Select((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
             }
             catch (ArgumentException ex)
@@ -65,7 +65,7 @@ namespace Vueling.DataAccess.DAO
             {
                 _log.Debug("Select " + typeof(T).Name + "con Guid " + guid.ToString());
                 var entityString = string.Empty;
-                using (TextReader reader = new StreamReader(RepositoryUtils.GetFilePath<T>(DataTypeAccess.txt)))
+                using (TextReader reader = new StreamReader(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.txt)))
                 {
                     StringBuilder word = new StringBuilder();
                     while (reader.Peek() > -1)
@@ -112,7 +112,7 @@ namespace Vueling.DataAccess.DAO
             {
                 _log.Debug("Obtenemos todos los/las " + typeof(T).Name);
                 var groupOfEntity = new List<T>();
-                using (TextReader reader = new StreamReader(RepositoryUtils.GetFilePath<T>(DataTypeAccess.txt)))
+                using (TextReader reader = new StreamReader(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.txt)))
                 {
                     while (reader.Peek() > -1)
                     {

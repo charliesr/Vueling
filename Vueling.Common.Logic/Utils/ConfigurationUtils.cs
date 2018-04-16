@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
+using System.IO;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using Vueling.Common.Logic.Utils;
 
 namespace Vueling.Common.Logic
@@ -31,6 +29,16 @@ namespace Vueling.Common.Logic
         private static string LoadVariable(string key)
         {
             return ConfigurationManager.AppSettings[key];
+        }
+
+        public static string GetConnecionString()
+        {
+            return LoadVariable("ConnectionString");
+        }
+
+        public static string GetFilePath<T>(DataTypeAccess dataTypeAccess)
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), typeof(T).Name + "." + dataTypeAccess.ToString());
         }
 
     }

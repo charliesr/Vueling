@@ -51,6 +51,7 @@
     <Compile Include="Formats\IFormatFactory.cs" />
     <Compile Include="IInsertDAO.cs" />
     <Compile Include="ISelectDAO.cs" />
+    <Compile Include="Singletons\SqlSingleton.cs" />
     <Compile Include="Singletons\XmlStudents.cs" />
     <Compile Include="Singletons\JsonStudents.cs" />
     <Compile Include="Formats\XmlFormat.cs" />

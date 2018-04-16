@@ -20,9 +20,9 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Añadiendo un/a nuevo/a " + typeof(T).Name);
-                var group = File.Exists(RepositoryUtils.GetFilePath<T>(DataTypeAccess.json)) ? JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(RepositoryUtils.GetFilePath<T>(DataTypeAccess.json))) : new List<T>();
+                var group = File.Exists(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json)) ? JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json))) : new List<T>();
                 group.Add(entity);
-                File.WriteAllText(RepositoryUtils.GetFilePath<T>(DataTypeAccess.json), JsonConvert.SerializeObject(group));
+                File.WriteAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json), JsonConvert.SerializeObject(group));
                 return Select((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
             }
             catch (ArgumentNullException ex)
@@ -62,8 +62,8 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Select " + typeof(T).Name + "con Guid " + guid.ToString());
-                if (!File.Exists(RepositoryUtils.GetFilePath<T>(DataTypeAccess.json))) return default(T);
-                var group = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(RepositoryUtils.GetFilePath<T>(DataTypeAccess.json)));
+                if (!File.Exists(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json))) return default(T);
+                var group = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json)));
                 return group.FirstOrDefault(i => (Guid)typeof(T).GetProperty("Guid").GetValue(i) == guid);
             }
             catch (ArgumentNullException ex)
@@ -103,7 +103,7 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Obtenemos todos los/las " + typeof(T).Name);
-                return JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(RepositoryUtils.GetFilePath<T>(DataTypeAccess.json)));
+                return JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json)));
             }
             catch (FileNotFoundException ex)
             {
