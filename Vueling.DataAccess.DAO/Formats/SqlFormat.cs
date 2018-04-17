@@ -16,11 +16,13 @@ namespace Vueling.DataAccess.DAO.Formats
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public T Insert(T entity)
+        public event EventHandler<DataTypeAccess> ChangeFormatPetition;
+
+        public T Add(T entity)
         {
             try
             {
-                using (SqlConnection _connection = SqlSingleton.GetInstance().GetConnection())
+                using (SqlConnection _connection = new SqlConnection(ConfigurationUtils.GetConnecionString()))
                 {
                     _connection.Open();
                     var query = new StringBuilder();
@@ -31,11 +33,10 @@ namespace Vueling.DataAccess.DAO.Formats
                         query.Append(!typeof(T).GetProperties().Last().Equals(property) ? "," : ")");
                     }
                     query.Append(" VALUES (");
-                    var propertyValues = entity.GetPropertiesArray();
-                    foreach (var value in propertyValues)
+                    foreach (var property in typeof(T).GetProperties())
                     {
-                        query.Append(value);
-                        query.Append(propertyValues.Last().Equals(value) ? "," : ")");
+                        query.Append(property.GetValue(entity));
+                        query.Append(typeof(T).GetProperties().Last().Equals(property) ? "," : ")");
                     }
 
 
@@ -63,7 +64,7 @@ namespace Vueling.DataAccess.DAO.Formats
             }
         }
 
-        public T Select(Guid guid)
+        public T GetByGUID(Guid guid)
         {
             try
             {
@@ -96,7 +97,7 @@ namespace Vueling.DataAccess.DAO.Formats
             }
         }
 
-        public List<T> SelectAll()
+        public List<T> GetAll()
         {
             try
             {
@@ -128,5 +129,47 @@ namespace Vueling.DataAccess.DAO.Formats
                 throw;
             }
         }
+
+        public DataTypeAccess GetFormat()
+        {
+            return DataTypeAccess.sqlDB;
+        }
+
+        public bool Update(Guid guid, T entity)
+        {
+            var entityToUpdate = GetByGUID(guid);
+            if (entity.Equals(entityToUpdate)) return false;
+            DeleteByGuid(guid);
+            Add(entity);
+            return true;
+        }
+
+        public bool DeleteByGuid(Guid guid)
+        {
+            try
+            {
+                using (SqlConnection _conn = new SqlConnection(ConfigurationUtils.GetConnecionString()))
+                {
+                    var query = new StringBuilder("DELETE FROM ").Append(typeof(T).Name).Append("WHERE GUID = ").Append(guid);
+                    using (SqlCommand _comm = new SqlCommand(query.ToString(),_conn))
+                    {
+                        return _comm.ExecuteNonQuery() > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+         
+        }
+
+        public void OnChangeFormatPetition(DataTypeAccess dataTypeAccess)
+        {
+            ChangeFormatPetition?.Invoke(this, dataTypeAccess);
+        }
+
+
     }
 }

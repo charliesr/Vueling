@@ -8,9 +8,8 @@ using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
 {
-    public interface IFormat<T> : ISelect<T>, IInsert<T>, IUpdate<T>, IDelete<T> where T : IVuelingModelObject
+    public interface ICrudDAO<T> : IDelete<T>, ISelect<T>, IUpdate<T>, IInsert<T> where T : IVuelingModelObject
     {
-        DataTypeAccess GetFormat();
+        void ChangeFormat(DataTypeAccess dataTypeAccess);
     }
-            
 }

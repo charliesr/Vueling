@@ -4,7 +4,7 @@ using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
 
-namespace Vueling.DataAccess.DAO
+namespace Vueling.DataAccess.DAO.Singletons
 {
     public class XmlStudents
     {
@@ -17,7 +17,7 @@ namespace Vueling.DataAccess.DAO
         {
             _log.Debug("Ojo! nueva instancia del singleton XML!!");
             var _format = FormatFactory<Student>.GetFormat(DataTypeAccess.xml);
-            _students = _format.SelectAll();
+            _students = _format.GetAll();
         }
 
         public static XmlStudents GetInstance()

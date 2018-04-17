@@ -14,15 +14,14 @@ namespace Vueling.Business.Logic
     public class CrudBL<T> : IReadBL<T>, ISaveBL<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IInsertDAO<T> _insertDAO = new CrudDAO<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
-        private readonly ISelectDAO<T> _selectDAO = new CrudDAO<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
+        private readonly ICrudDAO<T> _crudDAO = new CrudDAO<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
 
         public T Add(T entity)
         {
             try
             {
                 _log.Debug("Llamado método add del BL");
-                return _insertDAO.Add(entity);
+                return _crudDAO.Add(entity);
             }
             catch (ArgumentNullException ex)
             {
@@ -63,14 +62,13 @@ namespace Vueling.Business.Logic
 
         public List<T> GetAll(DataTypeAccess dataTypeAccess)
         {
-            return _selectDAO.GetAll(dataTypeAccess);
+            return _crudDAO.GetAll();
         }
 
         public void ChangeFormat(DataTypeAccess dataTypeAccess)
         {
             _log.Debug("Cambiamos el formato de la factory (formato del archivo a) " + dataTypeAccess.ToString());
-            _insertDAO.ChangeFormat(dataTypeAccess);
-            _selectDAO.ChangeFormat(dataTypeAccess);
+            _crudDAO.ChangeFormat(dataTypeAccess);
         }
     }
 }

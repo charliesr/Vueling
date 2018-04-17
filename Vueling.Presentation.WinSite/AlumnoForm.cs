@@ -110,6 +110,7 @@ namespace Vueling.Presentation.WinSite
         private void ChangeFormatConfig(object sender, EventArgs e)
         {
             var format = ((ToolStripMenuItem)sender).Text;
+
             alumnoBL.ChangeFormat(EnumsHelper.StringToDataTypeAccess(format));
             ConfigurationUtils.SaveFormat(format);
             SetFormat(format);

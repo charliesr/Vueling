@@ -93,19 +93,5 @@ namespace Vueling.Common.Logic.Model
         {
             return this.MemberwiseClone();
         }
-
-        public object[] GetPropertiesArray()
-        {
-            var properties = new object[this.GetType().GetProperties().Length];
-            properties[0] = Guid;
-            properties[1] = ID;
-            properties[2] = Nombre;
-            properties[3] = Apellidos;
-            properties[4] = DNI;
-            properties[5] = FechaDeNacimiento;
-            properties[6] = FechaHoraRegistro;
-            properties[7] = Edad;
-            return properties;
-        }
     }
 }

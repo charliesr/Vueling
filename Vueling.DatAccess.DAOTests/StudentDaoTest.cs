@@ -13,7 +13,7 @@ namespace Vueling.DatAccess.DAOTests
     public class StudentDaoTest
     {
         private readonly string Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Student";
-        private readonly IInsertDAO<Student> StudentRepository = new CrudDAO<Student>(DataTypeAccess.txt);
+        private readonly ICrudDAO<Student> StudentRepository = new CrudDAO<Student>(DataTypeAccess.txt);
         [TestInitialize]
         public void InitTest()
         {

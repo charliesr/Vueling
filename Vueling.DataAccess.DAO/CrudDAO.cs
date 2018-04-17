@@ -1,20 +1,17 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security;
 using System.Text;
-using System.Threading.Tasks;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
 
 namespace Vueling.DataAccess.DAO
 {
-    public class CrudDAO<T> : ISelectDAO<T>, IInsertDAO<T> where T : IVuelingModelObject
+    public class CrudDAO<T> : ICrudDAO<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private IFormat<T> _format;
@@ -34,8 +31,8 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Añadiendo " + typeof(T).Name);
-                _format.Insert(entity);
-                return _format.Select(entity.Guid);
+                _format.Add(entity);
+                return _format.GetByGUID(entity.Guid);
             }
             catch (ArgumentNullException ex)
             {
@@ -69,20 +66,20 @@ namespace Vueling.DataAccess.DAO
             }
         }
 
-        public List<T> GetAll(DataTypeAccess dataTypeAccess)
+        public List<T> GetAll()
         {
             try
             {
                 _log.Debug("Obtenemos todos " + typeof(T).ToString());
-                var typeString = string.Concat(dataTypeAccess.ToString().Substring(0, 1).ToUpper(), dataTypeAccess.ToString().Substring(1));
-                switch (dataTypeAccess)
+                var typeString = new StringBuilder(_format.GetFormat().ToString().First().ToString().ToUpper()).Append(_format.GetFormat().ToString().Substring(1)).ToString();
+                switch (_format.GetFormat())
                 {
                     case DataTypeAccess.sqlDB:
                     case DataTypeAccess.txt:
-                        return _format.SelectAll();
+                        return _format.GetAll();
                     default:
                         var foundSingleton = Assembly.Load("Vueling.DataAccess.DAO.Singletons").GetTypes().FirstOrDefault(t => t.Name.Contains(typeof(T).Name) && t.Name.Contains(typeString));
-                        if (foundSingleton == null) return _format.SelectAll();
+                        if (foundSingleton == null) return _format.GetAll();
                         var singletonInstance = foundSingleton.GetMethod("GetInstance", BindingFlags.Static).Invoke(null, null);
                         return (List<T>)singletonInstance.GetType().GetMethod("GetAll").Invoke(null, null);
                 }
@@ -118,6 +115,76 @@ namespace Vueling.DataAccess.DAO
                 throw;
             }
             catch (SecurityException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+        }
+
+        public T GetByGUID(Guid guid)
+        {
+            try
+            {
+                _log.Debug(new StringBuilder("Pedimos el ").Append(typeof(T).Name).Append(" con guid ").Append(guid.ToString()));
+                return _format.GetByGUID(guid);
+            }
+            catch (FileNotFoundException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (ArgumentNullException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+        }
+
+        public bool DeleteByGuid(Guid guid)
+        {
+            try
+            {
+                return _format.DeleteByGuid(guid);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+        }
+
+        public bool Update(Guid guid, T entity)
+        {
+            try
+            {
+                return _format.Update(guid, entity);
+            }
+            catch (Exception ex)
             {
                 _log.Error(ex);
                 throw;

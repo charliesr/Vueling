@@ -14,6 +14,7 @@ namespace Vueling.Business.Logic
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IReadBL<Student> _readBL = new CrudBL<Student>();
         private readonly ISaveBL<Student> _saveBL = new CrudBL<Student>();
+        public event EventHandler<DataTypeAccess> ChangeFormatPetition;
 
         public Student Add(Student alumno)
         {
@@ -109,7 +110,7 @@ namespace Vueling.Business.Logic
         public void ChangeFormat(DataTypeAccess dataTypeAccess)
         {
             _log.Debug("Cambiamos el formato de la factory (formato del archivo a) " + dataTypeAccess.ToString());
-            _readBL.ChangeFormat(dataTypeAccess);
+            ChangeFormatPetition?.Invoke(this, dataTypeAccess);
         }
 
         public int CalcularEdad(DateTime registro, DateTime nacimiento)

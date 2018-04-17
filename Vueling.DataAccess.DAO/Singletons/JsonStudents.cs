@@ -17,7 +17,7 @@ namespace Vueling.DataAccess.DAO
         {
             _log.Debug("Ojo! nueva instancia del singleton JSON!!");
             var _format = FormatFactory<Student>.GetFormat(DataTypeAccess.json);
-            _students = _format.SelectAll();
+            _students = _format.GetAll();
         }
 
         public static JsonStudents GetInstance()

@@ -14,8 +14,7 @@ namespace Vueling.Business.LogicUnitTests
     {
         private MockFactory _mockFactory;
 
-        private Mock<ISelectDAO<Student>> _selectDaoStudentMock;
-        private Mock<IInsertDAO<Student>> _insertDaoStudentMock;
+        private Mock<ICrudDAO<Student>> _crudDaoStudentsMock;
         private Mock<IReadBL<Student>> _readBLStudentMock;
         private Mock<ISaveBL<Student>> _saveBLStudentMock;
         private Mock<IStudentBL> _studentBLMock;
@@ -34,8 +33,7 @@ namespace Vueling.Business.LogicUnitTests
         public void Init()
         {
             _mockFactory = new MockFactory();
-            _selectDaoStudentMock = _mockFactory.CreateMock<ISelectDAO<Student>>();
-            _insertDaoStudentMock = _mockFactory.CreateMock<IInsertDAO<Student>>();
+            _crudDaoStudentsMock = _mockFactory.CreateMock<ICrudDAO<Student>>();
             _readBLStudentMock = _mockFactory.CreateMock<IReadBL<Student>>();
             _saveBLStudentMock = _mockFactory.CreateMock<ISaveBL<Student>>();
             _studentBLMock = _mockFactory.CreateMock<IStudentBL>();
@@ -68,7 +66,7 @@ namespace Vueling.Business.LogicUnitTests
 
             // Creating Expectations
             // ADD
-            _insertDaoStudentMock.Expects
+            _crudDaoStudentsMock.Expects
                 .One
                 .MethodWith(instance => instance.Add(_studentStub))
                 .WillReturn(_studentStub);
@@ -93,22 +91,22 @@ namespace Vueling.Business.LogicUnitTests
                 .WillReturn(30);
 
             //Get All
-            _selectDaoStudentMock.Expects
+            _crudDaoStudentsMock.Expects
+                .Any
+                .MethodWith(instance => instance.GetAll())
+                .WillReturn(_studentListStub);
+            _readBLStudentMock.Expects
                 .Any
                 .MethodWith(instance => instance.GetAll(_jsonType))
                 .WillReturn(_studentListStub);
-            _readBLStudentMock.Expects
-                .Any
-                .MethodWith(instance => instance.GetAll(_jsonType))
-                .WillReturn(_studentListStub);
             _studentBLMock.Expects
                 .One
                 .MethodWith(instance => instance.GetAll(_jsonType))
                 .WillReturn(_studentListStub);
 
-            _selectDaoStudentMock.Expects
+            _crudDaoStudentsMock.Expects
                 .One
-                .MethodWith(instance => instance.GetAll(_xmlType))
+                .MethodWith(instance => instance.GetAll())
                 .WillReturn(_studentListStub);
             _readBLStudentMock.Expects
                 .One
@@ -119,9 +117,9 @@ namespace Vueling.Business.LogicUnitTests
                 .MethodWith(instance => instance.GetAll(_xmlType))
                 .WillReturn(_studentListStub);
 
-            _selectDaoStudentMock.Expects
+            _crudDaoStudentsMock.Expects
                 .One
-                .MethodWith(instance => instance.GetAll(_txtType))
+                .MethodWith(instance => instance.GetAll())
                 .WillReturn(_studentListStub);
             _readBLStudentMock.Expects
                 .One
@@ -133,9 +131,9 @@ namespace Vueling.Business.LogicUnitTests
                 .WillReturn(_studentListStub);
 
 
-            _selectDaoStudentMock.Expects
+            _crudDaoStudentsMock.Expects
                 .One
-                .MethodWith(instance => instance.GetAll(_sqlType))
+                .MethodWith(instance => instance.GetAll())
                 .WillReturn(_studentListStub);
             _readBLStudentMock.Expects
                 .One

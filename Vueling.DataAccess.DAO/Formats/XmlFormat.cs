@@ -14,18 +14,18 @@ namespace Vueling.DataAccess.DAO
     public class XmlFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public T Insert(T entity)
+        public T Add(T entity)
         {
             try
             {
                 _log.Debug("Añadiendo un/a nuevo/a " + typeof(T).Name);
                 var xmlSerializer = new XmlSerializer(typeof(List<T>));
-                var group = SelectAll();
+                var group = GetAll();
                 using (Stream writer = File.Open(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.xml), FileMode.OpenOrCreate, FileAccess.Write))
                 {
                     xmlSerializer.Serialize(writer, group);
                 }
-                return Select((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
+                return GetByGUID((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
             }
             catch (FileNotFoundException ex)
             {
@@ -64,7 +64,7 @@ namespace Vueling.DataAccess.DAO
             }
         }
 
-        public T Select(Guid guid)
+        public T GetByGUID(Guid guid)
         {
             try
             {
@@ -118,7 +118,7 @@ namespace Vueling.DataAccess.DAO
             }
         }
 
-        public List<T> SelectAll()
+        public List<T> GetAll()
         {
             try
             {
@@ -168,6 +168,21 @@ namespace Vueling.DataAccess.DAO
                 _log.Error(ex);
                 throw;
             }
+        }
+
+        public DataTypeAccess GetFormat()
+        {
+            return DataTypeAccess.xml;
+        }
+
+        public bool Update(Guid guid, T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteByGuid(Guid guid)
+        {
+            throw new NotImplementedException();
         }
     }
 }

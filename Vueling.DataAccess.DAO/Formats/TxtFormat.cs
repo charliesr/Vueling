@@ -16,7 +16,7 @@ namespace Vueling.DataAccess.DAO
     public class TxtFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public T Insert(T entity)
+        public T Add(T entity)
         {
             var content = string.Empty;
             Type type;
@@ -34,7 +34,7 @@ namespace Vueling.DataAccess.DAO
                 var classInstance = Activator.CreateInstance(type, propValues);
                 content = (string)methodToString.Invoke(classInstance, null);
                 File.AppendAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.txt), content + "\r\n");
-                return Select((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
+                return GetByGUID((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
             }
             catch (ArgumentException ex)
             {
@@ -59,7 +59,7 @@ namespace Vueling.DataAccess.DAO
 
         }
 
-        public T Select(Guid guid)
+        public T GetByGUID(Guid guid)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace Vueling.DataAccess.DAO
 
         }
 
-        public List<T> SelectAll()
+        public List<T> GetAll()
         {
             try
             {
@@ -160,6 +160,21 @@ namespace Vueling.DataAccess.DAO
                 _log.Error(ex);
                 throw;
             }
+        }
+
+        public DataTypeAccess GetFormat()
+        {
+            return DataTypeAccess.txt;
+        }
+
+        public bool Update(Guid guid, T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteByGuid(Guid guid)
+        {
+            throw new NotImplementedException();
         }
     }
 }

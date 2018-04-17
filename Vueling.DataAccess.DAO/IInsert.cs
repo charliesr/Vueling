@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
-using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO
 {
-    public interface IFormat<T> : ISelect<T>, IInsert<T>, IUpdate<T>, IDelete<T> where T : IVuelingModelObject
+    public interface IInsert<T>
     {
-        DataTypeAccess GetFormat();
+        T Add(T entity);
     }
-            
 }

@@ -15,7 +15,7 @@ namespace Vueling.DataAccess.DAO
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public T Insert(T entity)
+        public T Add(T entity)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace Vueling.DataAccess.DAO
                 var group = File.Exists(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json)) ? JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json))) : new List<T>();
                 group.Add(entity);
                 File.WriteAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json), JsonConvert.SerializeObject(group));
-                return Select((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
+                return GetByGUID((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
             }
             catch (ArgumentNullException ex)
             {
@@ -57,7 +57,7 @@ namespace Vueling.DataAccess.DAO
             }
         }
 
-        public T Select(Guid guid)
+        public T GetByGUID(Guid guid)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace Vueling.DataAccess.DAO
             }
         }
 
-        public List<T> SelectAll()
+        public List<T> GetAll()
         {
             try
             {
@@ -140,6 +140,21 @@ namespace Vueling.DataAccess.DAO
                 _log.Error(ex);
                 throw;
             }
+        }
+
+        public DataTypeAccess GetFormat()
+        {
+            return DataTypeAccess.json;
+        }
+
+        public bool Update(Guid guid, T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteByGuid(Guid guid)
+        {
+            throw new NotImplementedException();
         }
     }
 }
