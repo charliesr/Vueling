@@ -130,11 +130,6 @@ namespace Vueling.DataAccess.DAO.Formats
             }
         }
 
-        public DataTypeAccess GetFormat()
-        {
-            return DataTypeAccess.sqlDB;
-        }
-
         public bool Update(Guid guid, T entity)
         {
             var entityToUpdate = GetByGUID(guid);
@@ -165,11 +160,10 @@ namespace Vueling.DataAccess.DAO.Formats
          
         }
 
-        public void OnChangeFormatPetition(DataTypeAccess dataTypeAccess)
+        public DataTypeAccess GetFormat()
         {
-            ChangeFormatPetition?.Invoke(this, dataTypeAccess);
+            return DataTypeAccess.json;
         }
-
 
     }
 }

@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Text;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
+using Vueling.DataAccess.DAO.Formats;
 
 namespace Vueling.DataAccess.DAO
 {

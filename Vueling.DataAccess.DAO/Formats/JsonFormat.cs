@@ -8,6 +8,7 @@ using System.Security;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
+using Vueling.DataAccess.DAO.Formats;
 
 namespace Vueling.DataAccess.DAO
 {
@@ -142,11 +143,6 @@ namespace Vueling.DataAccess.DAO
             }
         }
 
-        public DataTypeAccess GetFormat()
-        {
-            return DataTypeAccess.json;
-        }
-
         public bool Update(Guid guid, T entity)
         {
             throw new NotImplementedException();
@@ -155,6 +151,11 @@ namespace Vueling.DataAccess.DAO
         public bool DeleteByGuid(Guid guid)
         {
             throw new NotImplementedException();
+        }
+
+        public DataTypeAccess GetFormat()
+        {
+            return DataTypeAccess.json;
         }
     }
 }

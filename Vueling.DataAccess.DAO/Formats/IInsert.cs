@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
 
-namespace Vueling.DataAccess.DAO
+namespace Vueling.DataAccess.DAO.Formats
 {
     public interface IInsert<T>
     {

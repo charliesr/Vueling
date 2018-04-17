@@ -44,15 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CrudDAO.cs" />
+    <Compile Include="CrudDao.cs" />
     <Compile Include="Formats\FormatFactory.cs" />
+    <Compile Include="Formats\IDeleteDao.cs" />
     <Compile Include="Formats\IFormat.cs" />
-    <Compile Include="ISelect.cs" />
+    <Compile Include="Formats\SqlStoredProcedureFormat.cs" />
+    <Compile Include="IBaseDao.cs" />
+    <Compile Include="Formats\ISelect.cs" />
     <Compile Include="Formats\SqlFormat.cs" />
-    <Compile Include="ICrudDAO.cs" />
-    <Compile Include="IDelete.cs" />
-    <Compile Include="IInsert.cs" />
-    <Compile Include="IUpdate.cs" />
+    <Compile Include="Formats\IDelete.cs" />
+    <Compile Include="Formats\IInsert.cs" />
+    <Compile Include="Formats\IUpdate.cs" />
+    <Compile Include="IInsertDao.cs" />
+    <Compile Include="IUpdateDao.cs" />
+    <Compile Include="IDeleteDao.cs" />
+    <Compile Include="ISelectDao.cs" />
     <Compile Include="Singletons\XmlStudents.cs" />
     <Compile Include="Singletons\JsonStudents.cs" />
     <Compile Include="Formats\XmlFormat.cs" />

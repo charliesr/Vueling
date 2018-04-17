@@ -7,7 +7,8 @@ namespace Vueling.Common.Logic
         txt = 1,
         json = 2,
         xml = 3,
-        sqlDB = 4
+        sql = 4,
+        sqlStoredProcedure = 5
     }
 
     public static class EnumsHelper
