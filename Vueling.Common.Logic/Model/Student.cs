@@ -93,5 +93,19 @@ namespace Vueling.Common.Logic.Model
         {
             return this.MemberwiseClone();
         }
+
+        public object GetObjectWithoutId()
+        {
+            return new
+            {
+                Guid,
+                Nombre,
+                Apellidos,
+                DNI,
+                FechaDeNacimiento,
+                FechaHoraRegistro,
+                Edad
+            };
+        }
     }
 }

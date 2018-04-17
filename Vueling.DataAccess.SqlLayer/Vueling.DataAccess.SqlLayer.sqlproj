@@ -63,9 +63,11 @@
   <ItemGroup>
     <None Include="Scripts\Inserts_Initial_Values.sql" />
     <None Include="Scripts\Migrations\V1__Create_Students.sql" />
-    <None Include="Scripts\Create_Database_VuelingCrud.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="flyway.conf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\beforeMigrate.sql" />
   </ItemGroup>
 </Project>
