@@ -68,7 +68,7 @@ namespace Vueling.DataAccess.DAO.Formats
         {
             try
             {
-                using (SqlConnection _connection = new SqlConnection(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.sqlDB)))
+                using (SqlConnection _connection = new SqlConnection(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.sql)))
                 {
                     T entity = default(T);
                     _connection.Open();
@@ -101,7 +101,7 @@ namespace Vueling.DataAccess.DAO.Formats
         {
             try
             {
-                using (SqlConnection _connection = new SqlConnection(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.sqlDB)))
+                using (SqlConnection _connection = new SqlConnection(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.sql)))
                 {
                     var results = new List<T>();
                     _connection.Open();

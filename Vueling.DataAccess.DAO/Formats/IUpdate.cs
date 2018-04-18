@@ -8,7 +8,7 @@ using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.DAO.Formats
 {
-    public interface IUpdate<T> where T: IVuelingModelObject
+    public interface IUpdate<T> where T : IVuelingModelObject
     {
         bool Update(Guid guid, T entity);
     }

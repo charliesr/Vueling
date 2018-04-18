@@ -75,7 +75,7 @@ namespace Vueling.DataAccess.DAO
                 var typeString = new StringBuilder(_format.GetFormat().ToString().First().ToString().ToUpper()).Append(_format.GetFormat().ToString().Substring(1)).ToString();
                 switch (_format.GetFormat())
                 {
-                    case DataTypeAccess.sqlDB:
+                    case DataTypeAccess.sql:
                     case DataTypeAccess.txt:
                         return _format.GetAll();
                     default:

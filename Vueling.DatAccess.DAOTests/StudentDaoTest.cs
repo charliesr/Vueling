@@ -13,7 +13,9 @@ namespace Vueling.DatAccess.DAOTests
     public class StudentDaoTest
     {
         private readonly string Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Student";
-        private readonly ICrudDAO<Student> StudentRepository = new CrudDAO<Student>(DataTypeAccess.txt);
+        private readonly IInsertDao<Student> _studentAdd = new CrudDao<Student>(DataTypeAccess.txt);
+        private readonly ISelectDao<Student> _studentGetSql = new CrudDao<Student>(DataTypeAccess.sql);
+
         [TestInitialize]
         public void InitTest()
         {
@@ -42,8 +44,8 @@ namespace Vueling.DatAccess.DAOTests
         [DynamicData(nameof(StudentData), DynamicDataSourceType.Method)]
         public void TxtSaveTest(Student alumno)
         {
-            StudentRepository.ChangeFormat(DataTypeAccess.txt);
-            var result = StudentRepository.Add(alumno);
+            _studentAdd.ChangeFormat(DataTypeAccess.txt);
+            var result = _studentAdd.Add(alumno);
             Assert.IsTrue(alumno.Equals(result));
         }
 
@@ -51,8 +53,8 @@ namespace Vueling.DatAccess.DAOTests
         [DynamicData(nameof(StudentData), DynamicDataSourceType.Method)]
         public void JsonSaveTest(Student alumno)
         {
-            StudentRepository.ChangeFormat(DataTypeAccess.json);
-            var result = StudentRepository.Add(alumno);
+            _studentAdd.ChangeFormat(DataTypeAccess.json);
+            var result = _studentAdd.Add(alumno);
             Assert.IsTrue(alumno.Equals(result));
         }
 
@@ -60,9 +62,15 @@ namespace Vueling.DatAccess.DAOTests
         [DynamicData(nameof(StudentData), DynamicDataSourceType.Method)]
         public void XmlSaveTest(Student alumno)
         {
-            StudentRepository.ChangeFormat(DataTypeAccess.xml);
-            var result = StudentRepository.Add(alumno);
+            _studentAdd.ChangeFormat(DataTypeAccess.xml);
+            var result = _studentAdd.Add(alumno);
             Assert.IsTrue(alumno.Equals(result));
+        }
+
+        [DataTestMethod]
+        public void SqlGetAllTest()
+        {
+            var result = _studentGetSql.GetAll();
         }
     }
 }

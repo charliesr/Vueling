@@ -23,7 +23,6 @@ namespace Vueling.DataAccess.DAO.Formats
                 using (SqlConnection _conn = new SqlConnection(ConfigurationUtils.GetConnecionString()))
                 using (SqlCommand _comm = new SqlCommand("AddStudent", _conn))
                 {
-
                     _comm.CommandType = CommandType.StoredProcedure;
                     _comm.Parameters.Add(new SqlParameter("@studentTvp", entity.GetObjectWithoutId()));
                     _conn.Open();

@@ -9,6 +9,6 @@ namespace Vueling.Common.Logic.Model
     public interface IVuelingModelObject : ICloneable
     {
         Guid Guid { get; set; }
-        object GetObjectWithoutId()
+        object GetObjectWithoutId();
     }
 }
