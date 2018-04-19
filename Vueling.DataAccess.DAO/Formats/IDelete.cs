@@ -5,6 +5,7 @@ namespace Vueling.DataAccess.DAO.Formats
 {
     public interface IDelete<T> where T : IVuelingModelObject
     {
-        bool DeleteByGuid(Guid guid);
+        int DeleteByGuid(Guid guid);
+        int DeleteById(int id);
     }
 }

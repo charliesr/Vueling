@@ -14,14 +14,9 @@ namespace Vueling.Business.LogicUnitTests
     {
         private MockFactory _mockFactory;
 
-        private Mock<ICrudDAO<Student>> _crudDaoStudentsMock;
         private Mock<IReadBL<Student>> _readBLStudentMock;
         private Mock<ISaveBL<Student>> _saveBLStudentMock;
         private Mock<IStudentBL> _studentBLMock;
-        private DataTypeAccess _jsonType;
-        private DataTypeAccess _xmlType;
-        private DataTypeAccess _txtType;
-        private DataTypeAccess _sqlType;
 
         private Student _studentStub;
         private Student _studentPresentationStub;
@@ -33,7 +28,6 @@ namespace Vueling.Business.LogicUnitTests
         public void Init()
         {
             _mockFactory = new MockFactory();
-            _crudDaoStudentsMock = _mockFactory.CreateMock<ICrudDAO<Student>>();
             _readBLStudentMock = _mockFactory.CreateMock<IReadBL<Student>>();
             _saveBLStudentMock = _mockFactory.CreateMock<ISaveBL<Student>>();
             _studentBLMock = _mockFactory.CreateMock<IStudentBL>();
@@ -59,17 +53,9 @@ namespace Vueling.Business.LogicUnitTests
                 new Student(Guid.NewGuid(), 0, "Elisabet", "Bayot Bertran", "67676767Y", DateTime.Parse("27/05/1987"), DateTime.Now, 30)
             };
             _studentListStub.Add(_studentStub);
-            _xmlType = DataTypeAccess.xml;
-            _txtType = DataTypeAccess.txt;
-            _sqlType = DataTypeAccess.sqlDB;
-            _jsonType = DataTypeAccess.json;
 
             // Creating Expectations
             // ADD
-            _crudDaoStudentsMock.Expects
-                .One
-                .MethodWith(instance => instance.Add(_studentStub))
-                .WillReturn(_studentStub);
             _saveBLStudentMock.Expects
                 .One
                 .MethodWith(instance => instance.Add(_studentStub))
@@ -91,57 +77,22 @@ namespace Vueling.Business.LogicUnitTests
                 .WillReturn(30);
 
             //Get All
-            _crudDaoStudentsMock.Expects
-                .Any
-                .MethodWith(instance => instance.GetAll())
-                .WillReturn(_studentListStub);
             _readBLStudentMock.Expects
                 .Any
-                .MethodWith(instance => instance.GetAll(_jsonType))
+                .MethodWith(instance => instance.GetAll())
                 .WillReturn(_studentListStub);
             _studentBLMock.Expects
-                .One
-                .MethodWith(instance => instance.GetAll(_jsonType))
-                .WillReturn(_studentListStub);
-
-            _crudDaoStudentsMock.Expects
                 .One
                 .MethodWith(instance => instance.GetAll())
                 .WillReturn(_studentListStub);
-            _readBLStudentMock.Expects
-                .One
-                .MethodWith(instance => instance.GetAll(_xmlType))
-                .WillReturn(_studentListStub);
-            _studentBLMock.Expects
-                .One
-                .MethodWith(instance => instance.GetAll(_xmlType))
-                .WillReturn(_studentListStub);
 
-            _crudDaoStudentsMock.Expects
+            _readBLStudentMock.Expects
                 .One
                 .MethodWith(instance => instance.GetAll())
                 .WillReturn(_studentListStub);
-            _readBLStudentMock.Expects
-                .One
-                .MethodWith(instance => instance.GetAll(_txtType))
-                .WillReturn(_studentListStub);
             _studentBLMock.Expects
-                .One
-                .MethodWith(instance => instance.GetAll(_txtType))
-                .WillReturn(_studentListStub);
-
-
-            _crudDaoStudentsMock.Expects
                 .One
                 .MethodWith(instance => instance.GetAll())
-                .WillReturn(_studentListStub);
-            _readBLStudentMock.Expects
-                .One
-                .MethodWith(instance => instance.GetAll(_sqlType))
-                .WillReturn(_studentListStub);
-            _studentBLMock.Expects
-                .One
-                .MethodWith(instance => instance.GetAll(_sqlType))
                 .WillReturn(_studentListStub);
 
         }
@@ -168,25 +119,25 @@ namespace Vueling.Business.LogicUnitTests
         [TestMethod]
         public void GetAllUnitTestJsonBL()
         {
-            Assert.AreEqual(_studentListStub, _studentBLMock.MockObject.GetAll(_jsonType));
+            Assert.AreEqual(_studentListStub, _studentBLMock.MockObject.GetAll());
         }
 
         [TestMethod]
         public void GetAllUnitTestXmlBL()
         {
-            Assert.AreEqual(_studentListStub, _studentBLMock.MockObject.GetAll(_xmlType));
+            Assert.AreEqual(_studentListStub, _studentBLMock.MockObject.GetAll());
         }
 
         [TestMethod]
         public void GetAllUnitTestTxtBL()
         {
-            Assert.AreEqual(_studentListStub, _studentBLMock.MockObject.GetAll(_txtType));
+            Assert.AreEqual(_studentListStub, _studentBLMock.MockObject.GetAll());
         }
 
         [TestMethod]
         public void GetAllUnitTestSqlBL()
         {
-            Assert.AreEqual(_studentListStub, _studentBLMock.MockObject.GetAll(_sqlType));
+            Assert.AreEqual(_studentListStub, _studentBLMock.MockObject.GetAll());
         }
 
     }

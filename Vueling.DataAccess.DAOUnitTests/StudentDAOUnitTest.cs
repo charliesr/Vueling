@@ -13,7 +13,8 @@ namespace Vueling.DataAccess.DAOUnitTests
     public class StudentDaoUnitTest
     {
         private MockFactory _mockFactory;
-        private Mock<ICrudDAO<Student>> _crudDao;
+        private Mock<ISelectDao<Student>> _selectDao;
+        private Mock<IInsertDao<Student>> _inserDao;
         private Student _studentStub;
         private List<Student> _studentListStub;
 
@@ -21,7 +22,8 @@ namespace Vueling.DataAccess.DAOUnitTests
         public void Init()
         {
             _mockFactory = new MockFactory();
-            _crudDao = _mockFactory.CreateMock<ICrudDAO<Student>>();
+            _selectDao = _mockFactory.CreateMock<ISelectDao<Student>>();
+            _inserDao = _mockFactory.CreateMock<IInsertDao<Student>>();
 
             // Creating Stub
             _studentStub = new Student(Guid.NewGuid(), 1, "Carlos", "Sanchez Romero", "646464646Y", DateTime.Parse("28/02/1988"), DateTime.Now, 30);
@@ -33,11 +35,11 @@ namespace Vueling.DataAccess.DAOUnitTests
 
 
             //Creating Expectations
-            _crudDao.Expects
+            _selectDao.Expects
                 .One
                 .MethodWith(instance => instance.GetAll())
                 .WillReturn(_studentListStub);
-            _crudDao.Expects
+            _inserDao.Expects
                 .One
                 .MethodWith(instance => instance.Add(_studentStub))
                 .WillReturn(_studentStub);
@@ -52,13 +54,13 @@ namespace Vueling.DataAccess.DAOUnitTests
         [TestMethod]
         public void GetAllJsonUnitTestDao()
         {
-            Assert.AreEqual(_studentListStub, _crudDao.MockObject.GetAll());
+            Assert.AreEqual(_studentListStub, _selectDao.MockObject.GetAll());
         }
 
         [TestMethod]
         public void AddUnitTestDao()
         {
-            Assert.AreEqual(_studentStub, _crudDao.MockObject.Add(_studentStub));
+            Assert.AreEqual(_studentStub, _inserDao.MockObject.Add(_studentStub));
         }
     }
 }

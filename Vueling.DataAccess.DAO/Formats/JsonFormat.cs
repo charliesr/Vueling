@@ -143,12 +143,12 @@ namespace Vueling.DataAccess.DAO
             }
         }
 
-        public bool Update(Guid guid, T entity)
+        public T Update(T entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteByGuid(Guid guid)
+        public int DeleteByGuid(Guid guid)
         {
             throw new NotImplementedException();
         }
@@ -156,6 +156,16 @@ namespace Vueling.DataAccess.DAO
         public DataTypeAccess GetFormat()
         {
             return DataTypeAccess.json;
+        }
+
+        public T GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int DeleteById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

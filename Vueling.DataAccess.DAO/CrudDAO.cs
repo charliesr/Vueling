@@ -22,6 +22,11 @@ namespace Vueling.DataAccess.DAO
             ChangeFormat(tipo);
         }
 
+        public CrudDao()
+        {
+            ChangeFormat(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
+        }
+
         public void ChangeFormat(DataTypeAccess dataTypeAccess)
         {
             _format = FormatFactory<T>.GetFormat(dataTypeAccess);
@@ -32,8 +37,7 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Añadiendo " + typeof(T).Name);
-                _format.Add(entity);
-                return _format.GetByGUID(entity.Guid);
+                return _format.Add(entity);
             }
             catch (ArgumentNullException ex)
             {
@@ -72,18 +76,7 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Obtenemos todos " + typeof(T).ToString());
-                var typeString = new StringBuilder(_format.GetFormat().ToString().First().ToString().ToUpper()).Append(_format.GetFormat().ToString().Substring(1)).ToString();
-                switch (_format.GetFormat())
-                {
-                    case DataTypeAccess.sql:
-                    case DataTypeAccess.txt:
-                        return _format.GetAll();
-                    default:
-                        var foundSingleton = Assembly.Load("Vueling.DataAccess.DAO.Singletons").GetTypes().FirstOrDefault(t => t.Name.Contains(typeof(T).Name) && t.Name.Contains(typeString));
-                        if (foundSingleton == null) return _format.GetAll();
-                        var singletonInstance = foundSingleton.GetMethod("GetInstance", BindingFlags.Static).Invoke(null, null);
-                        return (List<T>)singletonInstance.GetType().GetMethod("GetAll").Invoke(null, null);
-                }
+                return _format.GetAll();
             }
             catch (FileNotFoundException ex)
             {
@@ -166,7 +159,7 @@ namespace Vueling.DataAccess.DAO
             }
         }
 
-        public bool DeleteByGuid(Guid guid)
+        public int DeleteByGuid(Guid guid)
         {
             try
             {
@@ -179,11 +172,39 @@ namespace Vueling.DataAccess.DAO
             }
         }
 
-        public bool Update(Guid guid, T entity)
+        public T Update(T entity)
         {
             try
             {
-                return _format.Update(guid, entity);
+                _log.Debug("Update");
+                return _format.Update(entity);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+        }
+
+        public T GetById(int id)
+        {
+            try
+            {
+                _log.Debug("Get by ID");
+                return _format.GetById(id);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+        }
+
+        public int DeleteById(int id)
+        {
+            try
+            {
+                return _format.DeleteById(id);
             }
             catch (Exception ex)
             {

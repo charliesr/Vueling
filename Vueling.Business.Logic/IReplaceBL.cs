@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 
-namespace Vueling.DataAccess.DAO.Formats
+namespace Vueling.Business.Logic
 {
-    public interface IUpdate<T> where T : IVuelingModelObject
+    interface IReplaceBL<T> where T : IVuelingModelObject
     {
-        T Update(T entity);
+        T Replace(T entity);
     }
 }

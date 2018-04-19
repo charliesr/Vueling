@@ -37,7 +37,7 @@ namespace Vueling.DataAccess.DAO.Formats
             }
         }
 
-        public bool DeleteByGuid(Guid guid)
+        public int DeleteByGuid(Guid guid)
         {
             using (SqlConnection _conn = new SqlConnection(ConfigurationUtils.GetConnecionString()))
             using (SqlCommand _comm = new SqlCommand("DeleteStudent", _conn))
@@ -45,8 +45,13 @@ namespace Vueling.DataAccess.DAO.Formats
                 _comm.CommandType = CommandType.StoredProcedure;
                 _comm.Parameters.Add("@guid", SqlDbType.UniqueIdentifier);
                 _conn.Open();
-                return _comm.ExecuteNonQuery() > 0;
+                return _comm.ExecuteNonQuery();
             }
+        }
+
+        public int DeleteById(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public List<T> GetAll()
@@ -78,12 +83,17 @@ namespace Vueling.DataAccess.DAO.Formats
             }
         }
 
+        public T GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public DataTypeAccess GetFormat()
         {
             return DataTypeAccess.sqlStoredProcedure;
         }
 
-        public bool Update(Guid guid, T entity)
+        public T Update(T entity)
         {
             using (SqlConnection _conn = new SqlConnection(ConfigurationUtils.GetConnecionString()))
             using (SqlCommand _comm = new SqlCommand("UpdateStudent", _conn))
@@ -91,7 +101,7 @@ namespace Vueling.DataAccess.DAO.Formats
                 _comm.Parameters.Add("@guid", SqlDbType.UniqueIdentifier);
                 _comm.Parameters.Add(new SqlParameter("@studentTvp", entity.GetObjectWithoutId()));
                 _conn.Open();
-                return _comm.ExecuteNonQuery() > 0;
+                throw new NotImplementedException();
 
             }
         }

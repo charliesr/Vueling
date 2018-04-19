@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 
-namespace Vueling.DataAccess.DAO.Formats
+namespace Vueling.Business.Logic
 {
-    public interface IUpdate<T> where T : IVuelingModelObject
+    public interface IDropBL<T> where T : IVuelingModelObject
     {
-        T Update(T entity);
+        int DropByGUID(Guid guid);
+        int DropById(int id);
     }
 }

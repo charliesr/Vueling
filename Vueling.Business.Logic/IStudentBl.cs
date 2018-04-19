@@ -12,8 +12,13 @@ namespace Vueling.Business.Logic
     public interface IStudentBL
     {
         Student Add(Student alumno);
-        List<Student> GetAll(DataTypeAccess dataTypeAccess);
+        Student GetByGUID(Guid guid);
+        List<Student> GetAll();
+        int DeleteByGUID(Guid guid);
+        Student Update(int id, Student student);
         void ChangeFormat(DataTypeAccess dataTypeAccess);
         int CalcularEdad(DateTime registro, DateTime nacimiento);
+        Student GetById(int id);
+        int DeleteById(int id);
     }
 }

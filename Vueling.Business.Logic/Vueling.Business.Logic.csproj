@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CrudBL.cs" />
+    <Compile Include="IDropBL.cs" />
     <Compile Include="IReadBL.cs" />
+    <Compile Include="IReplaceBL.cs" />
     <Compile Include="ISaveBL.cs" />
     <Compile Include="IStudentBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

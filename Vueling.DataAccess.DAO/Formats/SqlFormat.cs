@@ -16,8 +16,6 @@ namespace Vueling.DataAccess.DAO.Formats
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public event EventHandler<DataTypeAccess> ChangeFormatPetition;
-
         public T Add(T entity)
         {
             try
@@ -29,33 +27,44 @@ namespace Vueling.DataAccess.DAO.Formats
                     query.Append("INSERT INTO dbo.Students (");
                     foreach (var property in typeof(T).GetProperties())
                     {
+                        if (property.Name == "ID") continue;
                         query.Append(property.Name);
                         query.Append(!typeof(T).GetProperties().Last().Equals(property) ? "," : ")");
                     }
-                    query.Append(" VALUES (");
+                    query.Append(" VALUES ('");
                     foreach (var property in typeof(T).GetProperties())
                     {
+                        if (property.Name == "ID") continue;
                         query.Append(property.GetValue(entity));
-                        query.Append(typeof(T).GetProperties().Last().Equals(property) ? "," : ")");
+                        query.Append(!typeof(T).GetProperties().Last().Equals(property) ? "','" : "')");
                     }
 
+
+                    _log.Debug("Sql statement: " + query);
 
                     using (var _command = new SqlCommand(query.ToString(), _connection))
                     {
-                        var reader = _command.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            var properties = new object[typeof(T).GetProperties().Length];
-                            for (int i = 0; i < properties.Length; i++)
-                            {
-                                properties[i] = reader.GetValue(i);
-                            }
-                            entity = (T)Activator.CreateInstance(typeof(T), properties);
-
-                        }
+                        _command.ExecuteNonQuery();
                     }
-                    return entity;
+
+
+
+                    //using (var _command = new SqlCommand(query.ToString(), _connection))
+                    //{
+                    //    var reader = _command.ExecuteReader();
+                    //    while (reader.Read())
+                    //    {
+                    //        var properties = new object[typeof(T).GetProperties().Length];
+                    //        for (int i = 0; i < properties.Length; i++)
+                    //        {
+                    //            properties[i] = reader.GetValue(i);
+                    //        }
+                    //        entity = (T)Activator.CreateInstance(typeof(T), properties);
+
+                    //    }
+                    //}
                 }
+                return GetByGUID(entity.Guid);
             }
             catch (SqlException ex)
             {
@@ -68,11 +77,11 @@ namespace Vueling.DataAccess.DAO.Formats
         {
             try
             {
-                using (SqlConnection _connection = new SqlConnection(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.sql)))
+                using (SqlConnection _connection = new SqlConnection(ConfigurationUtils.GetConnecionString()))
                 {
                     T entity = default(T);
                     _connection.Open();
-                    var queryString = "Select * from dbo.Student where dbo.Student.GlobalUnitID = " + guid;
+                    var queryString = new StringBuilder("Select * from dbo.Students where GUID = '").Append(guid).Append("'").ToString();
                     using (var _command = new SqlCommand(queryString, _connection))
                     {
                         var reader = _command.ExecuteReader();
@@ -84,7 +93,6 @@ namespace Vueling.DataAccess.DAO.Formats
                                 properties[i] = reader.GetValue(i);
                             }
                             entity = (T)Activator.CreateInstance(typeof(T), properties);
-                            
                         }
                     }
                     return entity;
@@ -101,11 +109,11 @@ namespace Vueling.DataAccess.DAO.Formats
         {
             try
             {
-                using (SqlConnection _connection = new SqlConnection(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.sql)))
+                using (SqlConnection _connection = new SqlConnection(ConfigurationUtils.GetConnecionString()))
                 {
                     var results = new List<T>();
                     _connection.Open();
-                    var queryString = "Select * from dbo.Student";
+                    var queryString = "Select * from dbo.Students";
                     using (var _command = new SqlCommand(queryString, _connection))
                     {
                         var reader = _command.ExecuteReader();
@@ -130,25 +138,17 @@ namespace Vueling.DataAccess.DAO.Formats
             }
         }
 
-        public bool Update(Guid guid, T entity)
-        {
-            var entityToUpdate = GetByGUID(guid);
-            if (entity.Equals(entityToUpdate)) return false;
-            DeleteByGuid(guid);
-            Add(entity);
-            return true;
-        }
-
-        public bool DeleteByGuid(Guid guid)
+        public int DeleteByGuid(Guid guid)
         {
             try
             {
                 using (SqlConnection _conn = new SqlConnection(ConfigurationUtils.GetConnecionString()))
                 {
-                    var query = new StringBuilder("DELETE FROM ").Append(typeof(T).Name).Append("WHERE GUID = ").Append(guid);
+                    var query = new StringBuilder("DELETE FROM ").Append(typeof(T).Name).Append("WHERE GUID = '").Append(guid).Append("'").ToString();
+                    _conn.Open();
                     using (SqlCommand _comm = new SqlCommand(query.ToString(),_conn))
                     {
-                        return _comm.ExecuteNonQuery() > 0;
+                        return _comm.ExecuteNonQuery();
                     }
                 }
             }
@@ -165,5 +165,90 @@ namespace Vueling.DataAccess.DAO.Formats
             return DataTypeAccess.json;
         }
 
+        public T GetById(int id)
+        {
+            try
+            {
+                using (SqlConnection _conn = new SqlConnection(ConfigurationUtils.GetConnecionString()))
+                {
+                    T entity = default(T);
+                    _conn.Open();
+                    var queryString = new StringBuilder("Select * from dbo.Students where id = '").Append(id).Append("'").ToString();
+                    using (var _command = new SqlCommand(queryString, _conn))
+                    {
+                        var reader = _command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            var properties = new object[typeof(T).GetProperties().Length];
+                            for (int i = 0; i < properties.Length; i++)
+                            {
+                                properties[i] = reader.GetValue(i);
+                            }
+                            entity = (T)Activator.CreateInstance(typeof(T), properties);
+                        }
+                    }
+                    return entity;
+                }
+            }
+            catch (SqlException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+        }
+
+        public int DeleteById(int id)
+        {
+            try
+            {
+                using (SqlConnection _conn = new SqlConnection(ConfigurationUtils.GetConnecionString()))
+                {
+                    var query = new StringBuilder("DELETE FROM dbo.Students WHERE id = ").Append(id).ToString();
+                    _conn.Open();
+                    using (SqlCommand _comm = new SqlCommand(query.ToString(), _conn))
+                    {
+                        return _comm.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+        }
+
+        public T Update(T entity)
+        {
+            try
+            {
+                using (SqlConnection _connection = new SqlConnection(ConfigurationUtils.GetConnecionString()))
+                {
+                    var query = new StringBuilder();
+                    query.Append("UPDATE dbo.Students SET ");
+                    foreach (var property in typeof(T).GetProperties())
+                    {
+                        if (property.Name == "ID") continue;
+                        if (property.Name == "GUID") continue;
+                        query.Append(property.Name).Append(" = '");
+                        query.Append(property.GetValue(entity)).Append("' ");
+                        query.Append(!typeof(T).GetProperties().Last().Equals(property) ? ", " : "");
+                    }
+                    query.Append(" WHERE dbo.Students.GUID = ").Append("'").Append(entity.Guid).Append("'");
+                    _connection.Open();
+                    using (SqlCommand _comm = new SqlCommand(query.ToString(), _connection))
+                    {
+                        _comm.ExecuteNonQuery();
+                    }
+                }
+                return GetByGUID(entity.Guid);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+
+        }
     }
 }

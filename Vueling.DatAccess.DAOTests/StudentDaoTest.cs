@@ -66,11 +66,5 @@ namespace Vueling.DatAccess.DAOTests
             var result = _studentAdd.Add(alumno);
             Assert.IsTrue(alumno.Equals(result));
         }
-
-        [DataTestMethod]
-        public void SqlGetAllTest()
-        {
-            var result = _studentGetSql.GetAll();
-        }
     }
 }

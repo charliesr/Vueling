@@ -8,5 +8,6 @@ namespace Vueling.DataAccess.DAO.Formats
     {
         T GetByGUID(Guid guid);
         List<T> GetAll();
+        T GetById(int id);
     }
 }

@@ -14,13 +14,15 @@ namespace Vueling.Business.Logic
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IReadBL<Student> _readBL = new CrudBL<Student>();
         private readonly ISaveBL<Student> _saveBL = new CrudBL<Student>();
-        public event EventHandler<DataTypeAccess> ChangeFormatPetition;
+        private readonly IDropBL<Student> _dropBL = new CrudBL<Student>();
+        private readonly IReplaceBL<Student> _replaceBL = new CrudBL<Student>();
 
         public Student Add(Student alumno)
         {
             try
             {
                 _log.Debug("Llamado método add del BL");
+                if (alumno.Guid == Guid.Empty) alumno.Guid = Guid.NewGuid();
                 alumno.FechaHoraRegistro = DateTime.Now;
                 alumno.Edad = CalcularEdad(alumno.FechaHoraRegistro, alumno.FechaDeNacimiento);
                 return _saveBL.Add(alumno);
@@ -62,12 +64,12 @@ namespace Vueling.Business.Logic
             }
         }
 
-        public List<Student> GetAll(DataTypeAccess dataTypeAccess)
+        public List<Student> GetAll()
         {
             try
             {
                 _log.Debug("Método Get All alumnos");
-                return _readBL.GetAll(dataTypeAccess);
+                return _readBL.GetAll();
             }
             catch (FileNotFoundException ex)
             {
@@ -110,7 +112,6 @@ namespace Vueling.Business.Logic
         public void ChangeFormat(DataTypeAccess dataTypeAccess)
         {
             _log.Debug("Cambiamos el formato de la factory (formato del archivo a) " + dataTypeAccess.ToString());
-            ChangeFormatPetition?.Invoke(this, dataTypeAccess);
         }
 
         public int CalcularEdad(DateTime registro, DateTime nacimiento)
@@ -121,6 +122,75 @@ namespace Vueling.Business.Logic
                 return Convert.ToInt32((registro - nacimiento).TotalDays / 365);
             }
             catch (OverflowException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+        }
+
+        public Student GetByGUID(Guid guid)
+        {
+            try
+            {
+                return _readBL.GetByGUID(guid);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int DeleteByGUID(Guid guid)
+        {
+            try
+            {
+                return _dropBL.DropByGUID(guid);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+        }
+
+        public Student Update(int id, Student student)
+        {
+            try
+            {
+                var studentToUpdate = GetById(id);
+                student.Guid = studentToUpdate.Guid;
+                student.FechaHoraRegistro = studentToUpdate.FechaHoraRegistro;
+                student.Edad = CalcularEdad(studentToUpdate.FechaHoraRegistro, studentToUpdate.FechaDeNacimiento);
+                return _replaceBL.Replace(student);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+        }
+
+        public Student GetById(int id)
+        {
+            try
+            {
+                return _readBL.GetById(id);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+        }
+
+        public int DeleteById(int id)
+        {
+            try
+            {
+                return _dropBL.DropById(id);
+            }
+            catch (Exception ex)
             {
                 _log.Error(ex);
                 throw;
