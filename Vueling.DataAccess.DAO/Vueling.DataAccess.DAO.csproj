@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="CrudDao.cs" />
     <Compile Include="Formats\FormatFactory.cs" />
-    <Compile Include="Formats\IDeleteDao.cs" />
     <Compile Include="Formats\IFormat.cs" />
     <Compile Include="Formats\SqlStoredProcedureFormat.cs" />
     <Compile Include="IBaseDao.cs" />

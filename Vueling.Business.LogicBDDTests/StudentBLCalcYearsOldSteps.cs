@@ -8,34 +8,32 @@ namespace Vueling.Business.LogicBDDTests
     [Binding]
     public class StudentBLCalcYearsOldSteps
     {
-
-        private DateTime _fechaNacimiento;
-        private DateTime _fechaRegistro;
-        private int _edad;
-        private IStudentBL _studentBL = new StudentBL();
-
+        private readonly IStudentBL _studenBL = new StudentBL();
+        private DateTime FechaRegistro;
+        private DateTime FechaNacimiento;
+        private int Resultado;
         [Given(@"I have entered ""(.*)"" into the Year calculator")]
         public void GivenIHaveEnteredIntoTheYearCalculator(string fechaRegistro)
         {
-            _fechaRegistro = DateTime.Parse(fechaRegistro);
+            FechaRegistro = DateTime.Parse(fechaRegistro);
         }
         
         [Given(@"I have also entered ""(.*)"" into the calculator")]
         public void GivenIHaveAlsoEnteredIntoTheCalculator(string fechaNacimiento)
         {
-            _fechaNacimiento = DateTime.Parse(fechaNacimiento);
+            FechaNacimiento = DateTime.Parse(fechaNacimiento);
         }
-
+        
         [When(@"I call CalcEdad")]
         public void WhenICallCalcEdad()
         {
-            _edad = _studentBL.CalcularEdad(_fechaRegistro, _fechaNacimiento);
+            Resultado = _studenBL.CalcularEdad(FechaRegistro, FechaNacimiento);
         }
         
         [Then(@"the result should be (.*) on the screen")]
-        public void ThenTheResultShouldBeOnTheScreen(int result)
+        public void ThenTheResultShouldBeOnTheScreen(int resultado)
         {
-            Assert.AreEqual(_edad, result);
+            Assert.AreEqual(Resultado, resultado);
         }
     }
 }
