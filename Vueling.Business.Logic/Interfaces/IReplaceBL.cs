@@ -7,7 +7,7 @@ using Vueling.Common.Logic.Model;
 
 namespace Vueling.Business.Logic
 {
-    interface IReplaceBL<T> where T : IVuelingModelObject
+    public interface IReplaceBL<T> where T : IVuelingModelObject
     {
         T Replace(T entity);
     }

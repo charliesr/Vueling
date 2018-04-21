@@ -1,54 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Security;
-using System.Xml.Serialization;
+using System.Text;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
-using Vueling.DataAccess.DAO.Formats;
+using Vueling.DataAccess.DAO.Interfaces;
 
-namespace Vueling.DataAccess.DAO
+namespace Vueling.DataAccess.DAO.FormatImplementations
 {
-    public class XmlFormat<T> : IFormat<T> where T : IVuelingModelObject
+    public class TxtFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public T Add(T entity)
         {
+            var content = string.Empty;
+            Type type;
             try
             {
                 _log.Debug("Añadiendo un/a nuevo/a " + typeof(T).Name);
-                var xmlSerializer = new XmlSerializer(typeof(List<T>));
-                var group = GetAll();
-                using (Stream writer = File.Open(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.xml), FileMode.OpenOrCreate, FileAccess.Write))
+                var assembly = Assembly.Load("Vueling.Common.Logic");
+                type = assembly.GetType(typeof(T).FullName);
+                var methodToString = type.GetMethod("ToString");
+                object[] propValues = new object[type.GetProperties().Length];
+                for (int i = 0; i < type.GetProperties().Length; i++)
                 {
-                    xmlSerializer.Serialize(writer, group);
+                    propValues[i] = type.GetProperties()[i].GetValue(entity);
                 }
+                var classInstance = Activator.CreateInstance(type, propValues);
+                content = (string)methodToString.Invoke(classInstance, null);
+                File.AppendAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.txt), content + "\r\n");
                 return GetByGUID((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
             }
-            catch (FileNotFoundException ex)
-            {
-                _log.Error(ex);
-                throw;
-            }
-            catch (ArgumentNullException ex)
-            {
-                _log.Error(ex);
-                throw;
-            }
-            catch (PathTooLongException ex)
-            {
-                _log.Error(ex);
-                throw;
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                _log.Error(ex);
-                throw;
-            }
-            catch (UnauthorizedAccessException ex)
+            catch (ArgumentException ex)
             {
                 _log.Error(ex);
                 throw;
@@ -58,11 +44,17 @@ namespace Vueling.DataAccess.DAO
                 _log.Error(ex);
                 throw;
             }
-            catch (SecurityException ex)
+            catch (TargetInvocationException ex)
             {
                 _log.Error(ex);
                 throw;
             }
+            catch (FileNotFoundException ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+
         }
 
         public T GetByGUID(Guid guid)
@@ -70,39 +62,31 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Select " + typeof(T).Name + "con Guid " + guid.ToString());
-                if (File.Exists(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.xml)))
+                var entityString = string.Empty;
+                using (TextReader reader = new StreamReader(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.txt)))
                 {
-                    var xmlSerializer = new XmlSerializer(typeof(List<T>));
-                    List<T> group;
-                    using (Stream reader = File.OpenRead(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.xml)))
+                    StringBuilder word = new StringBuilder();
+                    while (reader.Peek() > -1)
                     {
-                        group = (List<T>)xmlSerializer.Deserialize(reader);
+                        word.Append((char)reader.Read());
+                        if ((char)reader.Peek() != ',') continue;
+                        if (guid.ToString() == word.ToString())
+                        {
+                            entityString = guid.ToString() + reader.ReadLine();
+                        }
+                        else
+                        {
+                            reader.ReadLine();
+                        }
                     }
-                    return group.FirstOrDefault(i => (Guid)typeof(T).GetProperty("Guid").GetValue(i) == guid);
                 }
-                return default(T);
+                if (entityString == string.Empty) return default(T);
+                var propValues = entityString.Split(',');
+                object entity;
+                entity = Activator.CreateInstance(typeof(T), propValues);
+                return (T)entity;
             }
-            catch (FileNotFoundException ex)
-            {
-                _log.Error(ex);
-                throw;
-            }
-            catch (ArgumentNullException ex)
-            {
-                _log.Error(ex);
-                throw;
-            }
-            catch (PathTooLongException ex)
-            {
-                _log.Error(ex);
-                throw;
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                _log.Error(ex);
-                throw;
-            }
-            catch (UnauthorizedAccessException ex)
+            catch (ArgumentException ex)
             {
                 _log.Error(ex);
                 throw;
@@ -112,11 +96,12 @@ namespace Vueling.DataAccess.DAO
                 _log.Error(ex);
                 throw;
             }
-            catch (SecurityException ex)
+            catch (TargetInvocationException ex)
             {
                 _log.Error(ex);
                 throw;
             }
+
         }
 
         public List<T> GetAll()
@@ -124,15 +109,19 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Obtenemos todos los/las " + typeof(T).Name);
-                if (File.Exists(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.xml)))
+                var groupOfEntity = new List<T>();
+                using (TextReader reader = new StreamReader(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.txt)))
                 {
-                    using (Stream reader = File.OpenRead(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.xml)))
+                    while (reader.Peek() > -1)
                     {
-                        var xmlSerializer = new XmlSerializer(typeof(List<T>));
-                        return (List<T>)xmlSerializer.Deserialize(reader);
+                        var line = reader.ReadLine();
+                        var propValues = line.Split(',');
+                        var entity = Activator.CreateInstance(typeof(T), propValues);
+                        groupOfEntity.Add((T)entity);
+
                     }
+                    return groupOfEntity;
                 }
-                return new List<T>();
             }
             catch (FileNotFoundException ex)
             {

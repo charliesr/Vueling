@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 
-namespace Vueling.DataAccess.DAO.Formats
+namespace Vueling.DataAccess.DAO.Interfaces
 {
-    public interface IUpdate<T> where T : IVuelingModelObject
+    public interface IInsert<T> where T : IVuelingModelObject
     {
-        T Update(T entity);
+        T Add(T entity);
     }
 }

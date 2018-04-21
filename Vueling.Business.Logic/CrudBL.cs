@@ -7,16 +7,17 @@ using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
 using Vueling.DataAccess.DAO;
+using Vueling.DataAccess.DAO.Interfaces;
 
 namespace Vueling.Business.Logic
 {
-    public class CrudBL<T> : IReadBL<T>, ISaveBL<T>, IDropBL<T>, IReplaceBL<T> where T : IVuelingModelObject
+    public class CrudBL<T> : IReplaceBL<T>, ISaveBL<T>, IDropBL<T>, IReadBL<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly ISelectDao<T> _selectDao = new CrudDao<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
-        private readonly IUpdateDao<T> _updateDAO = new CrudDao<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
-        private readonly IDeleteDao<T> _deleteDAO = new CrudDao<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
-        private readonly IInsertDao<T> _insertDaoO = new CrudDao<T>(EnumsHelper.StringToDataTypeAccess(ConfigurationUtils.LoadFormat()));
+        private readonly ISelect<T> _selectDao = new CrudDao<T>();
+        private readonly IUpdate<T> _updateDAO = new CrudDao<T>();
+        private readonly IDelete<T> _deleteDAO = new CrudDao<T>();
+        private readonly IInsert<T> _insertDaoO = new CrudDao<T>();
 
         public T Add(T entity)
         {
@@ -74,15 +75,6 @@ namespace Vueling.Business.Logic
                 _log.Error(ex);
                 throw;
             }
-        }
-
-        public void ChangeFormat(DataTypeAccess dataTypeAccess)
-        {
-            _log.Debug("Cambiamos el formato de la factory (formato del archivo a) " + dataTypeAccess.ToString());
-            _selectDao.ChangeFormat(dataTypeAccess);
-            _updateDAO.ChangeFormat(dataTypeAccess);
-            _deleteDAO.ChangeFormat(dataTypeAccess);
-            _insertDaoO.ChangeFormat(dataTypeAccess);
         }
 
         public T GetByGUID(Guid guid)

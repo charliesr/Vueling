@@ -14,7 +14,7 @@ namespace Vueling.Business.LogicUnitTests
     {
         private MockFactory _mockFactory;
 
-        private Mock<IReadBL<Student>> _readBLStudentMock;
+        private Mock<IReplaceBL<Student>> _readBLStudentMock;
         private Mock<ISaveBL<Student>> _saveBLStudentMock;
         private Mock<IStudentBL> _studentBLMock;
 
@@ -28,7 +28,7 @@ namespace Vueling.Business.LogicUnitTests
         public void Init()
         {
             _mockFactory = new MockFactory();
-            _readBLStudentMock = _mockFactory.CreateMock<IReadBL<Student>>();
+            _readBLStudentMock = _mockFactory.CreateMock<IReplaceBL<Student>>();
             _saveBLStudentMock = _mockFactory.CreateMock<ISaveBL<Student>>();
             _studentBLMock = _mockFactory.CreateMock<IStudentBL>();
 

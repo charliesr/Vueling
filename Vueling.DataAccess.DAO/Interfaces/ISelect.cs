@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Vueling.Common.Logic.Model;
 
-namespace Vueling.DataAccess.DAO.Formats
+namespace Vueling.DataAccess.DAO.Interfaces
 {
     public interface ISelect<T> where T : IVuelingModelObject
     {

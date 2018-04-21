@@ -4,17 +4,21 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
-using Vueling.DataAccess.DAO.Singletons;
+using Vueling.DataAccess.DAO.Interfaces;
 
-namespace Vueling.DataAccess.DAO.Formats
+namespace Vueling.DataAccess.DAO.FormatImplementations
 {
     public class SqlFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        public SqlFormat()
+        {
+
+        }
 
         public T Add(T entity)
         {

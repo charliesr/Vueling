@@ -1,13 +1,12 @@
-﻿    using System;
-    using System.Reflection;
-    using System.Text;
-    using Vueling.Common.Logic;
-    using Vueling.Common.Logic.Model;
-    using Vueling.DataAccess.DAO.Formats;
+﻿using System;
+using System.Reflection;
+using Vueling.Common.Logic;
+using Vueling.Common.Logic.Model;
+using Vueling.DataAccess.DAO.Interfaces;
 
-    namespace Vueling.DataAccess.DAO
-    {
-        public static class FormatFactory<T> where T : IVuelingModelObject
+namespace Vueling.DataAccess.DAO.FormatImplementations
+{
+    public static class FormatFactory<T> where T : IVuelingModelObject
         {
             public static IFormat<T> GetFormat(DataTypeAccess dataTypeAccess)
             {
