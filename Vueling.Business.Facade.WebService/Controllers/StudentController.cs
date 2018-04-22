@@ -64,7 +64,7 @@ namespace Vueling.Business.Facade.WebService.Controllers
             }
         }
 
-        [HttpPut()]
+        [HttpPost()]
         public IHttpActionResult AddStudent(Student student)
         {
             try
@@ -111,7 +111,7 @@ namespace Vueling.Business.Facade.WebService.Controllers
 
         }
 
-        [HttpPost()]
+        [HttpPut()]
         public IHttpActionResult UpdateStudent(int id, Student student)
         {
             try

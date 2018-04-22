@@ -36,9 +36,19 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="StackExchange.Redis.Extensions.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=d7d863643bcd13ef, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.Extensions.Core.3.3.0\lib\net46\StackExchange.Redis.Extensions.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis.Extensions.Newtonsoft, Version=3.3.0.0, Culture=neutral, PublicKeyToken=d7d863643bcd13ef, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.Extensions.Newtonsoft.3.3.0\lib\net46\StackExchange.Redis.Extensions.Newtonsoft.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis.StrongName, Version=1.2.6.0, Culture=neutral, PublicKeyToken=c219ff1ca8c2ce46, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.StrongName.1.2.6\lib\net46\StackExchange.Redis.StrongName.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +59,7 @@
   <ItemGroup>
     <Compile Include="CrudDao.cs" />
     <Compile Include="FormatImplementations\FormatFactory.cs" />
+    <Compile Include="FormatImplementations\RedisFormat.cs" />
     <Compile Include="Interfaces\IFormat.cs" />
     <Compile Include="FormatImplementations\SqlStoredProcedureFormat.cs" />
     <Compile Include="Interfaces\ISelect.cs" />
@@ -71,6 +82,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

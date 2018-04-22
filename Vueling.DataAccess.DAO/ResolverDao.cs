@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
+using Vueling.Common.Logic.Model;
 using Vueling.DataAccess.DAO.FormatImplementations;
 using Vueling.DataAccess.DAO.Interfaces;
 
 namespace Vueling.DataAccess.DAO
 {
-    public class ResolverDao
+    public class ResolverDao<T> where T : IVuelingModelObject
     {
 
         private static readonly IContainer _daoBuilder;
@@ -43,9 +44,9 @@ namespace Vueling.DataAccess.DAO
             #endregion
         }
 
-        public static object GetIFormat(DataTypeAccess dataTypeAccess)
+        public static IFormat<T> GetIFormat(DataTypeAccess dataTypeAccess)
         {
-            return _daoBuilder.ResolveKeyed(dataTypeAccess, typeof(IFormat<>));
+            return (IFormat<T>)_daoBuilder.ResolveKeyed(dataTypeAccess, typeof(IFormat<T>));
         }
 
     }

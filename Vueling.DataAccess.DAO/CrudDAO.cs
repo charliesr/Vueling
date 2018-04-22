@@ -18,7 +18,7 @@ namespace Vueling.DataAccess.DAO
 
         private IFormat<T> Format()
         {
-            return (IFormat<T>)ResolverDao.GetIFormat(ConfigurationUtils.LoadFormat());
+            return ResolverDao<T>.GetIFormat(ConfigurationUtils.LoadFormat());
         }
 
         public T Add(T entity)
@@ -65,7 +65,7 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Obtenemos todos " + typeof(T).ToString());
-                return ((IFormat<T>)ResolverDao.GetIFormat(ConfigurationUtils.LoadFormat())).GetAll();
+                return Format().GetAll();
             }
             catch (FileNotFoundException ex)
             {
