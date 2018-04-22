@@ -13,8 +13,6 @@ namespace Vueling.DatAccess.DAOTests
     public class StudentDaoTest
     {
         private readonly string Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Student";
-        private readonly IInsertDao<Student> _studentAdd = new CrudDao<Student>(DataTypeAccess.txt);
-        private readonly ISelectDao<Student> _studentGetSql = new CrudDao<Student>(DataTypeAccess.sql);
 
         [TestInitialize]
         public void InitTest()
@@ -44,27 +42,21 @@ namespace Vueling.DatAccess.DAOTests
         [DynamicData(nameof(StudentData), DynamicDataSourceType.Method)]
         public void TxtSaveTest(Student alumno)
         {
-            _studentAdd.ChangeFormat(DataTypeAccess.txt);
-            var result = _studentAdd.Add(alumno);
-            Assert.IsTrue(alumno.Equals(result));
+            Assert.IsTrue(alumno.Equals(2));
         }
 
         [DataTestMethod]
         [DynamicData(nameof(StudentData), DynamicDataSourceType.Method)]
         public void JsonSaveTest(Student alumno)
         {
-            _studentAdd.ChangeFormat(DataTypeAccess.json);
-            var result = _studentAdd.Add(alumno);
-            Assert.IsTrue(alumno.Equals(result));
+            Assert.IsTrue(alumno.Equals(2));
         }
 
         [DataTestMethod]
         [DynamicData(nameof(StudentData), DynamicDataSourceType.Method)]
         public void XmlSaveTest(Student alumno)
         {
-            _studentAdd.ChangeFormat(DataTypeAccess.xml);
-            var result = _studentAdd.Add(alumno);
-            Assert.IsTrue(alumno.Equals(result));
+            Assert.IsTrue(alumno.Equals(2));
         }
     }
 }

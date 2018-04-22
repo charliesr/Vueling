@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.0\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -41,13 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CrudBL.cs" />
-    <Compile Include="Interfaces\IDropBL.cs" />
-    <Compile Include="Interfaces\IReadBL.cs" />
-    <Compile Include="Interfaces\IReplaceBL.cs" />
-    <Compile Include="Interfaces\ISaveBL.cs" />
     <Compile Include="Interfaces\IStudentBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResolverBusiness.cs" />
     <Compile Include="StudentBL.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +58,9 @@
       <Project>{0de51ef2-a117-456e-8ebc-92b530f2d3dc}</Project>
       <Name>Vueling.DataAccess.DAO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

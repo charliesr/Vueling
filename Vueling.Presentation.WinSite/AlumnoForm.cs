@@ -27,7 +27,6 @@ namespace Vueling.Presentation.WinSite
             InitializeComponent();
             alumno = new Student();
             alumnoBL = new StudentBL();
-            SetFormat(ConfigurationUtils.LoadFormat());
         }
 
         private void SetFormat(string format)
@@ -87,7 +86,7 @@ namespace Vueling.Presentation.WinSite
                 resources.ApplyResources(ctrl, ctrl.Name);
             });
             Text = resources.GetString("$this.text");
-            lbActualFormat.Text = ConfigurationUtils.LoadFormat();
+            lbActualFormat.Text = ConfigurationUtils.LoadFormat().ToString();
         }
 
         private IEnumerable<Control> GetChildren(Control control)
@@ -110,8 +109,6 @@ namespace Vueling.Presentation.WinSite
         private void ChangeFormatConfig(object sender, EventArgs e)
         {
             var format = ((ToolStripMenuItem)sender).Text;
-
-            alumnoBL.ChangeFormat(EnumsHelper.StringToDataTypeAccess(format));
             ConfigurationUtils.SaveFormat(format);
             SetFormat(format);
         }

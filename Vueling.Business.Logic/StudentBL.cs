@@ -12,10 +12,6 @@ namespace Vueling.Business.Logic
     public class StudentBL : IStudentBL
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IReadBL<Student> _readBL = new CrudBL<Student>();
-        private readonly ISaveBL<Student> _saveBL = new CrudBL<Student>();
-        private readonly IDropBL<Student> _dropBL = new CrudBL<Student>();
-        private readonly IReplaceBL<Student> _replaceBL = new CrudBL<Student>();
 
         public Student Add(Student alumno)
         {
@@ -25,7 +21,7 @@ namespace Vueling.Business.Logic
                 if (alumno.Guid == Guid.Empty) alumno.Guid = Guid.NewGuid();
                 alumno.FechaHoraRegistro = DateTime.Now;
                 alumno.Edad = CalcularEdad(alumno.FechaHoraRegistro, alumno.FechaDeNacimiento);
-                return _saveBL.Add(alumno);
+                return ResolverBusiness<Student>.GetIInsert().Add(alumno);
             }
             catch (ArgumentNullException ex)
             {
@@ -69,7 +65,7 @@ namespace Vueling.Business.Logic
             try
             {
                 _log.Debug("Método Get All alumnos");
-                return _readBL.GetAll();
+                return ResolverBusiness<Student>.GetISelect().GetAll();
             }
             catch (FileNotFoundException ex)
             {
@@ -109,11 +105,6 @@ namespace Vueling.Business.Logic
 
         }
 
-        public void ChangeFormat(DataTypeAccess dataTypeAccess)
-        {
-            _log.Debug("Cambiamos el formato de la factory (formato del archivo a) " + dataTypeAccess.ToString());
-        }
-
         public int CalcularEdad(DateTime registro, DateTime nacimiento)
         {
             try
@@ -132,7 +123,8 @@ namespace Vueling.Business.Logic
         {
             try
             {
-                return _readBL.GetByGUID(guid);
+                _log.Debug("Get By Guid - Business");
+                return ResolverBusiness<Student>.GetISelect().GetByGUID(guid);
             }
             catch (Exception)
             {
@@ -145,7 +137,8 @@ namespace Vueling.Business.Logic
         {
             try
             {
-                return _dropBL.DropByGUID(guid);
+                _log.Debug("Dropping by guid - BL");
+                return ResolverBusiness<Student>.GetIDelete().DeleteByGuid(guid);
             }
             catch (Exception ex)
             {
@@ -158,11 +151,12 @@ namespace Vueling.Business.Logic
         {
             try
             {
+                _log.Debug("Updateing Student - BL");
                 var studentToUpdate = GetById(id);
                 student.Guid = studentToUpdate.Guid;
                 student.FechaHoraRegistro = studentToUpdate.FechaHoraRegistro;
                 student.Edad = CalcularEdad(studentToUpdate.FechaHoraRegistro, studentToUpdate.FechaDeNacimiento);
-                return _replaceBL.Replace(student);
+                return ResolverBusiness<Student>.GetIUpdate().Update(student);
             }
             catch (Exception ex)
             {
@@ -175,7 +169,8 @@ namespace Vueling.Business.Logic
         {
             try
             {
-                return _readBL.GetById(id);
+                _log.Debug("Get by id BL");
+                return ResolverBusiness<Student>.GetISelect().GetById(id);
             }
             catch (Exception ex)
             {
@@ -188,7 +183,8 @@ namespace Vueling.Business.Logic
         {
             try
             {
-                return _dropBL.DropById(id);
+                _log.Debug("Delete by id BL");
+                return ResolverBusiness<Student>.GetIDelete().DeleteById(id);
             }
             catch (Exception ex)
             {

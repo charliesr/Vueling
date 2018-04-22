@@ -15,9 +15,9 @@ namespace Vueling.Common.Logic
             ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).Save();
         }
 
-        public static string LoadFormat()
+        public static DataTypeAccess LoadFormat()
         {
-            return ConfigurationManager.AppSettings["ConfiguredAccessType"];
+            return StringToDataTypeAccess(ConfigurationManager.AppSettings["ConfiguredAccessType"]);
         }
 
         public static IVuelingLogger LoadLogger(Type declaringType)
@@ -39,6 +39,11 @@ namespace Vueling.Common.Logic
         public static string GetFilePath<T>(DataTypeAccess dataTypeAccess)
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), typeof(T).Name + "." + dataTypeAccess.ToString());
+        }
+
+        public static DataTypeAccess StringToDataTypeAccess(string from)
+        {
+            return (DataTypeAccess)Enum.Parse(typeof(DataTypeAccess), from);
         }
 
     }

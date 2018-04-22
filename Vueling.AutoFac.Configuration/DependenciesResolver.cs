@@ -112,7 +112,7 @@ namespace Vueling.AutoFac.Configuration
 
         public static object GetISelect()
         {
-            return _daoBuilder.Resolve(typeof(ISelect<>));
+            return _businessBuilder.Resolve(typeof(ISelect<>));
         }
 
         public static object GetIReadBL()

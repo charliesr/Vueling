@@ -16,7 +16,6 @@ namespace Vueling.Business.Logic
         List<Student> GetAll();
         int DeleteByGUID(Guid guid);
         Student Update(int id, Student student);
-        void ChangeFormat(DataTypeAccess dataTypeAccess);
         int CalcularEdad(DateTime registro, DateTime nacimiento);
         Student GetById(int id);
         int DeleteById(int id);

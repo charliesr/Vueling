@@ -14,8 +14,6 @@ namespace Vueling.Business.LogicUnitTests
     {
         private MockFactory _mockFactory;
 
-        private Mock<IReplaceBL<Student>> _readBLStudentMock;
-        private Mock<ISaveBL<Student>> _saveBLStudentMock;
         private Mock<IStudentBL> _studentBLMock;
 
         private Student _studentStub;
@@ -28,8 +26,6 @@ namespace Vueling.Business.LogicUnitTests
         public void Init()
         {
             _mockFactory = new MockFactory();
-            _readBLStudentMock = _mockFactory.CreateMock<IReplaceBL<Student>>();
-            _saveBLStudentMock = _mockFactory.CreateMock<ISaveBL<Student>>();
             _studentBLMock = _mockFactory.CreateMock<IStudentBL>();
 
 
@@ -56,10 +52,6 @@ namespace Vueling.Business.LogicUnitTests
 
             // Creating Expectations
             // ADD
-            _saveBLStudentMock.Expects
-                .One
-                .MethodWith(instance => instance.Add(_studentStub))
-                .WillReturn(_studentStub);
             _studentBLMock.Expects
                 .One
                 .MethodWith(instance => instance.Add(_studentStub))
@@ -77,19 +69,11 @@ namespace Vueling.Business.LogicUnitTests
                 .WillReturn(30);
 
             //Get All
-            _readBLStudentMock.Expects
-                .Any
-                .MethodWith(instance => instance.GetAll())
-                .WillReturn(_studentListStub);
             _studentBLMock.Expects
                 .One
                 .MethodWith(instance => instance.GetAll())
                 .WillReturn(_studentListStub);
 
-            _readBLStudentMock.Expects
-                .One
-                .MethodWith(instance => instance.GetAll())
-                .WillReturn(_studentListStub);
             _studentBLMock.Expects
                 .One
                 .MethodWith(instance => instance.GetAll())
