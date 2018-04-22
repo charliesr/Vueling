@@ -1,9 +1,4 @@
 ﻿using Autofac;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.DataAccess.DAO.FormatImplementations;
@@ -39,6 +34,10 @@ namespace Vueling.DataAccess.DAO
                 .RegisterGeneric(typeof(XmlFormat<>))
                 .As(typeof(IFormat<>))
                 .Keyed(DataTypeAccess.xml, typeof(IFormat<>));
+            builder
+                .RegisterGeneric(typeof(XmlFormat<>))
+                .As(typeof(IFormat<>))
+                .Keyed(DataTypeAccess.redis, typeof(IFormat<>));
             _daoBuilder = builder.Build();
 
             #endregion
