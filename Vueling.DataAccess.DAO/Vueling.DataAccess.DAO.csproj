@@ -58,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CrudDao.cs" />
-    <Compile Include="FormatImplementations\FormatFactory.cs" />
     <Compile Include="FormatImplementations\RedisFormat.cs" />
     <Compile Include="Interfaces\IFormat.cs" />
     <Compile Include="FormatImplementations\SqlStoredProcedureFormat.cs" />
@@ -68,8 +67,6 @@
     <Compile Include="Interfaces\IInsert.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
     <Compile Include="ResolverDao.cs" />
-    <Compile Include="Singletons\XmlStudents.cs" />
-    <Compile Include="Singletons\JsonStudents.cs" />
     <Compile Include="FormatImplementations\XmlFormat.cs" />
     <Compile Include="FormatImplementations\TxtFormat.cs" />
     <Compile Include="FormatImplementations\JsonFormat.cs" />
@@ -85,6 +82,8 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Singletons\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

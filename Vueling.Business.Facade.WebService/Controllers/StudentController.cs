@@ -19,6 +19,11 @@ namespace Vueling.Business.Facade.WebService.Controllers
             _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         }
 
+        /// <summary>
+        /// Return a student by guid
+        /// </summary>
+        /// <param name="guid"> Guid from a student to search</param>
+        /// <returns>A Student</returns>
         [HttpGet()]
         public IHttpActionResult GetStudentByGuid(Guid guid)
         {
@@ -34,6 +39,11 @@ namespace Vueling.Business.Facade.WebService.Controllers
             }
         }
 
+        /// <summary>
+        /// Return a student by id
+        /// </summary>
+        /// <param name="id"> id from a student to search</param>
+        /// <returns>A Student</returns>
         [HttpGet()]
         public IHttpActionResult ReadStudent(int id)
         {
@@ -49,6 +59,10 @@ namespace Vueling.Business.Facade.WebService.Controllers
             }
         }
 
+        /// <summary>
+        /// Return all students
+        /// </summary>
+        /// <returns>List of all students</returns>
         [HttpGet()]
         public IHttpActionResult GetAllStudents()
         {
@@ -64,6 +78,11 @@ namespace Vueling.Business.Facade.WebService.Controllers
             }
         }
 
+        /// <summary>
+        /// Add a student
+        /// </summary>
+        /// <param name="student"> Student to Add</param>
+        /// <returns>A Student</returns>
         [HttpPost()]
         public IHttpActionResult AddStudent(Student student)
         {
@@ -79,6 +98,11 @@ namespace Vueling.Business.Facade.WebService.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete a student by guid
+        /// </summary>
+        /// <param name="guid"> guid from a student to delete</param>
+        /// <returns>A Student</returns>
         [HttpDelete()]
         public IHttpActionResult DeleteStudentByGuid(Guid guid)
         {
@@ -95,6 +119,11 @@ namespace Vueling.Business.Facade.WebService.Controllers
 
         }
 
+        /// <summary>
+        /// Delete a student by id
+        /// </summary>
+        /// <param name="id"> id from a student to delete</param>
+        /// <returns>A Student</returns>
         [HttpDelete()]
         public IHttpActionResult DeleteStudent(int id)
         {
@@ -111,6 +140,12 @@ namespace Vueling.Business.Facade.WebService.Controllers
 
         }
 
+        /// <summary>
+        /// Update a student
+        /// </summary>
+        /// <param name="id"> id whose student we want to update</param>
+        /// <param name="student"> Student to Update</param>
+        /// <returns>A Student</returns>
         [HttpPut()]
         public IHttpActionResult UpdateStudent(int id, Student student)
         {
@@ -126,6 +161,10 @@ namespace Vueling.Business.Facade.WebService.Controllers
             }
         }
 
+        /// <summary>
+        /// ping api
+        /// </summary>
+        /// <returns>string with result</returns>
         [HttpGet()]
         public IHttpActionResult Trial()
         {
