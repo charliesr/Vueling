@@ -12,11 +12,12 @@ namespace Vueling.Business.Facade.WebService.Controllers
 {
     public class StudentController : ApiController
     {
-        private readonly IVuelingLogger _log;
+        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);;
+        private readonly IStudentBL _studentBl;
 
-        public StudentController()
+        public StudentController(IStudentBL studentBL)
         {
-            _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
+            this._studentBl = studentBL;
         }
 
         /// <summary>

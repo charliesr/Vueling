@@ -33,6 +33,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation Layer", "Prese
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Business.Facade.WebService", "Vueling.Business.Facade.WebService\Vueling.Business.Facade.WebService.csproj", "{9DDF1F87-0B4B-4678-8D66-E91ADAF2A0E8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Autofac Layer", "Autofac Layer", "{AC06D932-42AB-4D53-AF46-AC9E38EA475A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Autofac.Configuration", "Vueling.Autofac.Configuration\Vueling.Autofac.Configuration.csproj", "{42B07838-317D-42C3-A627-BC1D1C207192}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +89,10 @@ Global
 		{9DDF1F87-0B4B-4678-8D66-E91ADAF2A0E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DDF1F87-0B4B-4678-8D66-E91ADAF2A0E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DDF1F87-0B4B-4678-8D66-E91ADAF2A0E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42B07838-317D-42C3-A627-BC1D1C207192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42B07838-317D-42C3-A627-BC1D1C207192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42B07838-317D-42C3-A627-BC1D1C207192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42B07838-317D-42C3-A627-BC1D1C207192}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +109,7 @@ Global
 		{9D47FEE5-0461-4E00-890A-60D0789CBDCC} = {E0C05CC6-20E7-4F9E-ABBB-1C020E9B8025}
 		{CF886210-B987-4972-B5C6-586B670206A7} = {D024C69F-5891-42D1-9FF8-689C12FF3C58}
 		{9DDF1F87-0B4B-4678-8D66-E91ADAF2A0E8} = {E0C05CC6-20E7-4F9E-ABBB-1C020E9B8025}
+		{42B07838-317D-42C3-A627-BC1D1C207192} = {AC06D932-42AB-4D53-AF46-AC9E38EA475A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2490D861-D705-4C54-8A70-5D73918C1404}

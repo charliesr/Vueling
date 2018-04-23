@@ -6,12 +6,26 @@ using System.Security;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
+using Vueling.DataAccess.DAO.Interfaces;
 
 namespace Vueling.Business.Logic
 {
     public class StudentBL : IStudentBL
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly ISelect<Student> _selectDao;
+        private readonly IDelete<Student> _deleteDao;
+        private readonly IUpdate<Student> _updateDao;
+        private readonly IInsert<Student> _insertDao;
+
+        public StudentBL(ISelect<Student> selectDao, IInsert<Student> insertDao, IUpdate<Student> updateDao, IDelete<Student> deleteDao)
+        {
+            this._deleteDao = deleteDao;
+            this._insertDao = insertDao;
+            this._selectDao = selectDao;
+            this._updateDao = updateDao;
+        }
+
 
         public Student Add(Student alumno)
         {
@@ -21,7 +35,7 @@ namespace Vueling.Business.Logic
                 if (alumno.Guid == Guid.Empty) alumno.Guid = Guid.NewGuid();
                 alumno.FechaHoraRegistro = DateTime.Now;
                 alumno.Edad = CalcularEdad(alumno.FechaHoraRegistro, alumno.FechaDeNacimiento);
-                return ResolverBusiness<Student>.GetIInsert().Add(alumno);
+                return this._insertDao.Add(alumno);
             }
             catch (ArgumentNullException ex)
             {
@@ -65,7 +79,7 @@ namespace Vueling.Business.Logic
             try
             {
                 _log.Debug("Método Get All alumnos");
-                return ResolverBusiness<Student>.GetISelect().GetAll();
+                return this._selectDao.GetAll();
             }
             catch (FileNotFoundException ex)
             {
@@ -124,7 +138,7 @@ namespace Vueling.Business.Logic
             try
             {
                 _log.Debug("Get By Guid - Business");
-                return ResolverBusiness<Student>.GetISelect().GetByGUID(guid);
+                return this._selectDao.GetByGUID(guid);
             }
             catch (Exception)
             {
@@ -138,7 +152,7 @@ namespace Vueling.Business.Logic
             try
             {
                 _log.Debug("Dropping by guid - BL");
-                return ResolverBusiness<Student>.GetIDelete().DeleteByGuid(guid);
+                return this._deleteDao.DeleteByGuid(guid);
             }
             catch (Exception ex)
             {
@@ -156,7 +170,7 @@ namespace Vueling.Business.Logic
                 student.Guid = studentToUpdate.Guid;
                 student.FechaHoraRegistro = studentToUpdate.FechaHoraRegistro;
                 student.Edad = CalcularEdad(studentToUpdate.FechaHoraRegistro, studentToUpdate.FechaDeNacimiento);
-                return ResolverBusiness<Student>.GetIUpdate().Update(student);
+                return this._updateDao.Update(student);
             }
             catch (Exception ex)
             {
@@ -170,7 +184,7 @@ namespace Vueling.Business.Logic
             try
             {
                 _log.Debug("Get by id BL");
-                return ResolverBusiness<Student>.GetISelect().GetById(id);
+                return this._selectDao.GetById(id);
             }
             catch (Exception ex)
             {
@@ -184,7 +198,7 @@ namespace Vueling.Business.Logic
             try
             {
                 _log.Debug("Delete by id BL");
-                return ResolverBusiness<Student>.GetIDelete().DeleteById(id);
+                return _deleteDao.DeleteById(id);
             }
             catch (Exception ex)
             {
