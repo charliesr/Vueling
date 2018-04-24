@@ -19,14 +19,14 @@ namespace Vueling.Presentation.WinSite
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private Student alumno;
-        private IStudentBL alumnoBL;
+        //private IStudentBL alumnoBL;
         
         public AlumnoForm()
         {
             // dibuja todos los controles
             InitializeComponent();
             alumno = new Student();
-            alumnoBL = new StudentBL();
+            //alumnoBL = new StudentBL();
         }
 
         private void SetFormat(string format)
@@ -119,7 +119,7 @@ namespace Vueling.Presentation.WinSite
             {
                 _log.Debug("Clicado el botón de guardar en " + ConfigurationUtils.LoadFormat());
                 LoadAlumnoData();
-                alumnoBL.Add(alumno);
+                //alumnoBL.Add(alumno);
             }
             catch (OverflowException ex)
             {

@@ -9,21 +9,19 @@ using Vueling.DataAccess.DAO.Interfaces;
 
 namespace Vueling.Autofac.Configuration
 {
-    public class CommonBuilder : Module
+    public class BusinessModule  : Module
     {
-        public override void Load(ContainerBuilder builder)
+        protected override void Load(ContainerBuilder builder)
         {
             builder
                 .RegisterGeneric(typeof(CrudDao<>))
-                .As(typeof(IInsert<>))
                 .As(typeof(ISelect<>))
+                .As(typeof(IInsert<>))
                 .As(typeof(IUpdate<>))
                 .As(typeof(IDelete<>))
                 .InstancePerRequest();
 
-
-
-
+            base.Load(builder);
         }
     }
 }

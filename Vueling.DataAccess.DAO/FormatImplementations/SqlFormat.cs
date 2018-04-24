@@ -15,11 +15,6 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public SqlFormat()
-        {
-
-        }
-
         public T Add(T entity)
         {
             try

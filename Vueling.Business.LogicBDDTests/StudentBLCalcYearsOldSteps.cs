@@ -2,13 +2,14 @@
 using System;
 using TechTalk.SpecFlow;
 using Vueling.Business.Logic;
+using Vueling.Business.Logic.Interfaces;
 
 namespace Vueling.Business.LogicBDDTests
 {
     [Binding]
     public class StudentBLCalcYearsOldSteps
     {
-        private readonly IStudentBL _studenBL = new StudentBL();
+        //private readonly IStudentBL _studenBL = ;
         private DateTime FechaRegistro;
         private DateTime FechaNacimiento;
         private int Resultado;
@@ -27,7 +28,7 @@ namespace Vueling.Business.LogicBDDTests
         [When(@"I call CalcEdad")]
         public void WhenICallCalcEdad()
         {
-            Resultado = _studenBL.CalcularEdad(FechaRegistro, FechaNacimiento);
+            //Resultado = _studenBL.CalcularEdad(FechaRegistro, FechaNacimiento);
         }
         
         [Then(@"the result should be (.*) on the screen")]

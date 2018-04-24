@@ -18,12 +18,12 @@ namespace Vueling.Presentation.WinSite
     public partial class AlumnoShowForm : Form
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IStudentBL _studentBL = new StudentBL();
+        //private readonly IStudentBL _studentBL = new StudentBL();
         private List<Student> students = new List<Student>();
         public AlumnoShowForm()
         {
             InitializeComponent();
-            GridRestart(_studentBL.GetAll());
+            //GridRestart(_studentBL.GetAll());
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -44,13 +44,13 @@ namespace Vueling.Presentation.WinSite
         private void btnJson_Click(object sender, EventArgs e)
         {
             _log.Debug("Cargamos los datos desde Json");
-            GridRestart(_studentBL.GetAll());
+            //GridRestart(_studentBL.GetAll());
         }
 
         private void btnXml_Click(object sender, EventArgs e)
         {
             _log.Debug("Cargamos los datos desde xml");
-            GridRestart(_studentBL.GetAll());
+            //GridRestart(_studentBL.GetAll());
         }
 
         private void GridRestart(List<Student> source)
@@ -63,7 +63,7 @@ namespace Vueling.Presentation.WinSite
         private void btnTxt_Click(object sender, EventArgs e)
         {
             _log.Debug("Cargamos los datos desde txt");
-            GridRestart(_studentBL.GetAll());
+            //GridRestart(_studentBL.GetAll());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac.Features.Indexed;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -15,10 +16,11 @@ namespace Vueling.DataAccess.DAO
     public class CrudDao<T> : IDelete<T>, ISelect<T>, IUpdate<T>, IInsert<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IFormat<T> _format;
 
-        private IFormat<T> Format()
+        public CrudDao(IIndex<DataTypeAccess, IFormat<T>> formats)
         {
-            return ResolverDao<T>.GetIFormat(ConfigurationUtils.LoadFormat());
+            this._format = formats[ConfigurationUtils.LoadFormat()];
         }
 
         public T Add(T entity)
@@ -26,7 +28,7 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Añadiendo " + typeof(T).Name);
-                return Format().Add(entity);
+                return _format.Add(entity);
             }
             catch (ArgumentNullException ex)
             {
@@ -65,7 +67,7 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Obtenemos todos " + typeof(T).ToString());
-                return Format().GetAll();
+                return _format.GetAll();
             }
             catch (FileNotFoundException ex)
             {
@@ -109,7 +111,7 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug(new StringBuilder("Pedimos el ").Append(typeof(T).Name).Append(" con guid ").Append(guid.ToString()));
-                return Format().GetByGUID(guid);
+                return _format.GetByGUID(guid);
             }
             catch (FileNotFoundException ex)
             {
@@ -152,7 +154,7 @@ namespace Vueling.DataAccess.DAO
         {
             try
             {
-                return Format().DeleteByGuid(guid);
+                return _format.DeleteByGuid(guid);
             }
             catch (Exception ex)
             {
@@ -166,7 +168,7 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Update");
-                return Format().Update(entity);
+                return _format.Update(entity);
             }
             catch (Exception ex)
             {
@@ -180,7 +182,7 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Get by ID");
-                return Format().GetById(id);
+                return _format.GetById(id);
             }
             catch (Exception ex)
             {
@@ -194,7 +196,7 @@ namespace Vueling.DataAccess.DAO
             try
             {
                 _log.Debug("Delete by ID");
-                return Format().DeleteById(id);
+                return _format.DeleteById(id);
             }
             catch (Exception ex)
             {

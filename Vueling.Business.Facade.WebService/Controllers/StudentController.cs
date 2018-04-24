@@ -7,12 +7,13 @@ using Vueling.Common.Logic.Utils;
 using System.Text;
 using System.Web;
 using Vueling.Business.Logic;
+using Vueling.Business.Logic.Interfaces;
 
 namespace Vueling.Business.Facade.WebService.Controllers
 {
     public class StudentController : ApiController
     {
-        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);;
+        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IStudentBL _studentBl;
 
         public StudentController(IStudentBL studentBL)
@@ -31,7 +32,7 @@ namespace Vueling.Business.Facade.WebService.Controllers
             try
             {
                 _log.Debug(new StringBuilder(LogLiterals.RequestReceived).Append(HttpContext.Current.Request.HttpMethod).Append(" ").Append(MethodBase.GetCurrentMethod().Name).ToString());
-                return Ok(ResolverFacade.GetStudentBL().GetByGUID(guid));
+                return Ok(_studentBl.GetByGUID(guid));
             }
             catch (Exception ex)
             {
@@ -51,7 +52,7 @@ namespace Vueling.Business.Facade.WebService.Controllers
             try
             {
                 _log.Debug(new StringBuilder(LogLiterals.RequestReceived).Append(HttpContext.Current.Request.HttpMethod).Append(" ").Append(MethodBase.GetCurrentMethod().Name).ToString());
-                return Ok(ResolverFacade.GetStudentBL().GetById(id));
+                return Ok(_studentBl.GetById(id));
             }
             catch (Exception ex)
             {
@@ -70,7 +71,7 @@ namespace Vueling.Business.Facade.WebService.Controllers
             try
             {
                 _log.Debug(new StringBuilder(LogLiterals.RequestReceived).Append(HttpContext.Current.Request.HttpMethod).Append(" ").Append(MethodBase.GetCurrentMethod().Name).ToString());
-                return Ok(ResolverFacade.GetStudentBL().GetAll());
+                return Ok(_studentBl.GetAll());
             }
             catch (Exception ex)
             {
@@ -90,7 +91,7 @@ namespace Vueling.Business.Facade.WebService.Controllers
             try
             {
                 _log.Debug(new StringBuilder(LogLiterals.RequestReceived).Append(HttpContext.Current.Request.HttpMethod).Append(" ").Append(MethodBase.GetCurrentMethod().Name).ToString());
-                return Ok(ResolverFacade.GetStudentBL().Add(student));
+                return Ok(_studentBl.Add(student));
             }
             catch (Exception ex)
             {
@@ -110,7 +111,7 @@ namespace Vueling.Business.Facade.WebService.Controllers
             try
             {
                 _log.Debug(new StringBuilder(LogLiterals.RequestReceived).Append(HttpContext.Current.Request.HttpMethod).Append(" ").Append(MethodBase.GetCurrentMethod().Name).ToString());
-                return Ok(ResolverFacade.GetStudentBL().DeleteByGUID(guid));
+                return Ok(_studentBl.DeleteByGUID(guid));
             }
             catch (Exception ex)
             {
@@ -131,7 +132,7 @@ namespace Vueling.Business.Facade.WebService.Controllers
             try
             {
                 _log.Debug(new StringBuilder(LogLiterals.RequestReceived).Append(HttpContext.Current.Request.HttpMethod).Append(" ").Append(MethodBase.GetCurrentMethod().Name).ToString());
-                return Ok(ResolverFacade.GetStudentBL().DeleteById(id));
+                return Ok(_studentBl.DeleteById(id));
             }
             catch (Exception ex)
             {
@@ -153,7 +154,7 @@ namespace Vueling.Business.Facade.WebService.Controllers
             try
             {
                 _log.Debug(new StringBuilder(LogLiterals.RequestReceived).Append(HttpContext.Current.Request.HttpMethod).Append(" ").Append(MethodBase.GetCurrentMethod().Name).ToString());
-                return Ok(ResolverFacade.GetStudentBL().Update(id,student));
+                return Ok(_studentBl.Update(id,student));
             }
             catch (Exception ex)
             {
