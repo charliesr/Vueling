@@ -14,12 +14,19 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
 {
     public class XmlFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
-        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger log;
+
+        public XmlFormat(IVuelingLogger log)
+        {
+            this.log = log;
+            this.log.Init(MethodBase.GetCurrentMethod().DeclaringType);
+        }
+
         public T Add(T entity)
         {
             try
             {
-                _log.Debug("Añadiendo un/a nuevo/a " + typeof(T).Name);
+                log.Debug("Añadiendo un/a nuevo/a " + typeof(T).Name);
                 var xmlSerializer = new XmlSerializer(typeof(List<T>));
                 var group = GetAll();
                 using (Stream writer = File.Open(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.xml), FileMode.OpenOrCreate, FileAccess.Write))
@@ -30,37 +37,37 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (FileNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (ArgumentNullException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (PathTooLongException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (DirectoryNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (UnauthorizedAccessException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (NotSupportedException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (SecurityException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -69,7 +76,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
         {
             try
             {
-                _log.Debug("Select " + typeof(T).Name + "con Guid " + guid.ToString());
+                log.Debug("Select " + typeof(T).Name + "con Guid " + guid.ToString());
                 if (File.Exists(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.xml)))
                 {
                     var xmlSerializer = new XmlSerializer(typeof(List<T>));
@@ -84,37 +91,37 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (FileNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (ArgumentNullException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (PathTooLongException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (DirectoryNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (UnauthorizedAccessException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (NotSupportedException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (SecurityException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -123,7 +130,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
         {
             try
             {
-                _log.Debug("Obtenemos todos los/las " + typeof(T).Name);
+                log.Debug("Obtenemos todos los/las " + typeof(T).Name);
                 if (File.Exists(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.xml)))
                 {
                     using (Stream reader = File.OpenRead(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.xml)))
@@ -136,37 +143,37 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (FileNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (ArgumentNullException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (PathTooLongException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (DirectoryNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (UnauthorizedAccessException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (NotSupportedException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (SecurityException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }

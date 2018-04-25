@@ -17,7 +17,7 @@ namespace Vueling.Presentation.WinSite
 {
     public partial class AlumnoForm : Form
     {
-        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private Student alumno;
         //private IStudentBL alumnoBL;
         
@@ -44,7 +44,7 @@ namespace Vueling.Presentation.WinSite
         {
             try
             {
-                _log.Debug("Cargamos datos del alumno en el form");
+                log.Debug("Cargamos datos del alumno en el form");
                 alumno.SetGuid();
                 alumno.ID = Convert.ToInt32(txtId.Text);
                 alumno.Nombre = txtNombre.Text;
@@ -54,12 +54,12 @@ namespace Vueling.Presentation.WinSite
             }
             catch (OverflowException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 MessageBoxUtil.ShowException(ex);
             }
             catch (FormatException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 MessageBoxUtil.ShowException(ex);
             }
         }
@@ -73,7 +73,7 @@ namespace Vueling.Presentation.WinSite
             }
             catch (InvalidOperationException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 MessageBoxUtil.ShowException(ex);
             }
         }
@@ -117,43 +117,43 @@ namespace Vueling.Presentation.WinSite
         {
             try
             {
-                _log.Debug("Clicado el botón de guardar en " + ConfigurationUtils.LoadFormat());
+                log.Debug("Clicado el botón de guardar en " + ConfigurationUtils.LoadFormat());
                 LoadAlumnoData();
                 //alumnoBL.Add(alumno);
             }
             catch (OverflowException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 MessageBoxUtil.ShowException(ex);
             }
             catch (ArgumentNullException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 MessageBoxUtil.ShowException(ex);
             }
             catch (PathTooLongException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 MessageBoxUtil.ShowException(ex);
             }
             catch (DirectoryNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 MessageBoxUtil.ShowException(ex);
             }
             catch (UnauthorizedAccessException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 MessageBoxUtil.ShowException(ex);
             }
             catch (NotSupportedException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 MessageBoxUtil.ShowException(ex);
             }
             catch (SecurityException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 MessageBoxUtil.ShowException(ex);
             }
         }

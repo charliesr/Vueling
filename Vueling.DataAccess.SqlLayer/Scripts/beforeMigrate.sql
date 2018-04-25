@@ -27,8 +27,8 @@ FILEGROUP VuelingCrudFileStreamGroup1 CONTAINS FILESTREAM
   ( NAME = 'VuelingCrud_FS',
     FILENAME = 'c:\DataBase\VuelingCrudFileStream')
 LOG ON(
-	name=VuelingCrud_log,
-	filename='C:\DataBase\VuelingCrud_log.ldf',
+	name=VuelingCrudlog,
+	filename='C:\DataBase\VuelingCrudlog.ldf',
 	size=2MB, 
 	maxsize=2MB,
 	filegrowth=0MB

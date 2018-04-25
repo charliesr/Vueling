@@ -13,14 +13,21 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
 {
     public class TxtFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
-        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger log;
+
+        public TxtFormat(IVuelingLogger log)
+        {
+            this.log = log;
+            this.log.Init(MethodBase.GetCurrentMethod().DeclaringType);
+        }
+
         public T Add(T entity)
         {
             var content = string.Empty;
             Type type;
             try
             {
-                _log.Debug("Añadiendo un/a nuevo/a " + typeof(T).Name);
+                log.Debug("Añadiendo un/a nuevo/a " + typeof(T).Name);
                 var assembly = Assembly.Load("Vueling.Common.Logic");
                 type = assembly.GetType(typeof(T).FullName);
                 var methodToString = type.GetMethod("ToString");
@@ -36,22 +43,22 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (ArgumentException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (NotSupportedException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (TargetInvocationException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (FileNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
 
@@ -61,7 +68,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
         {
             try
             {
-                _log.Debug("Select " + typeof(T).Name + "con Guid " + guid.ToString());
+                log.Debug("Select " + typeof(T).Name + "con Guid " + guid.ToString());
                 var entityString = string.Empty;
                 using (TextReader reader = new StreamReader(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.txt)))
                 {
@@ -88,17 +95,17 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (ArgumentException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (NotSupportedException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (TargetInvocationException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
 
@@ -108,7 +115,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
         {
             try
             {
-                _log.Debug("Obtenemos todos los/las " + typeof(T).Name);
+                log.Debug("Obtenemos todos los/las " + typeof(T).Name);
                 var groupOfEntity = new List<T>();
                 using (TextReader reader = new StreamReader(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.txt)))
                 {
@@ -125,37 +132,37 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (FileNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (ArgumentNullException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (PathTooLongException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (DirectoryNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (UnauthorizedAccessException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (NotSupportedException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (SecurityException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }

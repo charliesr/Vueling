@@ -22,7 +22,8 @@ namespace Vueling.Autofac.Configuration
             builder
                 .RegisterModule(new FacadeModule())
                 .RegisterModule(new BusinessModule())
-                .RegisterModule(new DaoModule());
+                .RegisterModule(new DaoModule())
+                .RegisterModule(new CommonModule());
 
             return builder.Build();
         }

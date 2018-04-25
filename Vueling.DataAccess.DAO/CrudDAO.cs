@@ -15,49 +15,51 @@ namespace Vueling.DataAccess.DAO
 {
     public class CrudDao<T> : IDelete<T>, ISelect<T>, IUpdate<T>, IInsert<T> where T : IVuelingModelObject
     {
-        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IFormat<T> _format;
+        private readonly IVuelingLogger log;
+        private readonly IFormat<T> format;
 
-        public CrudDao(IIndex<DataTypeAccess, IFormat<T>> formats)
+        public CrudDao(IIndex<DataTypeAccess, IFormat<T>> formats, IVuelingLogger log)
         {
-            this._format = formats[ConfigurationUtils.LoadFormat()];
+            this.format = formats[ConfigurationUtils.LoadFormat()];
+            this.log = log;
+            this.log.Init(MethodBase.GetCurrentMethod().DeclaringType);
         }
 
         public T Add(T entity)
         {
             try
             {
-                _log.Debug("Añadiendo " + typeof(T).Name);
-                return _format.Add(entity);
+                log.Debug("Añadiendo " + typeof(T).Name);
+                return format.Add(entity);
             }
             catch (ArgumentNullException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (PathTooLongException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (DirectoryNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (UnauthorizedAccessException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (NotSupportedException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (SecurityException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -66,42 +68,42 @@ namespace Vueling.DataAccess.DAO
         {
             try
             {
-                _log.Debug("Obtenemos todos " + typeof(T).ToString());
-                return _format.GetAll();
+                log.Debug("Obtenemos todos " + typeof(T).ToString());
+                return format.GetAll();
             }
             catch (FileNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (ArgumentNullException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (PathTooLongException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (DirectoryNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (UnauthorizedAccessException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (NotSupportedException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (SecurityException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -110,42 +112,42 @@ namespace Vueling.DataAccess.DAO
         {
             try
             {
-                _log.Debug(new StringBuilder("Pedimos el ").Append(typeof(T).Name).Append(" con guid ").Append(guid.ToString()));
-                return _format.GetByGUID(guid);
+                log.Debug(new StringBuilder("Pedimos el ").Append(typeof(T).Name).Append(" con guid ").Append(guid.ToString()));
+                return format.GetByGUID(guid);
             }
             catch (FileNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (ArgumentNullException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (PathTooLongException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (DirectoryNotFoundException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (UnauthorizedAccessException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (NotSupportedException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
             catch (SecurityException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -154,11 +156,11 @@ namespace Vueling.DataAccess.DAO
         {
             try
             {
-                return _format.DeleteByGuid(guid);
+                return format.DeleteByGuid(guid);
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -167,12 +169,12 @@ namespace Vueling.DataAccess.DAO
         {
             try
             {
-                _log.Debug("Update");
-                return _format.Update(entity);
+                log.Debug("Update");
+                return format.Update(entity);
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -181,12 +183,12 @@ namespace Vueling.DataAccess.DAO
         {
             try
             {
-                _log.Debug("Get by ID");
-                return _format.GetById(id);
+                log.Debug("Get by ID");
+                return format.GetById(id);
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -195,12 +197,12 @@ namespace Vueling.DataAccess.DAO
         {
             try
             {
-                _log.Debug("Delete by ID");
-                return _format.DeleteById(id);
+                log.Debug("Delete by ID");
+                return format.DeleteById(id);
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }

@@ -17,7 +17,7 @@ namespace Vueling.Presentation.WinSite
 {
     public partial class AlumnoShowForm : Form
     {
-        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
         //private readonly IStudentBL _studentBL = new StudentBL();
         private List<Student> students = new List<Student>();
         public AlumnoShowForm()
@@ -28,7 +28,7 @@ namespace Vueling.Presentation.WinSite
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            _log.Debug("Filtramos DataGridView");
+            log.Debug("Filtramos DataGridView");
             IEnumerable<Student> query = students.AsEnumerable();
             if (!string.IsNullOrEmpty(txtGuid.Text)) query = query.Where(s => s.Guid.ToString().Contains(txtGuid.Text));
             if (!string.IsNullOrEmpty(txtID.Text)) query = query.Where(s => s.ID == Convert.ToInt32(txtID.Text));
@@ -43,26 +43,26 @@ namespace Vueling.Presentation.WinSite
 
         private void btnJson_Click(object sender, EventArgs e)
         {
-            _log.Debug("Cargamos los datos desde Json");
+            log.Debug("Cargamos los datos desde Json");
             //GridRestart(_studentBL.GetAll());
         }
 
         private void btnXml_Click(object sender, EventArgs e)
         {
-            _log.Debug("Cargamos los datos desde xml");
+            log.Debug("Cargamos los datos desde xml");
             //GridRestart(_studentBL.GetAll());
         }
 
         private void GridRestart(List<Student> source)
         {
-            _log.Debug("Restablecemos la grid con nuevos datos");
+            log.Debug("Restablecemos la grid con nuevos datos");
             this.dgvResults.DataSource = source;
             students = source;
         }
 
         private void btnTxt_Click(object sender, EventArgs e)
         {
-            _log.Debug("Cargamos los datos desde txt");
+            log.Debug("Cargamos los datos desde txt");
             //GridRestart(_studentBL.GetAll());
         }
     }

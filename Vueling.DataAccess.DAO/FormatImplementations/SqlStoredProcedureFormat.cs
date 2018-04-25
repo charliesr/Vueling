@@ -12,7 +12,13 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
 {
     public class SqlStoredProcedureFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
-        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        public SqlStoredProcedureFormat(IVuelingLogger log)
+        {
+            this.log = log;
+            this.log.Init(MethodBase.GetCurrentMethod().DeclaringType);
+        }
 
         public T Add(T entity)
         {
@@ -30,7 +36,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }

@@ -10,14 +10,18 @@ namespace Vueling.Common.Logic.Utils
 {
     public class Log4NetLogger : IVuelingLogger
     {
-        private readonly ILog log;
+        private ILog log;
 
         static Log4NetLogger()
         {
-            Init();
+            Configure();
         }
 
-        public static void Init()
+        public Log4NetLogger()
+        {
+
+        }
+        public static void Configure()
         {
             var hierarchy = (Hierarchy)LogManager.GetRepository();
 
@@ -72,7 +76,7 @@ namespace Vueling.Common.Logic.Utils
 
         }
 
-        public Log4NetLogger(Type declaringType )
+        public void Init(Type declaringType)
         {
             log = LogManager.GetLogger(declaringType);
             this.Debug(new StringBuilder(LogLiterals.enteringClass).Append(declaringType.FullName));

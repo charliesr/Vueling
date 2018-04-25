@@ -14,11 +14,6 @@ namespace Vueling.Common.Logic.Utils
                 .WriteTo.Async(sink => sink.Console())
                 .CreateLogger();
         }
-        public SeriLogger(Type declaringType)
-        {
-            this.Debug(new StringBuilder(LogLiterals.enteringClass).Append(declaringType.FullName).ToString());
-        }
-
 
         public void Debug(object message)
         {
@@ -50,6 +45,11 @@ namespace Vueling.Common.Logic.Utils
         {
             Log.Information((string)message);
             Log.CloseAndFlush();
+        }
+
+        public void Init(Type declaringType)
+        {
+            this.Debug(new StringBuilder(LogLiterals.enteringClass).Append(declaringType.FullName).ToString());
         }
 
         public void Warn(object message)

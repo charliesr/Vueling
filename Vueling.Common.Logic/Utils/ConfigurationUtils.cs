@@ -20,6 +20,11 @@ namespace Vueling.Common.Logic
             return StringToDataTypeAccess(ConfigurationManager.AppSettings["ConfiguredAccessType"]);
         }
 
+        public static Type LoadTypeLogger()
+        {
+            return Assembly.GetExecutingAssembly().GetType(new StringBuilder(Assembly.GetExecutingAssembly().GetName().Name).Append(".Utils").Append(".").Append(LoadVariable("LoggerFramework")).ToString());
+        }
+
         public static IVuelingLogger LoadLogger(Type declaringType)
         {
             var type = Assembly.GetExecutingAssembly().GetType(new StringBuilder(Assembly.GetExecutingAssembly().GetName().Name).Append(".Utils").Append(".").Append(LoadVariable("LoggerFramework")).ToString());

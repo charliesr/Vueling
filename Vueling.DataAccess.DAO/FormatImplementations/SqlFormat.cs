@@ -13,7 +13,14 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
 {
     public class SqlFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
-        private readonly IVuelingLogger _log = ConfigurationUtils.LoadLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger log;
+
+
+        public SqlFormat(IVuelingLogger log)
+        {
+            this.log = log;
+            this.log.Init(MethodBase.GetCurrentMethod().DeclaringType);
+        }
 
         public T Add(T entity)
         {
@@ -39,7 +46,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
                     }
 
 
-                    _log.Debug("Sql statement: " + query);
+                    log.Debug("Sql statement: " + query);
 
                     using (var _command = new SqlCommand(query.ToString(), _connection))
                     {
@@ -67,7 +74,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (SqlException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -99,7 +106,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (SqlException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -132,7 +139,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (SqlException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -153,7 +160,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
          
@@ -191,7 +198,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (SqlException ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -212,7 +219,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
         }
@@ -244,7 +251,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                log.Error(ex);
                 throw;
             }
 
