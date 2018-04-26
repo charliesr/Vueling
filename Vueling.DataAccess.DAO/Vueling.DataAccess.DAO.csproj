@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="ClientConfig.cs" />
     <Compile Include="CrudDao.cs" />
+    <Compile Include="Interfaces\IConnection.cs" />
     <Compile Include="FormatImplementations\RedisFormat.cs" />
     <Compile Include="FormatImplementations\WebApiFormat.cs" />
     <Compile Include="Interfaces\IFormat.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="FormatImplementations\XmlFormat.cs" />
     <Compile Include="FormatImplementations\TxtFormat.cs" />
     <Compile Include="FormatImplementations\JsonFormat.cs" />
+    <Compile Include="ISelectStudentWebApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

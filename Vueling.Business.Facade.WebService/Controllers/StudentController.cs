@@ -8,6 +8,7 @@ using System.Text;
 using System.Web;
 using Vueling.Business.Logic;
 using Vueling.Business.Logic.Interfaces;
+using Vueling.Business.Facade.WebService.App_Start;
 
 namespace Vueling.Business.Facade.WebService.Controllers
 {
@@ -48,19 +49,12 @@ namespace Vueling.Business.Facade.WebService.Controllers
         /// </summary>
         /// <param name="id"> id from a student to search</param>
         /// <returns>A Student</returns>
+        [CustomExceptionFilter]
         [HttpGet()]
         public IHttpActionResult ReadStudent(int id)
         {
-            try
-            {
                 log.Debug(new StringBuilder(LogLiterals.RequestReceived).Append(HttpContext.Current.Request.HttpMethod).Append(" ").Append(MethodBase.GetCurrentMethod().Name).ToString());
                 return Ok(_studentBl.GetById(id));
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                throw;
-            }
         }
 
         /// <summary>

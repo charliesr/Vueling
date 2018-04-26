@@ -12,7 +12,7 @@ using Vueling.DataAccess.DAO.Interfaces;
 
 namespace Vueling.DataAccess.DAO.FormatImplementations
 {
-    public class WebApiFormat<T> : IFormat<T> where T : IVuelingModelObject
+    public class WebApiFormat<T> : IFormat<T>, IConnection<T> where T : IVuelingModelObject
     {
         private HttpClient client;
         private IVuelingLogger log;
@@ -87,6 +87,21 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
         public DataTypeAccess GetFormat()
         {
             throw new NotImplementedException();
+        }
+
+        public Student InitCache()
+        {
+            
+            var response = Task.FromResult(client.GetAsync("api/UsuarioAsync/GetAsync")
+                .GetAwaiter()
+                .GetResult()).Result;
+
+            var result = Task.FromResult(response.Content.ReadAsAsync<Student>()
+                .GetAwaiter()
+                .GetResult())
+                .Result;
+
+            return result;
         }
 
         public T Update(T entity)

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
@@ -19,28 +20,33 @@ namespace Vueling.Autofac.Configuration
             builder
                 .RegisterGeneric(typeof(SqlFormat<>))
                 .As(typeof(IFormat<>))
-                .Keyed(DataTypeAccess.sql, typeof(IFormat<>))
-                .InstancePerRequest();
+                .Keyed(DataTypeAccess.sql, typeof(IFormat<>));
             builder
                 .RegisterGeneric(typeof(TxtFormat<>))
                 .As(typeof(IFormat<>))
-                .Keyed(DataTypeAccess.txt, typeof(IFormat<>))
-                .InstancePerRequest();
+                .Keyed(DataTypeAccess.txt, typeof(IFormat<>));
             builder
                 .RegisterGeneric(typeof(JsonFormat<>))
                 .As(typeof(IFormat<>))
-                .Keyed(DataTypeAccess.json, typeof(IFormat<>))
-                .InstancePerRequest();
+                .Keyed(DataTypeAccess.json, typeof(IFormat<>));
             builder
                 .RegisterGeneric(typeof(SqlStoredProcedureFormat<>))
                 .As(typeof(IFormat<>))
-                .Keyed(DataTypeAccess.sqlStoredProcedure, typeof(IFormat<>))
-                .InstancePerRequest();
+                .Keyed(DataTypeAccess.sqlStoredProcedure, typeof(IFormat<>));
             builder
                 .RegisterGeneric(typeof(XmlFormat<>))
                 .As(typeof(IFormat<>))
-                .Keyed(DataTypeAccess.xml, typeof(IFormat<>))
-                .InstancePerRequest();
+                .Keyed(DataTypeAccess.xml, typeof(IFormat<>));
+            builder
+                .RegisterGeneric(typeof(WebApiFormat<>))
+                .As(typeof(IFormat<>))
+                .Keyed(DataTypeAccess.webApi, typeof(IFormat<>));
+            builder
+                .RegisterGeneric(typeof(WebApiFormat<>))
+                .As(typeof(IConnection<>));
+
+            builder
+                .RegisterType<HttpClient>();
 
             base.Load(builder);
         }

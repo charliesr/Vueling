@@ -19,7 +19,7 @@ namespace Vueling.Autofac.Configuration
                 .As(typeof(IInsert<>))
                 .As(typeof(IUpdate<>))
                 .As(typeof(IDelete<>))
-                .InstancePerRequest();
+                .As(typeof(ISelectStudentWebApi<>));
 
             base.Load(builder);
         }

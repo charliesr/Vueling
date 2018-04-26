@@ -13,16 +13,19 @@ using Vueling.DataAccess.DAO.Interfaces;
 
 namespace Vueling.DataAccess.DAO
 {
-    public class CrudDao<T> : IDelete<T>, ISelect<T>, IUpdate<T>, IInsert<T> where T : IVuelingModelObject
+    public class CrudDao<T> : IDelete<T>, ISelect<T>, IUpdate<T>, IInsert<T> , ISelectStudentWebApi<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger log;
         private readonly IFormat<T> format;
+        private readonly IConnection<T> webApiInitCache;
 
-        public CrudDao(IIndex<DataTypeAccess, IFormat<T>> formats, IVuelingLogger log)
+        public CrudDao(IIndex<DataTypeAccess, IFormat<T>> formats, IVuelingLogger log, IConnection<T> webApiInitCache)
         {
             this.format = formats[ConfigurationUtils.LoadFormat()];
+            this.webApiInitCache = webApiInitCache;
             this.log = log;
             this.log.Init(MethodBase.GetCurrentMethod().DeclaringType);
+
         }
 
         public T Add(T entity)
@@ -186,7 +189,7 @@ namespace Vueling.DataAccess.DAO
                 log.Debug("Get by ID");
                 return format.GetById(id);
             }
-            catch (Exception ex)
+            catch (NotImplementedException ex)
             {
                 log.Error(ex);
                 throw;
@@ -205,6 +208,11 @@ namespace Vueling.DataAccess.DAO
                 log.Error(ex);
                 throw;
             }
+        }
+
+        public Student InitStudent()
+        {
+            return this.webApiInitCache.InitCache();
         }
     }
 }

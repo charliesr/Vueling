@@ -15,8 +15,7 @@ namespace Vueling.Autofac.Configuration
         {
             builder
                 .RegisterType<StudentBL>()
-                .As<IStudentBL>()
-                .InstancePerRequest();
+                .As<IStudentBL>();
 
             base.Load(builder);
         }

@@ -9,7 +9,8 @@ namespace Vueling.Common.Logic
         xml = 3,
         sql = 4,
         sqlStoredProcedure = 5,
-        redis = 6
+        redis = 6,
+        webApi = 7
     }
 
     public static class EnumsHelper

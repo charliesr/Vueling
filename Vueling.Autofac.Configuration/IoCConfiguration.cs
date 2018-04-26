@@ -19,6 +19,8 @@ namespace Vueling.Autofac.Configuration
                 .RegisterApiControllers(apiAssembly)
                 .InstancePerRequest();
 
+
+
             builder
                 .RegisterModule(new FacadeModule())
                 .RegisterModule(new BusinessModule())

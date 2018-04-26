@@ -15,8 +15,7 @@ namespace Vueling.Autofac.Configuration
         {
             builder
                 .RegisterType(ConfigurationUtils.LoadTypeLogger())
-                .As<IVuelingLogger>()
-                .InstancePerRequest();
+                .As<IVuelingLogger>();
 
 
             base.Load(builder);
