@@ -51,5 +51,10 @@ namespace Vueling.Common.Logic
             return (DataTypeAccess)Enum.Parse(typeof(DataTypeAccess), from);
         }
 
+        public static string GetWebClientAddress()
+        {
+            return LoadVariable("BaseAddress");
+        }
+
     }
 }
