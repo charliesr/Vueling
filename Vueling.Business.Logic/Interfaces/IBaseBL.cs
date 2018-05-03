@@ -16,8 +16,5 @@ namespace Vueling.Business.Logic.Interfaces
         T Update(int id, Student student);
         T GetById(int id);
         int DeleteById(int id);
-        Student InitStudent();
-
-
     }
 }

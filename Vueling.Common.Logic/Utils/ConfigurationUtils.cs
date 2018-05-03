@@ -11,18 +11,23 @@ namespace Vueling.Common.Logic
     {
         public static void SaveFormat(string format)
         {
-            ConfigurationManager.AppSettings["ConfiguredAccessType"] = format;
+            SetVariable(CommonLiterals.FactoryFormat, format);
             ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).Save();
         }
 
         public static DataTypeAccess LoadFormat()
         {
-            return StringToDataTypeAccess(ConfigurationManager.AppSettings["ConfiguredAccessType"]);
+            return StringToDataTypeAccess(LoadVariable(CommonLiterals.FactoryFormat));
         }
 
         public static Type LoadTypeLogger()
         {
-            return Assembly.GetExecutingAssembly().GetType(new StringBuilder(Assembly.GetExecutingAssembly().GetName().Name).Append(".Utils").Append(".").Append(LoadVariable("LoggerFramework")).ToString());
+            return Assembly.GetExecutingAssembly().GetType(
+                new StringBuilder(Assembly.GetExecutingAssembly().GetName().Name)
+                .Append(CommonLiterals.Dot)
+                .Append(CommonLiterals.Utils)
+                .Append(CommonLiterals.Dot)
+                .Append(LoadVariable(CommonLiterals.LogggerKey)).ToString());
         }
 
         public static IVuelingLogger LoadLogger(Type declaringType)
@@ -36,9 +41,14 @@ namespace Vueling.Common.Logic
             return ConfigurationManager.AppSettings[key];
         }
 
+        private static void SetVariable(string key, string value)
+        {
+            ConfigurationManager.AppSettings[key] = value;
+        }
+
         public static string GetConnecionString()
         {
-            return LoadVariable("ConnectionString");
+            return LoadVariable(CommonLiterals.ConnectionKey);
         }
 
         public static string GetFilePath<T>(DataTypeAccess dataTypeAccess)
@@ -53,12 +63,17 @@ namespace Vueling.Common.Logic
 
         public static string GetWebClientAddress()
         {
-            return LoadVariable("BaseAddress");
+            return LoadVariable(CommonLiterals.BaseAddKey);
         }
 
         public static string GetRedisEndpoint()
         {
-            return LoadVariable("RedisEndpoint");
+            return LoadVariable(CommonLiterals.RedisKey);
+        }
+
+        public static string GetConfigForWebClient()
+        {
+            return LoadVariable(CommonLiterals.MimeHeaderKey);
         }
 
     }

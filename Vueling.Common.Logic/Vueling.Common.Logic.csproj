@@ -59,7 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Utils\LogLiterals.Designer.cs">
+    <Compile Include="CommonLiterals.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommonLiterals.resx</DependentUpon>
+    </Compile>
+    <Compile Include="LogLiterals.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LogLiterals.resx</DependentUpon>
@@ -93,7 +98,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Utils\LogLiterals.resx">
+    <EmbeddedResource Include="CommonLiterals.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommonLiterals.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogLiterals.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LogLiterals.Designer.cs</LastGenOutput>
     </EmbeddedResource>

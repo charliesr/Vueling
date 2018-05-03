@@ -7,8 +7,8 @@ using Vueling.Business.Logic.Interfaces;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
+using Vueling.DataAccess.Dao.Contracts;
 using Vueling.DataAccess.DAO;
-using Vueling.DataAccess.DAO.Interfaces;
 
 namespace Vueling.Business.Logic
 {
@@ -19,9 +19,8 @@ namespace Vueling.Business.Logic
         private readonly IDelete<Student> _deleteDao;
         private readonly IUpdate<Student> _updateDao;
         private readonly IInsert<Student> _insertDao;
-        private readonly ISelectStudentWebApi<Student> initiatorStudent;
 
-        public StudentBL(ISelect<Student> selectDao, IInsert<Student> insertDao, IUpdate<Student> updateDao, IDelete<Student> deleteDao, IVuelingLogger log, ISelectStudentWebApi<Student> initiatorStudent)
+        public StudentBL(ISelect<Student> selectDao, IInsert<Student> insertDao, IUpdate<Student> updateDao, IDelete<Student> deleteDao, IVuelingLogger log)
         {
             this._deleteDao = deleteDao;
             this._insertDao = insertDao;
@@ -31,7 +30,6 @@ namespace Vueling.Business.Logic
             this.log = log;
             this.log.Init(MethodBase.GetCurrentMethod().DeclaringType);
         }
-
 
         public Student Add(Student alumno)
         {
@@ -211,11 +209,6 @@ namespace Vueling.Business.Logic
                 log.Error(ex);
                 throw;
             }
-        }
-
-        public Student InitStudent()
-        {
-            return initiatorStudent.InitStudent();
         }
     }
 }

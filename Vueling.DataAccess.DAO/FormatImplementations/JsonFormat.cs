@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security;
+using System.Text;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
@@ -26,11 +27,16 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
         {
             try
             {
-                log.Debug("Añadiendo un/a nuevo/a " + typeof(T).Name);
-                var group = File.Exists(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json)) ? JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json))) : new List<T>();
+                log.Debug(
+                    new StringBuilder(DaoResources.Obtaining)
+                    .Append(typeof(T).Name)
+                    .ToString());
+                var group = File.Exists(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json)) ? 
+                    JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json))) : 
+                    new List<T>();
                 group.Add(entity);
                 File.WriteAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json), JsonConvert.SerializeObject(group));
-                return GetByGUID((Guid)typeof(T).GetProperty("Guid").GetValue(entity));
+                return GetByGUID((Guid)typeof(T).GetProperty(DaoResources.guid).GetValue(entity));
             }
             catch (ArgumentNullException ex)
             {
@@ -68,10 +74,16 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
         {
             try
             {
-                log.Debug("Select " + typeof(T).Name + "con Guid " + guid.ToString());
+                log.Debug(
+                    new StringBuilder(DaoResources.Obtaining)
+                    .Append(typeof(T).Name)
+                    .Append(DaoResources.ByLiteral)
+                    .Append(DaoResources.guid)
+                    .Append(guid.ToString())
+                    .ToString());
                 if (!File.Exists(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json))) return default(T);
                 var group = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json)));
-                return group.FirstOrDefault(i => (Guid)typeof(T).GetProperty("Guid").GetValue(i) == guid);
+                return group.FirstOrDefault(i => (Guid)typeof(T).GetProperty(DaoResources.guid).GetValue(i) == guid);
             }
             catch (ArgumentNullException ex)
             {
@@ -109,8 +121,13 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
         {
             try
             {
-                log.Debug("Obtenemos todos los/las " + typeof(T).Name);
-                return JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json)));
+                log.Debug(
+                    new StringBuilder(DaoResources.Obtaining)
+                    .Append(DaoResources.AllLiteral)
+                    .Append(typeof(T).Name)
+                    .ToString());
+                return JsonConvert.DeserializeObject<List<T>>(
+                    File.ReadAllText(ConfigurationUtils.GetFilePath<T>(DataTypeAccess.json)));
             }
             catch (FileNotFoundException ex)
             {
@@ -157,11 +174,6 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
         public int DeleteByGuid(Guid guid)
         {
             throw new NotImplementedException();
-        }
-
-        public DataTypeAccess GetFormat()
-        {
-            return DataTypeAccess.json;
         }
 
         public T GetById(int id)

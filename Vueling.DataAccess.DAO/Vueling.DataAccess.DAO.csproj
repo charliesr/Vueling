@@ -59,8 +59,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DaoResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RedisConfig.cs" />
-    <Compile Include="WebClientConfig.cs" />
+    <Compile Include="DaoConfigurations\RedisConfig.cs" />
+    <Compile Include="DaoConfigurations\WebClientConfig.cs" />
     <Compile Include="CrudDao.cs" />
     <Compile Include="FormatImplementations\RedisFormat.cs" />
     <Compile Include="FormatImplementations\WebApiFormat.cs" />

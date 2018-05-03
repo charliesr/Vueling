@@ -51,6 +51,10 @@
       <Project>{7033aabc-c8f8-4456-9dfa-aef7aa8a6726}</Project>
       <Name>Vueling.Common.Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Vueling.DataAccess.Dao.Contracts\Vueling.DataAccess.Dao.Contracts.csproj">
+      <Project>{56BAEC14-1DFD-498A-B399-6F2892E461DF}</Project>
+      <Name>Vueling.DataAccess.Dao.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Vueling.DataAccess.DAO\Vueling.DataAccess.DAO.csproj">
       <Project>{0de51ef2-a117-456e-8ebc-92b530f2d3dc}</Project>
       <Name>Vueling.DataAccess.DAO</Name>

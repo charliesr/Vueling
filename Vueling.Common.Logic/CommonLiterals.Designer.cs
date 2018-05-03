@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Vueling.Common.Logic.Utils {
+namespace Vueling.Common.Logic {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Vueling.Common.Logic.Utils {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class LogLiterals {
+    internal class CommonLiterals {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal LogLiterals() {
+        internal CommonLiterals() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Vueling.Common.Logic.Utils {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Vueling.Common.Logic.Utils.LogLiterals", typeof(LogLiterals).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Vueling.Common.Logic.CommonLiterals", typeof(CommonLiterals).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,74 @@ namespace Vueling.Common.Logic.Utils {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Init Log for object .
+        ///   Looks up a localized string similar to BaseAddress.
         /// </summary>
-        internal static string enteringClass {
+        internal static string BaseAddKey {
             get {
-                return ResourceManager.GetString("enteringClass", resourceCulture);
+                return ResourceManager.GetString("BaseAddKey", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to App has thrown a .
+        ///   Looks up a localized string similar to ConnectionString.
         /// </summary>
-        internal static string exceptionThrown {
+        internal static string ConnectionKey {
             get {
-                return ResourceManager.GetString("exceptionThrown", resourceCulture);
+                return ResourceManager.GetString("ConnectionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ..
+        /// </summary>
+        internal static string Dot {
+            get {
+                return ResourceManager.GetString("Dot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfiguredAccessType.
+        /// </summary>
+        internal static string FactoryFormat {
+            get {
+                return ResourceManager.GetString("FactoryFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LoggerFramework.
+        /// </summary>
+        internal static string LogggerKey {
+            get {
+                return ResourceManager.GetString("LogggerKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MimeTypeHeader.
+        /// </summary>
+        internal static string MimeHeaderKey {
+            get {
+                return ResourceManager.GetString("MimeHeaderKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RedisEndpoint.
+        /// </summary>
+        internal static string RedisKey {
+            get {
+                return ResourceManager.GetString("RedisKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Utils.
+        /// </summary>
+        internal static string Utils {
+            get {
+                return ResourceManager.GetString("Utils", resourceCulture);
             }
         }
     }

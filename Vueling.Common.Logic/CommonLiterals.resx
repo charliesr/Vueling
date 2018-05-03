@@ -117,34 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Adding" xml:space="preserve">
-    <value>Adding new </value>
+  <data name="BaseAddKey" xml:space="preserve">
+    <value>BaseAddress</value>
   </data>
-  <data name="AllLiteral" xml:space="preserve">
-    <value>all </value>
+  <data name="ConnectionKey" xml:space="preserve">
+    <value>ConnectionString</value>
   </data>
-  <data name="ByLiteral" xml:space="preserve">
-    <value>by </value>
+  <data name="Dot" xml:space="preserve">
+    <value>.</value>
   </data>
-  <data name="DaoLayer" xml:space="preserve">
-    <value>Data Acces Layer </value>
+  <data name="FactoryFormat" xml:space="preserve">
+    <value>ConfiguredAccessType</value>
   </data>
-  <data name="guid" xml:space="preserve">
-    <value>Guid</value>
+  <data name="LogggerKey" xml:space="preserve">
+    <value>LoggerFramework</value>
   </data>
-  <data name="inLiteral" xml:space="preserve">
-    <value>in </value>
+  <data name="MimeHeaderKey" xml:space="preserve">
+    <value>MimeTypeHeader</value>
   </data>
-  <data name="Obtaining" xml:space="preserve">
-    <value>obtaining </value>
+  <data name="RedisKey" xml:space="preserve">
+    <value>RedisEndpoint</value>
   </data>
-  <data name="Deleting" xml:space="preserve">
-    <value>Deleting </value>
-  </data>
-  <data name="Update" xml:space="preserve">
-    <value>Updating </value>
-  </data>
-  <data name="id" xml:space="preserve">
-    <value>id </value>
+  <data name="Utils" xml:space="preserve">
+    <value>Utils</value>
   </data>
 </root>

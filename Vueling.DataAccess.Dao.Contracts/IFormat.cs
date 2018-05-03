@@ -10,6 +10,5 @@ namespace Vueling.DataAccess.Dao.Contracts
 {
     public interface IFormat<T> : ISelect<T>, IInsert<T>, IUpdate<T>, IDelete<T> where T : IVuelingModelObject
     {
-        DataTypeAccess GetFormat();
     }
 }

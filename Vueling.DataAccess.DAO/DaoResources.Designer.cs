@@ -106,7 +106,7 @@ namespace Vueling.DataAccess.DAO {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  guid.
+        ///   Looks up a localized string similar to Guid.
         /// </summary>
         internal static string guid {
             get {

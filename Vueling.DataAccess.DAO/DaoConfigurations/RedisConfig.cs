@@ -2,7 +2,7 @@
 using System;
 using Vueling.Common.Logic;
 
-namespace Vueling.DataAccess.DAO
+namespace Vueling.DataAccess.DAO.DaoConfigurations
 {
     public static class RedisConfiguration
     {
