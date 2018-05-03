@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Vueling.Business.Facade.WindowsComunicationFoundation.Service1" CodeBehind="Service1.svc.cs" %>
