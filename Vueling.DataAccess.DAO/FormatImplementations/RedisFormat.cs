@@ -9,28 +9,16 @@ using System.Text;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
-using Vueling.DataAccess.DAO.Interfaces;
+using Vueling.DataAccess.Dao.Contracts;
 
 namespace Vueling.DataAccess.DAO.FormatImplementations
 {
     public class RedisFormat<T> : IFormat<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger log;
-        private readonly StackExchangeRedisCacheClient redis;
 
         public RedisFormat(IVuelingLogger log)
         {
-
-            var redisConfig = new RedisConfiguration()
-            {
-                AbortOnConnectFail = true,
-                KeyPrefix = "Charlio",
-                Hosts = new RedisHost[] { new RedisHost() { Host = "192.168.99.100", Port = 6379 } },
-                ConnectTimeout = 3000,
-                Database = 0
-            };
-            var redis = new StackExchangeRedisCacheClient(new NewtonsoftSerializer(), redisConfig);
-
             this.log = log;
             this.log.Init(MethodBase.GetCurrentMethod().DeclaringType);
         }

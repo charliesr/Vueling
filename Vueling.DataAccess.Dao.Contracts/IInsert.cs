@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 
-namespace Vueling.DataAccess.DAO.Interfaces
+namespace Vueling.DataAccess.Dao.Contracts
 {
     public interface IInsert<T> where T : IVuelingModelObject
     {

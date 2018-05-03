@@ -8,7 +8,7 @@ using System.Security;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
-using Vueling.DataAccess.DAO.Interfaces;
+using Vueling.DataAccess.Dao.Contracts;
 
 namespace Vueling.DataAccess.DAO.FormatImplementations
 {

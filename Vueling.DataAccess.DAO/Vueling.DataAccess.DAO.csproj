@@ -36,14 +36,8 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="StackExchange.Redis.Extensions.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=d7d863643bcd13ef, processorArchitecture=MSIL">
-      <HintPath>..\packages\StackExchange.Redis.Extensions.Core.3.3.0\lib\net46\StackExchange.Redis.Extensions.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="StackExchange.Redis.Extensions.Newtonsoft, Version=3.3.0.0, Culture=neutral, PublicKeyToken=d7d863643bcd13ef, processorArchitecture=MSIL">
-      <HintPath>..\packages\StackExchange.Redis.Extensions.Newtonsoft.3.3.0\lib\net46\StackExchange.Redis.Extensions.Newtonsoft.dll</HintPath>
-    </Reference>
-    <Reference Include="StackExchange.Redis.StrongName, Version=1.2.6.0, Culture=neutral, PublicKeyToken=c219ff1ca8c2ce46, processorArchitecture=MSIL">
-      <HintPath>..\packages\StackExchange.Redis.StrongName.1.2.6\lib\net46\StackExchange.Redis.StrongName.dll</HintPath>
+    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net46\StackExchange.Redis.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -60,28 +54,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientConfig.cs" />
+    <Compile Include="DaoResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DaoResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RedisConfig.cs" />
+    <Compile Include="WebClientConfig.cs" />
     <Compile Include="CrudDao.cs" />
-    <Compile Include="Interfaces\IConnection.cs" />
     <Compile Include="FormatImplementations\RedisFormat.cs" />
     <Compile Include="FormatImplementations\WebApiFormat.cs" />
-    <Compile Include="Interfaces\IFormat.cs" />
     <Compile Include="FormatImplementations\SqlStoredProcedureFormat.cs" />
-    <Compile Include="Interfaces\ISelect.cs" />
     <Compile Include="FormatImplementations\SqlFormat.cs" />
-    <Compile Include="Interfaces\IDelete.cs" />
-    <Compile Include="Interfaces\IInsert.cs" />
-    <Compile Include="Interfaces\IUpdate.cs" />
     <Compile Include="FormatImplementations\XmlFormat.cs" />
     <Compile Include="FormatImplementations\TxtFormat.cs" />
     <Compile Include="FormatImplementations\JsonFormat.cs" />
-    <Compile Include="ISelectStudentWebApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vueling.Common.Logic\Vueling.Common.Logic.csproj">
       <Project>{7033aabc-c8f8-4456-9dfa-aef7aa8a6726}</Project>
       <Name>Vueling.Common.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vueling.DataAccess.Dao.Contracts\Vueling.DataAccess.Dao.Contracts.csproj">
+      <Project>{56BAEC14-1DFD-498A-B399-6F2892E461DF}</Project>
+      <Name>Vueling.DataAccess.Dao.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Singletons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DaoResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DaoResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

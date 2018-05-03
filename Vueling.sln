@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Autofac Layer", "Autofac La
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Autofac.Configuration", "Vueling.Autofac.Configuration\Vueling.Autofac.Configuration.csproj", "{42B07838-317D-42C3-A627-BC1D1C207192}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAccess.Dao.Contracts", "Vueling.DataAccess.Dao.Contracts\Vueling.DataAccess.Dao.Contracts.csproj", "{56BAEC14-1DFD-498A-B399-6F2892E461DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{42B07838-317D-42C3-A627-BC1D1C207192}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42B07838-317D-42C3-A627-BC1D1C207192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42B07838-317D-42C3-A627-BC1D1C207192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56BAEC14-1DFD-498A-B399-6F2892E461DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56BAEC14-1DFD-498A-B399-6F2892E461DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56BAEC14-1DFD-498A-B399-6F2892E461DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56BAEC14-1DFD-498A-B399-6F2892E461DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +116,7 @@ Global
 		{CF886210-B987-4972-B5C6-586B670206A7} = {D024C69F-5891-42D1-9FF8-689C12FF3C58}
 		{9DDF1F87-0B4B-4678-8D66-E91ADAF2A0E8} = {E0C05CC6-20E7-4F9E-ABBB-1C020E9B8025}
 		{42B07838-317D-42C3-A627-BC1D1C207192} = {AC06D932-42AB-4D53-AF46-AC9E38EA475A}
+		{56BAEC14-1DFD-498A-B399-6F2892E461DF} = {D024C69F-5891-42D1-9FF8-689C12FF3C58}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2490D861-D705-4C54-8A70-5D73918C1404}

@@ -19,7 +19,7 @@ namespace Vueling.DataAccess.DAO.FormatImplementations
 
         public WebApiFormat(HttpClient client, IVuelingLogger log)
         {
-            this.client = ClientConfig.InitClient(client);
+            this.client = WebClientConfig.InitClient(client);
             this.log = log;
             this.log.Init(MethodBase.GetCurrentMethod().DeclaringType);
         }

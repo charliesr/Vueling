@@ -8,32 +8,34 @@ using System.Text;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.Common.Logic.Utils;
-using Vueling.DataAccess.DAO.FormatImplementations;
-using Vueling.DataAccess.DAO.Interfaces;
+using Vueling.DataAccess.Dao.Contracts;
 
 namespace Vueling.DataAccess.DAO
 {
-    public class CrudDao<T> : IDelete<T>, ISelect<T>, IUpdate<T>, IInsert<T> , ISelectStudentWebApi<T> where T : IVuelingModelObject
+    public class CrudDao<T> : IDelete<T>, ISelect<T>, IUpdate<T>, IInsert<T> where T : IVuelingModelObject
     {
         private readonly IVuelingLogger log;
         private readonly IFormat<T> format;
-        private readonly IConnection<T> webApiInitCache;
 
-        public CrudDao(IIndex<DataTypeAccess, IFormat<T>> formats, IVuelingLogger log, IConnection<T> webApiInitCache)
+        public CrudDao(IIndex<DataTypeAccess, IFormat<T>> formats, IVuelingLogger log)
         {
             this.format = formats[ConfigurationUtils.LoadFormat()];
-            this.webApiInitCache = webApiInitCache;
             this.log = log;
             this.log.Init(MethodBase.GetCurrentMethod().DeclaringType);
-
         }
 
         public T Add(T entity)
         {
+            T entityResult;
             try
             {
-                log.Debug("Añadiendo " + typeof(T).Name);
-                return format.Add(entity);
+                log.Debug(
+                    new StringBuilder(DaoResources.Adding)
+                    .Append(typeof(T).Name)
+                    .Append(DaoResources.inLiteral)
+                    .Append(DaoResources.DaoLayer)
+                    .ToString());
+                entityResult = format.Add(entity);
             }
             catch (ArgumentNullException ex)
             {
@@ -65,14 +67,22 @@ namespace Vueling.DataAccess.DAO
                 log.Error(ex);
                 throw;
             }
+
+            return entityResult;
         }
 
         public List<T> GetAll()
         {
+            List<T> entitiesResult;
             try
             {
-                log.Debug("Obtenemos todos " + typeof(T).ToString());
-                return format.GetAll();
+                log.Debug(
+                    new StringBuilder(DaoResources.Obtaining)
+                    .Append(DaoResources.AllLiteral)
+                    .Append(typeof(T).Name)
+                    .Append(DaoResources.inLiteral)
+                    .Append(DaoResources.DaoLayer).ToString());
+                entitiesResult = format.GetAll();
             }
             catch (FileNotFoundException ex)
             {
@@ -109,14 +119,21 @@ namespace Vueling.DataAccess.DAO
                 log.Error(ex);
                 throw;
             }
+
+            return entitiesResult;
         }
 
         public T GetByGUID(Guid guid)
         {
+            T entityResult;
             try
             {
-                log.Debug(new StringBuilder("Pedimos el ").Append(typeof(T).Name).Append(" con guid ").Append(guid.ToString()));
-                return format.GetByGUID(guid);
+                log.Debug(
+                    new StringBuilder(DaoResources.Obtaining)
+                    .Append(typeof(T).Name)
+                    .Append(DaoResources.ByLiteral)
+                    .Append(DaoResources.guid).ToString());
+                entityResult = format.GetByGUID(guid);
             }
             catch (FileNotFoundException ex)
             {
@@ -153,39 +170,56 @@ namespace Vueling.DataAccess.DAO
                 log.Error(ex);
                 throw;
             }
+            return entityResult;
         }
 
         public int DeleteByGuid(Guid guid)
         {
+            var result = 0;
             try
             {
-                return format.DeleteByGuid(guid);
+                log.Debug(
+                    new StringBuilder(DaoResources.Deleting)
+                    .Append(typeof(T).Name)
+                    .Append(DaoResources.ByLiteral)
+                    .Append(DaoResources.guid)
+                    .ToString());
+                result = format.DeleteByGuid(guid);
             }
             catch (Exception ex)
             {
                 log.Error(ex);
                 throw;
             }
+            return result;
         }
 
         public T Update(T entity)
         {
+            T entityUpdated;
             try
             {
-                log.Debug("Update");
-                return format.Update(entity);
+                log.Debug(
+                    new StringBuilder(DaoResources.Update)
+                    .Append(typeof(T))
+                    .ToString());
+                entityUpdated =  format.Update(entity);
             }
             catch (Exception ex)
             {
                 log.Error(ex);
                 throw;
             }
+            return entityUpdated;
         }
 
         public T GetById(int id)
         {
             try
             {
+                log.Debug(new StringBuilder(DaoResources.Obtaining)
+                    .Append(DaoResources.ByLiteral)
+                    .Append(DaoResources.id).ToString());
                 log.Debug("Get by ID");
                 return format.GetById(id);
             }
@@ -208,11 +242,6 @@ namespace Vueling.DataAccess.DAO
                 log.Error(ex);
                 throw;
             }
-        }
-
-        public Student InitStudent()
-        {
-            return this.webApiInitCache.InitCache();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Vueling.Common.Logic.Model;
 
-namespace Vueling.DataAccess.DAO.Interfaces
+namespace Vueling.DataAccess.Dao.Contracts
 {
     public interface IUpdate<T> where T : IVuelingModelObject
     {

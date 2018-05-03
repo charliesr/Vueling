@@ -56,5 +56,10 @@ namespace Vueling.Common.Logic
             return LoadVariable("BaseAddress");
         }
 
+        public static string GetRedisEndpoint()
+        {
+            return LoadVariable("RedisEndpoint");
+        }
+
     }
 }

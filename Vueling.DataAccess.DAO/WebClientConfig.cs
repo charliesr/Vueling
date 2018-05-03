@@ -9,15 +9,16 @@ using Vueling.Common.Logic;
 
 namespace Vueling.DataAccess.DAO
 {
-    public static class ClientConfig
+    public static class WebClientConfig
     {
         public static HttpClient InitClient(HttpClient client)
         {
-            client.BaseAddress = new Uri(ConfigurationUtils.GetWebClientAddress());
+            client.BaseAddress = new Uri(
+                ConfigurationUtils.GetWebClientAddress());
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
             return client;
-
         }
     }
 }
